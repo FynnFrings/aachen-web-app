@@ -1,15 +1,23 @@
 {
-  "name": "next-express-scaffold",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "template-start-scripts",
+  "version": "0.1.0",
+  "description": "Start scripts for a project containing frontend and backend with dev scripts each",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently -n front,back -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm --prefix ./frontend run dev\" \"npm --prefix ./backend run dev\""
+    "dev": "concurrently -n backend,frontend -c green,blue -t \"HH:mm:ss\" -p \"[{time} • {name}]\t\" \"npm --prefix ./backend run dev\" \"npm --prefix ./frontend run dev\"",
+    "test": "echo \"Error: no test script, create one to run tests across your packages\" && exit 1",
+    "build": "echo \"Error: build script missing, you can define one to build your packages\" && exit 1",
+    "start": "echo \"Error: start script missing, you can define one to run built packages\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "start",
+    "scripts",
+    "dev",
+    "script",
+    "concurrently",
+    "fullstack"
+  ],
+  "author": "David Alexander Pfeiffer (davidmc971)",
+  "license": "MIT",
   "devDependencies": {
     "concurrently": "^7.6.0"
   }

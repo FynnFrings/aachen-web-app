@@ -1,4 +1,4 @@
-# template-ts-vite-react-express
+# template-ts-next-express
 
 Super simple TypeScript monorepo with a frontend app using Next and a backend app using Express.
 

@@ -5,15 +5,15 @@ import BurgerMenu from "./BurgerMenu/BurgerMenu";
 const Header = () => {
   return (
     <>
-      <header className="bg-black w-screen flex flex-nowrap justify-between items-center px-[4%] py-[4%]">
+      <header className="bg-black lg:bg-transparent w-full flex flex-nowrap justify-between items-center px-[4%] py-[4%] lg:px-[5%] lg:py-[2%]">
         <div>
-          <Image src={"/logo.svg"} alt="logo" width={55} height={55} />
+          <Image src={"/logo.svg"} alt="logo" width={60} height={60} />
         </div>
-        <div className="visible lg:invisible">
+        <div className="lg:hidden">
           <BurgerMenu />
         </div>
-        {/* <div className="invisible lg:visible text-white font-sans font-normal text-md">
-          <ul className="w-full flex flex-nowrap gap-x-12 items-center">
+        <div className="hidden lg:block text-white font-sans font-normal text-md">
+          <ul className="flex flex-nowrap items-center gap-x-8">
             <li>
               <Link href={"/unternehmens"}>Unternehmens</Link>
             </li>
@@ -35,7 +35,7 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-        </div> */}
+        </div>
       </header>
     </>
   );

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const AdDownload = () => {
   return (
-    <div className="py-[15%]">
+    <div className="py-20">
       <div className="w-full flex flex-col items-center gap-y-16 text-white">
         <Image
           className="rounded-full"

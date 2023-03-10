@@ -1,7 +1,9 @@
-import { Inter } from "@next/font/google";
-
-// const inter = Inter({ subsets: ['latin'] })
+import AdDownload from "@/components/AdDowmload";
 
 export default function Home() {
-  return <div className="text-white">hi there</div>;
+  return (
+    <>
+      <AdDownload />
+    </>
+  );
 }

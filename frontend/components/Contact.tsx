@@ -10,7 +10,7 @@ const Contact = () => {
   };
   return (
     <>
-      <div className="text-white flex flex-col items-center gap-y-14 py-16">
+      <div className="text-white flex flex-col items-center gap-y-14 py-20">
         <h1 className="font-bold text-5xl">Kontakt</h1>
         <div className="w-full bg-[#22221f] rounded-2xl py-8 px-4">
           <form

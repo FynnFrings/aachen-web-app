@@ -9,9 +9,9 @@ import Image from "next/image";
 const Overview = () => {
   return (
     <>
-      <div className="flex flex-col items-center text-white gap-y-14 py-14">
+      <div className="flex flex-col items-center text-white gap-y-14 py-20">
         <div>
-          <h1 className="font-bold text-4xl">Die Aachen App</h1>
+          <h1 className="font-bold text-5xl">Die Aachen App</h1>
         </div>
         <OverviewCArd
           logo={Calendar}

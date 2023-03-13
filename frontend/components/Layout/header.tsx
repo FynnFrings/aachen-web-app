@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 const Header = () => {
   return (

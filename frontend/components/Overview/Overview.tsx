@@ -1,9 +1,9 @@
-import Calendar from "../public/calendar.svg";
-import Angebot from "../public/angebot.svg";
-import Unternehmen from "../public/unternehmen_logo.svg";
-import Nacrichten from "../public/nachrichten_logo.svg";
+import Calendar from "../../public/overview/calendar.svg";
+import Angebot from "../../public/overview/angebot.svg";
+import Unternehmen from "../../public/overview/unternehmen_logo.svg";
+import Nacrichten from "../../public/overview/nachrichten_logo.svg";
 import OverviewCArd from "./OverviewCard";
-import Iphone from "../public/iphone.png";
+import Iphone from "../../public/iphone.png";
 import Image from "next/image";
 
 const Overview = () => {

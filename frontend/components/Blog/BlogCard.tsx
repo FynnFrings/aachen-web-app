@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AachenPic from "../public/aachen_pic_2.png";
+import AachenPic from "../../public/aachen_pic_2.png";
 import Link from "next/link";
 
 const BlogCard = () => {

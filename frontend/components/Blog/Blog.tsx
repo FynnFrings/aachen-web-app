@@ -10,7 +10,7 @@ const Blog = () => {
         <h1 className="text-white font-bold text-5xl text-center">
           Unser Blog
         </h1>
-        <div className="lg:hidden">
+        <div className="flex flex-col items-center gap-y-14 lg:hidden">
           <BlogCard photo={AachenPic} />
           <BlogCard photo={AachenPic} />
         </div>

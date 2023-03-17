@@ -1,10 +1,10 @@
 import { useState } from "react";
 import BlogCard from "./BlogCard";
-import AachenPic from "../../public/aachen_pic_2.png";
-import AachenPic2 from "../../public/aachen3.jpg";
-import AachenPic3 from "../../public/aachen2.jpg";
+import AachenPic2 from "../../public/AachenPics/aachen3.jpg";
+import AachenPic3 from "../../public/AachenPics/aachen2.jpg";
 
 const BlogDesktop = () => {
+  //TODO: FINISH THE COMPONENT!!!
   const [currentGalleryContainer, setCurrentGalleryContainer] = useState(0);
   const galleryContainers = [
     { id: 1, div: <BlogCard photo={AachenPic2} /> },

@@ -11,8 +11,8 @@ const Contact = () => {
   return (
     <>
       <div className="text-white flex flex-col items-center gap-y-14 py-20">
-        <h1 className="font-bold text-5xl">Kontakt</h1>
-        <div className="w-full lg:flex lg:flex-row lg:justify-between lg:gap-x-6 lg:items-center">
+        <h2 className="block text-5xl font-bold lg:hidden ">Kontakt</h2>
+        <div className="w-full lg:flex lg:flex-row-reverse lg:justify-around lg:gap-x-6 lg:items-center">
           <div className="w-full bg-[#22221f] rounded-2xl py-8 px-4 lg:w-[55%]">
             <form
               onSubmit={handleSubmit}
@@ -64,10 +64,12 @@ const Contact = () => {
             </form>
           </div>
           <div className="hidden lg:block lg:w-[35%]">
-            <h2 className="font-semibold text-3xl">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Laudantium pariatur facilis quos nulla similique quaerat!
-            </h2>
+            <h2 className="font-semibold text-5xl mb-6">Kontakt</h2>
+            <p className="font-light text-lg">
+              Hier können Sie uns erreichen! Schreiben Sie uns eine E-Mail oder
+              nutzen Sie das Kontaktformular, um mit uns in Verbindung zu
+              treten. Wir freuen uns auf Ihre Nachricht!
+            </p>
           </div>
         </div>
       </div>

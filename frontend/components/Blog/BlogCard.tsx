@@ -9,10 +9,10 @@ interface Props {
 const BlogCard: FC<Props> = ({ photo }) => {
   return (
     <>
-      <div className="w-full bg-[#22221f] flex flex-col mx-4 px-4 py-4 gap-y-4 rounded-2xl lg:w-[40%] lg:mx-0 lg:px-10">
-        <div className="w-full flex justify-center">
+      <div className="bg-[#22221f] flex flex-col mx-4 px-4 py-4 gap-y-4 rounded-2xl lg:mx-0 lg:px-10 lg:py-10 lg:whitespace-normal">
+        <div className="flex justify-center">
           <Image
-            className="rounded-2xl text-center"
+            className="rounded-2xl text-center w-full"
             src={photo}
             alt="aachen"
             width={400}

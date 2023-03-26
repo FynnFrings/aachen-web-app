@@ -12,7 +12,7 @@ interface CarouselItemProps {
 // Define the CarouselItem component which renders each carousel item
 export const CarouselItem: React.FC<CarouselItemProps> = ({ children }) => {
   return (
-    <div className="inline-flex items-center justify-center text-white w-full">
+    <div className="w-[100%] inline-flex items-center justify-center text-white">
       {children}
     </div>
   );
@@ -48,7 +48,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
       if (!paused) {
         updateIndex(activeIndex + 1);
       }
-    }, 5000);
+    }, 3000);
     // Clean up the interval on unmount
     return () => {
       if (interval) {
@@ -72,7 +72,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
           updateIndex(activeIndex - 1);
         }}
       >
-        <Image src={arrowLeft} alt="arrow_left" width={100} height={100} />
+        <Image src={arrowLeft} alt="arrow_left" width={80} height={80} />
       </button>
       <div
         onMouseEnter={() => setPaused(true)}
@@ -80,7 +80,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
         className="overflow-hidden w-[60%]"
       >
         <div
-          className="whitespace-nowrap transition-transform"
+          className="whitespace-nowrap transition-transform "
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {/* Render each carousel item */}
@@ -120,7 +120,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
           updateIndex(activeIndex + 1);
         }}
       >
-        <Image src={arrowRight} alt="arrow_right" width={100} height={100} />
+        <Image src={arrowRight} alt="arrow_right" width={80} height={80} />
       </button>
     </div>
   );

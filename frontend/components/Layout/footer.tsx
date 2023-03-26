@@ -35,7 +35,7 @@ const Footer = () => {
               <Link className="font-light text-xs" href={"/"}>
                 Datenschutz
               </Link>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/agb"}>
                 AGB
               </Link>
             </div>

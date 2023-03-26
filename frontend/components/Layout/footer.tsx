@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
             <div className="flex flex-col">
               <h2 className="font-bold text-md mb-4">Rechtliches</h2>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/impressum"}>
                 Impressum
               </Link>
               <Link className="font-light text-xs" href={"/datenschutz"}>

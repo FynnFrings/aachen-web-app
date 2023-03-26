@@ -1,7 +1,21 @@
-import { Inter } from "@next/font/google";
-
-// const inter = Inter({ subsets: ['latin'] })
+import AdDownload from "@/components/AdDowmload";
+import Blog from "@/components/Blog/Blog";
+import Contact from "@/components/Contact";
+import Gallery from "@/components/Gallery";
+import Overview from "@/components/Overview/Overview";
+import Reviews from "@/components/Reviews/Reviews";
+import WeatherWidget from "@/components/WeatherWidget";
 
 export default function Home() {
-  return <div className="text-white">hi there</div>;
+  return (
+    <>
+      <AdDownload />
+      <Reviews />
+      <Overview />
+      <Blog />
+      <Gallery />
+      <Contact />
+      <WeatherWidget />
+    </>
+  );
 }

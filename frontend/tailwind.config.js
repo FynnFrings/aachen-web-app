@@ -13,9 +13,6 @@ module.exports = {
     fontFamily: {
       sans: ["Helvetica Neue", "sans-serif"],
     },
-    fontSize: {
-      md: ["20px", "24px"],
-    },
   },
   plugins: [],
 };

@@ -32,7 +32,7 @@ const Footer = () => {
               <Link className="font-light text-xs" href={"/"}>
                 Impressum
               </Link>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/datenschutz"}>
                 Datenschutz
               </Link>
               <Link className="font-light text-xs" href={"/agb"}>

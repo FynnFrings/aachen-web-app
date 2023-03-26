@@ -8,8 +8,6 @@ export default function AGB() {
         <title>AGB | Aachen App</title>
         <meta name="description" content="AGB der Aachen App." />
         <meta name="keywords" content="Aachen App, AGB" />
-        {/* Links */}
-        <script></script>
       </Head>
 
       <main className="text-white">
@@ -20,25 +18,25 @@ export default function AGB() {
         <section className="flex flex-col gap-8 mb-4 max-w-[850px]">
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Allgemein</h3>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Die Swibble UG (haftungsbeschränkt), Königstraße 30, 52064 Aachen
               betreibt eine digitale Mobilanwendung ("App") sowie eine digitale
               Webanwendung ("Web-App"). Über diese können sich Unternehmen
               präsentieren und Angebote, Veranstaltungen und weitere
               Informationen über das eigene Unternehmen publizieren.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Diese Allgemeinen Geschäfts-bedingungen ("AGB") gelten
               ausschließlich. Andere lautende Bedingungen werden nicht
               anerkannt.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Bei der Nutzung des Aachen App Accounts erkennen Sie als User die
               AGB für unsere Dienste mit Setzen des Hakens bei "Ich habe die
               Datenschutzerklärung & AGB der Aachen App gelesen und stimme zu!"
               und das Klicken auf den "Registrieren" Button an.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Wir sind zu Änderungen der AGB und sonstiger Bedingungen mit
               Wirkung für die Zukunft berechtigt. Änderungen bedürfen Ihrer
               Zustimmung. Die Zustimmung gilt als erteilt, wenn nicht binnen 8
@@ -49,12 +47,12 @@ export default function AGB() {
               Auf die Widerspruchsfrist werden wir bei der Änderungsmitteilung
               gesondert hinweisen.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Widersprechen Sie als User fristgerecht, so sind Sie ebenso wie
               wir berechtigt, die Lizenzvereinbarung zu kündigen bzw. den
               Account zu löschen.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Sollten diese AGB eine Regelung enthalten, die nicht wirksam ist,
               gelten alle übrigen gleichwohl. Die unwirksame Regelung ist durch
               eine wirksame zu ersetzen, die dem wirtschaftlichen Zweck der
@@ -63,7 +61,7 @@ export default function AGB() {
           </div>
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Rechtsbeziehung</h3>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Als User gestatten wir Ihnen die kostenlose Nutzung der Aachen
               App. Sie haben gegen uns weder einen Anspruch auf Bereitstellung
               und Nutzung der App, noch einen Anspruch auf Nutzung einzelner
@@ -72,18 +70,18 @@ export default function AGB() {
               gekündigt werden und einzelne Dienste können jederzeit ohne Angabe
               von Gründen eingestellt werden.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Wir bieten die Möglichkeit ein Unternehmen innerhalb der Aachen
               App zu erstellen nur Personen an, die mindestens 18 Jahre alt
               sind. Personen, die jünger sind, dürfen unser Programm nicht
               nutzen.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Die Einlösung von Angeboten und Events innerhalb der Aachen App
               richtet sich ausschließlich nach den Bedingungen der
               Kooperationspartner. Ein Anspruch gegen uns besteht nicht.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Wir behalten uns für den Fall, dass es z.B. aufgrund von
               technischen Problemen oder aufgrund einer Störung des Angebotes
               durch den Eingriff Dritter oder ähnlichen Ereignissen zu
@@ -94,18 +92,18 @@ export default function AGB() {
           </div>
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Haftungsbeschränkungen</h3>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Mit der Lizenzvereinbarung erhalten Sie als User die Möglichkeit,
               die Aachen App in der jeweils aktuellen Fassung zu nutzen. Ihnen
               ist bewusst, dass die Aachen App - wie jede Software – nie völlig
               fehlerfrei sein kann.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Grundsätzlich ist jegliche Haftung von uns ausgeschlossen und
               findet nur nach Maßgabe der folgenden Regelungen statt. Wir haften
               auf Schadensersatz und Ersatz vergeblicher
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Aufwendungen ("Schadensersatz") wegen Verletzung vertraglicher
               oder außervertraglicher Pflichten nur bei Vorsatz oder grober
               Fahrlässigkeit, bei fahrlässiger oder vorsätzlicher Verletzung des
@@ -115,7 +113,7 @@ export default function AGB() {
               Haftung nach dem Produkthaftungsgesetz sowie im Anwendungsbereich
               des § 44a TKG oder aufgrund sonstiger zwingender Haftung.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Der Schadensersatz für die Verletzung wesentlicher
               Vertragspflichten ist auf den vertragstypischen, vorhersehbaren
               Schaden begrenzt, soweit nicht Vorsatz oder grobe Fahrlässigkeit
@@ -123,11 +121,11 @@ export default function AGB() {
               der Gesundheit oder der Übernahme einer Beschaffenheitsgarantie
               oder aus Produkthaftung gehaftet wird.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Die vorstehenden Haftungsregelungen gelten auch für unsere
               Erfüllungsgehilfen.
             </p>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Wir distanzieren uns ausdrücklich von den Inhalten sämtlicher
               Seiten, auf die direkt oder indirekt verlinkt wird oder die direkt
               oder indirekt auf unser Angebot verlinken. Wir übernehmen für
@@ -136,7 +134,7 @@ export default function AGB() {
           </div>
           <div className="div">
             <h3 className="text-2xl">Datenschutz</h3>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Informationen über Art, Umfang, Ort und Zweck der Erhebung,
               Verarbeitung und Nutzung personenbezogenen Daten durch uns sowie
               über die Ihnen zustehenden Rechte entnehmen Sie bitte unserer
@@ -151,7 +149,7 @@ export default function AGB() {
           </div>
           <div className="div">
             <h3 className="text-2xl">Rechtswahl</h3>
-            <p className="leading-6 mt-2">
+            <p className="leading-6 mt-2 text-gray-300">
               Informationen über Art, Umfang, Ort und Zweck der Erhebung,
               Verarbeitung und Nutzung personenbezogenen Daten durch uns sowie
               über die Ihnen zustehenden Rechte entnehmen Sie bitte unserer

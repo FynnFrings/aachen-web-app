@@ -8,8 +8,13 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  important: true,
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        input: "0 0 5px !important",
+      },
+    },
     fontFamily: {
       sans: ["Helvetica Neue", "sans-serif"],
     },

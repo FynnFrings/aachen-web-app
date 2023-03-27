@@ -9,34 +9,48 @@ const Footer = () => {
             <Image src={"/logo.svg"} alt="logo" width={120} height={120} />
           </div>
           <div className="w-full flex flex-col lg:flex-row text-center gap-y-8 lg:justify-center lg:gap-x-16">
-            <div>
+            <div className="flex flex-col items-center">
               <h2 className="font-bold text-md mb-4">Mehr von uns</h2>
               <Link className="font-light text-xs" href={"/"}>
-                Aachen App API
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Aachen App API
+                </p>
               </Link>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <h2 className="font-bold text-md mb-4">Aachen App</h2>
               <Link className="font-light text-xs" href={"/"}>
-                Download
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Download
+                </p>
               </Link>
               <Link className="font-light text-xs" href={"/"}>
-                Allgemeinfeedback
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Allgemeinfeedback
+                </p>
               </Link>
               <Link className="font-light text-xs" href={"/"}>
-                Feedback als Unternehmen
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Feedback als Unternehmen
+                </p>
               </Link>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <h2 className="font-bold text-md mb-4">Rechtliches</h2>
               <Link className="font-light text-xs" href={"/impressum"}>
-                Impressum
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Impressum
+                </p>
               </Link>
               <Link className="font-light text-xs" href={"/datenschutz"}>
-                Datenschutz
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  Datenschutz
+                </p>
               </Link>
               <Link className="font-light text-xs" href={"/agb"}>
-                AGB
+                <p className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+                  AGB
+                </p>
               </Link>
             </div>
           </div>

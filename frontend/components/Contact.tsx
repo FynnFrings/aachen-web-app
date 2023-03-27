@@ -20,7 +20,7 @@ const Contact = () => {
             >
               <div className="w-full flex flex-row justify-between">
                 <input
-                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:shadow-input focus:!outline-offset-0 focus:!outline-none"
+                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Vorname"
                   required
@@ -28,7 +28,7 @@ const Contact = () => {
                   onChange={(e) => setFirstname(e.target.value)}
                 />
                 <input
-                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:shadow-input focus:!outline-offset-0 focus:!outline-none"
+                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Nachname"
                   required
@@ -38,7 +38,7 @@ const Contact = () => {
               </div>
               <div className="w-full">
                 <input
-                  className="w-full bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:shadow-input focus:!outline-offset-0 focus:!outline-none"
+                  className="w-full bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="email"
                   placeholder="Email"
                   required
@@ -48,7 +48,7 @@ const Contact = () => {
               </div>
               <div className="w-full">
                 <textarea
-                  className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20 focus:!shadow-[#FAC520] focus:shadow-input focus:!outline-offset-0 focus:!outline-none"
+                  className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   placeholder="Your message"
                   required
                   value={message}

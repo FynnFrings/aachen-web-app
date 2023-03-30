@@ -5,8 +5,10 @@ const Footer = () => {
     <>
       <div className="w-full sticky top-[100vh] bg-transparent  text-white px-[4%] lg:px-[5%]">
         <div className="flex flex-col items-center border-y border-slate-600 py-8 gap-y-8">
-          <div>
-            <Image src={"/logo_hd.png"} alt="logo" width={120} height={120} />
+          <div className="hover:scale-95 transition duration-200">
+            <Link href={"/"}>
+              <Image src={"/logo_hd.png"} alt="logo" width={120} height={120} />
+            </Link>
           </div>
           <div className="w-full flex flex-col lg:flex-row text-center gap-y-8 lg:justify-center lg:gap-x-16">
             <div className="flex flex-col items-center">

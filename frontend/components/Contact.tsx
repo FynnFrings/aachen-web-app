@@ -69,7 +69,7 @@ const Contact = () => {
                 />
               </div>
               <button
-                className="bg-[#FAC520] text-black w-[80%] py-2 rounded-xl font-medium text-2xl"
+                className="bg-[#FAC520] text-black w-[80%] py-2 rounded-xl font-medium text-2xl hover:scale-95 transition duration-200"
                 type="submit"
               >
                 Absenden

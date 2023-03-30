@@ -49,7 +49,7 @@ const AdDownload = () => {
               </p>
               <div>
                 <Link href={"/"}>
-                  <button className=" text-black px-14 py-4 bg-[#FAC520] font-semibold text-xl rounded-lg">
+                  <button className=" text-black px-14 py-4 bg-[#FAC520] font-semibold text-xl rounded-lg hover:scale-95 transition duration-200">
                     Download
                   </button>
                 </Link>

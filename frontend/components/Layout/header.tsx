@@ -8,7 +8,7 @@ const Header = () => {
       <header className="bg-black lg:bg-transparent w-full flex flex-nowrap justify-between items-center px-[4%] py-[4%] lg:px-[5%] lg:py-[2%]">
         <div>
           <Link href={"/"}>
-            <Image src={"/logo.svg"} alt="logo" width={60} height={60} />
+            <Image src={"/logo_hd.png"} alt="logo" width={80} height={80} />
           </Link>
         </div>
         <div className="lg:hidden">

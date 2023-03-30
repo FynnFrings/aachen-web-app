@@ -37,7 +37,7 @@ const Contact = () => {
                   className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Vorname"
-                  // required
+                  required
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
@@ -45,7 +45,6 @@ const Contact = () => {
                   className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Nachname"
-                  // required
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 />
@@ -54,8 +53,8 @@ const Contact = () => {
                 <input
                   className="w-full bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="email"
-                  placeholder="Email"
-                  // required
+                  placeholder="E-mail"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -63,8 +62,8 @@ const Contact = () => {
               <div className="w-full">
                 <textarea
                   className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
-                  placeholder="Your message"
-                  // required
+                  placeholder="Text"
+                  required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />

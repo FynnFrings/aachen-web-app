@@ -16,3 +16,6 @@ body {
 body {
   background-color: rgba(19, 19, 17, 1);
 }
+*::selection {
+  background: #FAC520;
+}

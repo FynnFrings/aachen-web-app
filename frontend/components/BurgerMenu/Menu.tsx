@@ -21,21 +21,37 @@ export default function Menu({ menu, setMenu }: any) {
           <div className="flex flex-col items-start text-white text-xl  gap-5 mb-5">
             <Link
               onClick={handleOnClick}
-              className="hover:underline underline-offset-8 decoration-hover"
+              className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
               href={"/"}
             >
               Unternehmen
             </Link>
-            <a onClick={handleOnClick} className="" href={"/"}>
+            <a
+              onClick={handleOnClick}
+              className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
+              href={"/"}
+            >
               Events
             </a>
-            <a onClick={handleOnClick} className="" href="#projects">
+            <a
+              onClick={handleOnClick}
+              className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
+              href="#projects"
+            >
               Coupons
             </a>
-            <Link onClick={handleOnClick} className="" href={"/"}>
+            <Link
+              onClick={handleOnClick}
+              className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
+              href={"/"}
+            >
               Nachrichtem
             </Link>
-            <Link onClick={handleOnClick} className="" href={"/"}>
+            <Link
+              onClick={handleOnClick}
+              className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
+              href={"/"}
+            >
               Download
             </Link>
           </div>

@@ -1,13 +1,27 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import ContactAlert from "./ContactAlert";
 
 const Contact = () => {
   const [firstname, setFirstname] = useState<string>();
   const [lastname, setLastname] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [message, setMessage] = useState<string>();
+  const [alert, setAlert] = useState<boolean>(false);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setAlert(true);
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setMessage("");
   };
+
+  //useEffect with timer for closing alert message wich react on "alert" state
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert(false);
+    }, 7000);
+  }, [alert]);
   return (
     <>
       <div className="text-white flex flex-col items-center gap-y-14 py-20">
@@ -20,37 +34,37 @@ const Contact = () => {
             >
               <div className="w-full flex flex-row justify-between">
                 <input
-                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2"
+                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Vorname"
-                  required
+                  // required
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
                 <input
-                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2"
+                  className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Nachname"
-                  required
+                  // required
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 />
               </div>
               <div className="w-full">
                 <input
-                  className="w-full bg-transparent border border-white rounded-xl py-4 pl-2"
+                  className="w-full bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="email"
                   placeholder="Email"
-                  required
+                  // required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="w-full">
                 <textarea
-                  className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20"
+                  className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   placeholder="Your message"
-                  required
+                  // required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />
@@ -73,6 +87,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      {alert ? <ContactAlert /> : ""}
     </>
   );
 };

@@ -14,16 +14,16 @@ const Header = () => {
         </div>
         <div className="hidden lg:block text-white font-sans font-normal text-md">
           <ul className="flex flex-nowrap items-center gap-x-8">
-            <li>
+            <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
               <Link href={"/unternehmens"}>Unternehmens</Link>
             </li>
-            <li>
+            <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
               <Link href={"/events"}>Events</Link>
             </li>
-            <li>
+            <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
               <Link href={"/coupons"}>Coupons</Link>
             </li>
-            <li>
+            <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
               <Link href={"/nachrichten"}>Nachrichten</Link>
             </li>
             <li>

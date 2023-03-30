@@ -18,4 +18,5 @@ body {
 }
 *::selection {
   background: #FAC520;
+  color: black;
 }

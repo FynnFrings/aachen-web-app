@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import iphoneLarge from "../public/iphoneLarge.png";
+import iphoneLarge from "../public/iphone_pics/IMG_9532.png";
 const AdDownload = () => {
   return (
     <>

@@ -11,11 +11,7 @@ interface CarouselItemProps {
 
 // Define the CarouselItem component which renders each carousel item
 export const CarouselItem: React.FC<CarouselItemProps> = ({ children }) => {
-  return (
-    <div className="w-[100%] inline-flex items-center justify-center text-white">
-      {children}
-    </div>
-  );
+  return <div className="inline-flex">{children}</div>;
 };
 
 interface CarouselProps {
@@ -41,26 +37,26 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
     setActiveIndex(newIndex);
   };
 
-  // Set up an effect to automatically update the active index
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Increment the active index if the carousel is not paused
-      if (!paused) {
-        updateIndex(activeIndex + 1);
-      }
-    }, 3000);
-    // Clean up the interval on unmount
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  });
+  // // Set up an effect to automatically update the active index
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     // Increment the active index if the carousel is not paused
+  //     if (!paused) {
+  //       updateIndex(activeIndex + 1);
+  //     }
+  //   }, 3000);
+  //   // Clean up the interval on unmount
+  //   return () => {
+  //     if (interval) {
+  //       clearInterval(interval);
+  //     }
+  //   };
+  // });
 
   // Set up swipe handlers using the react-swipeable library
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex + 1),
+    onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
   // Render the Carousel component
@@ -77,10 +73,10 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
       <div
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        className="overflow-hidden w-[60%]"
+        className="overflow-hidden  w-[60%]"
       >
         <div
-          className="whitespace-nowrap transition-transform "
+          className="whitespace-nowrap  transition-transform "
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {/* Render each carousel item */}

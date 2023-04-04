@@ -11,11 +11,7 @@ interface CarouselItemProps {
 
 // Define the CarouselItem component which renders each carousel item
 export const CarouselItem: React.FC<CarouselItemProps> = ({ children }) => {
-  return (
-    <div className="w-[100%] inline-flex items-center justify-center text-white">
-      {children}
-    </div>
-  );
+  return <div className="w-full inline-flex">{children}</div>;
 };
 
 interface CarouselProps {
@@ -60,12 +56,12 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   // Set up swipe handlers using the react-swipeable library
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex + 1),
+    onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
   // Render the Carousel component
   return (
-    <div className="w-full flex justify-center items-center gap-x-10">
+    <div className="w-screen flex justify-center items-center gap-x-10">
       <button
         onClick={() => {
           // Decrement the active index when the left arrow button is clicked
@@ -77,16 +73,17 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
       <div
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        className="overflow-hidden w-[60%]"
+        className="overflow-hidden w-[45rem]"
       >
         <div
-          className="whitespace-nowrap transition-transform "
+          className="whitespace-nowrap  transition-transform"
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {/* Render each carousel item */}
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child as React.ReactElement<any>, {
               key: index,
+              width: "100%",
             });
           })}
         </div>
@@ -95,6 +92,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
           {React.Children.map(children, (child, index) => {
             return (
               <button
+                key={index}
                 onClick={() => {
                   // Update the active index when a navigation dot is clicked
                   updateIndex(index);

@@ -7,7 +7,9 @@ const Header = () => {
     <>
       <header className="bg-black lg:bg-transparent w-full flex flex-nowrap justify-between items-center px-[4%] py-[4%] lg:px-[5%] lg:py-[2%]">
         <div>
-          <Image src={"/logo.svg"} alt="logo" width={60} height={60} />
+          <Link href={"/"}>
+            <Image src={"/logo_hd.png"} alt="logo" width={80} height={80} />
+          </Link>
         </div>
         <div className="lg:hidden">
           <BurgerMenu />
@@ -15,7 +17,7 @@ const Header = () => {
         <div className="hidden lg:block text-white font-sans font-normal text-md">
           <ul className="flex flex-nowrap items-center gap-x-8">
             <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
-              <Link href={"/unternehmens"}>Unternehmens</Link>
+              <Link href={"/unternehmens"}>Unternehmen</Link>
             </li>
             <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
               <Link href={"/events"}>Events</Link>

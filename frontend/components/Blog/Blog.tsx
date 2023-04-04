@@ -16,7 +16,7 @@ const Blog = () => {
         <div className="hidden lg:w-full lg:flex lg:justify-center">
           <BlogDesktop />
         </div>
-        <button className="text-white border-2 py-5 px-14 rounded-xl font-medium text-2xl">
+        <button className="text-white border-2 py-5 px-14 rounded-xl font-medium text-2xl hover:scale-95 transition duration-200">
           mehr anzeigen
         </button>
       </div>

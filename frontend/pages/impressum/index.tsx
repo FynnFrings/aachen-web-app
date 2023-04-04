@@ -12,7 +12,6 @@ export default function ImpressumPage() {
         />
         {/* SEO texts */}
         <meta name="keywords" content="Aachen App, Impressum" />
-        <script> </script>
       </Head>
 
       <main className="text-white">
@@ -24,20 +23,14 @@ export default function ImpressumPage() {
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Postanschrift</h3>
             <p className="leading-6 mt-2 text-gray-300">
-              Jorit Vásconez Gerlach
+              Fynn Frings
               <br />
-              Charles-de-Coster-Str. 11
+              Königstraße 30
               <br />
-              52074 Aachen
+              52064 Aachen
               <br />
               Germany
             </p>
-            {/* <p>
-                  Swibble UG (haftungsbeschränkt)<br>
-                  Königstraße 30<br>
-                  52064 Aachen<br>
-                  Germany
-              </p> */}
           </div>
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Kontakt</h3>
@@ -45,7 +38,7 @@ export default function ImpressumPage() {
               Mail
               <a href="mailto:contact@swibble.net">contact@aachen-app.de</a>
               <br />
-              Nummer <a href="tel:+49 176 56928667">+49 176 56928667</a>
+              Nummer <a href="tel:+49 176 56928667">+49 178 2632310</a>
             </p>
           </div>
           <div className="flex flex-col gap-[0.8rem]">
@@ -53,7 +46,7 @@ export default function ImpressumPage() {
               Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
             </h3>
             <p className="leading-6 mt-2 text-gray-300">
-              Swibble UG (haftungsbeschränkt)
+              Fynn Frings
               <br />
               Königstraße 30
               <br />

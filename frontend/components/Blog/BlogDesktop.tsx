@@ -15,12 +15,6 @@ const BlogDesktop = () => {
         <CarouselItem>
           <BlogCard photo={AachenPic4} />
         </CarouselItem>
-        <CarouselItem>
-          <BlogCard photo={AachenPic4} />
-        </CarouselItem>
-        <CarouselItem>
-          <BlogCard photo={AachenPic4} />
-        </CarouselItem>
       </Carousel>
     </>
   );

@@ -10,13 +10,20 @@ const BlogCard: FC<Props> = ({ photo }) => {
   return (
     <>
       <div className="w-full bg-[#22221f] flex flex-col mx-4 px-4 py-4 gap-y-4 rounded-2xl md:w-[45%] md:flex md:flex-col md:justify-between lg:w-full lg:mx-0 lg:px-10 lg:py-10 lg:whitespace-normal">
-        <div className="flex justify-center w-full h-full items-center">
+        <div className="flex justify-center w-full items-center">
           <Image
-            className="rounded-2xl text-center lg:w-full"
+            className="block rounded-2xl text-center lg:hidden"
             src={photo}
             alt="aachen"
             width={300}
             height={300}
+          />
+          <Image
+            className="lg:block rounded-2xl text-center w-full hidden"
+            src={photo}
+            alt="aachen"
+            width={0}
+            height={0}
           />
         </div>
         <div className="flex flex-col gap-y-4">

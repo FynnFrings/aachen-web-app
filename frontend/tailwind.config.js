@@ -21,8 +21,8 @@ module.exports = {
       fill: "fill 2s ease-out 1 forwards",
       popup:
         "popup 0.5s ease-in-out 1 forwards, popupDelay 0.5s ease-in-out 4s 1 forwards",
-      slide: "slide 1s ease 0s 1 normal forwards",
-      slideBack: "slideBack 1s ease 0s 1 normal forwards",
+      slide: "slide 0.5s ease 0s 1 normal forwards",
+      slideBack: "slideBack 0.5s ease 0s 1 normal forwards",
     },
     keyframes: {
       fill: {

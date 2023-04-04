@@ -39,13 +39,9 @@ const AdDownload = () => {
         <div className="bg-[url('../public/gradient.png')] bg-cover bg-top w-screen -mx-[6%]">
           <div className="flex justify-between items-center px-[5%]">
             <div className="text-white w-[60%] flex flex-col gap-y-8">
-              <h1 className="font-bold text-5xl">
-                Discover Everything Aachen Has to Offer with Our Comprehensive
-                City App!
-              </h1>
-              <p className="font-light text-2xl">
-                Our city app is the ultimate guide to Aachen, providing you with
-                all the information you need to make the most of your visit.
+              <h1 className="font-bold text-5xl">Aachen App</h1>
+              <p className="font-light text-4xl">
+                Events. Angebote. Nachrichten. Dein Aachen
               </p>
               <div>
                 <Link href={"/"}>

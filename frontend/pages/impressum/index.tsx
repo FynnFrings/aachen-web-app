@@ -23,7 +23,7 @@ export default function ImpressumPage() {
           <div className="flex flex-col gap-[0.8rem]">
             <h3 className="text-2xl">Postanschrift</h3>
             <p className="leading-6 mt-2 text-gray-300">
-              Fynn Frings
+              Aachen App UG (haftungsbeschränkt)
               <br />
               Königstraße 30
               <br />

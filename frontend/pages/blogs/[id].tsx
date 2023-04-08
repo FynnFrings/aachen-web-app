@@ -1,15 +1,15 @@
+import Titel from "@/components/Titel";
 import Link from "next/link";
 
 const BlogDetails = () => {
   return (
     <>
       <div className="flex flex-col gap-5 items-start mb-16 mx-5">
-        <div className="bg-[#fac520] bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
-          <h1 className="text-5xl font-bold text-white opa ">Titel</h1>
-          <p className="text-slate-300 text-2xl font-light">
-            Fynn Frings • 01. April 2023
-          </p>
-        </div>
+        <Titel
+          titel={"Titel"}
+          addInfo={"Fynn Frings • 01. April 2023"}
+          background={"bg-#fac520"}
+        />
         <div className="">
           <h2 className="text-white text-4xl font-bold mt-7">Titel</h2>
           <p className="text-slate-300 text-xl mb-7">

@@ -8,7 +8,7 @@ const BlogDetails = () => {
         <Titel
           titel={"Titel"}
           addInfo={"Fynn Frings • 01. April 2023"}
-          background={"bg-#fac520"}
+          background={"bg-[#fac520]"}
         />
         <div className="">
           <h2 className="text-white text-4xl font-bold mt-7">Titel</h2>

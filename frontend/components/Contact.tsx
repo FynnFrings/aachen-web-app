@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import ContactAlert from "./ContactAlert";
 
 const Contact = () => {
+  //TODO: USE useReduce INSTEAD OF USE STATE
   const [firstname, setFirstname] = useState<string>();
   const [lastname, setLastname] = useState<string>();
   const [email, setEmail] = useState<string>();

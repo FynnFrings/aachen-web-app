@@ -1,9 +1,12 @@
+import BlogCard from "@/components/Blog/BlogCard";
 import DropdownList from "@/components/DropdownFilter/DropdownList";
 import SearchFiled from "@/components/SearchFiled";
 import Titel from "@/components/Titel";
 import { ChangeEvent, useState } from "react";
+import { articles } from "./database";
 
 const BlogPage = () => {
+  //TODO: USE useReduce INSTEAD OF USE STATE
   //*handling search field in search bar START
   const [searchInput, setSearchInput] = useState<string>("");
 
@@ -35,6 +38,19 @@ const BlogPage = () => {
             placeholder={"Search"}
           />
           <DropdownList selectItem={selectItem} itemSelection={itemSelection} />
+        </div>
+        <div className="flex flex-wrap flex-row justify-between gap-5 ">
+          {articles.map((article) => (
+            <BlogCard
+              key={article.id}
+              id={article.id}
+              title={article.title}
+              author={article.author}
+              date={article.date}
+              text={article.text}
+              link={article.link}
+            />
+          ))}
         </div>
       </div>
     </>

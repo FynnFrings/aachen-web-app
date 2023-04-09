@@ -10,7 +10,7 @@ const SearchFiled = (props: InputProps) => {
           <FiSearch />
         </div>
         <input
-          className="w-full text-start text-lg rounded-lg bg-transparent  h-12 border-transparent"
+          className="w-full text-start text-lg rounded-lg bg-transparent  h-12 border-transparent focus:!outline-offset-0 focus:!outline-none"
           type="text"
           placeholder={placeholder}
           onChange={handleChange}

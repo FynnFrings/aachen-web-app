@@ -1,31 +1,44 @@
-import { IBlogCard } from "@/pages/blogs/database";
+// Import required modules
+import { IBlogCard, ITimestamp } from "../../types/types";
 import Link from "next/link";
+import Image from "next/image";
+import { dateFormat } from "../dateFormat";
+import DOMPurify from "isomorphic-dompurify";
 
-const BlogCard = ({ title, author, date, text, link }: IBlogCard) => {
+// Define the BlogCard component which accepts an article object as a prop with type IBlogCard
+const BlogCard = ({ article }: { article: IBlogCard }) => {
+  // Sanitize the article content to prevent malicious attacks
+  const sanitizedData: string = DOMPurify.sanitize(article.htmlContent);
+
+  // Return JSX to render the blog card
   return (
-    <>
-      <div className="bg-[#22221f] flex flex-col w-[32%] p-5 gap-y-4 rounded-lg">
-        <div className="w-full bg-[#fac520] h-44 rounded-lg"></div>
-        <div>
-          <h2 className="font-bold text-2xl text-white">{title}</h2>
-        </div>
-        <div>
-          <p className="text-slate-300">
-            {author} • {date}
-          </p>
-        </div>
-        <div>
-          <p className="text-slate-300">{text}</p>
-        </div>
-        <div>
-          <Link href={link}>
-            <button className="w-full bg-[#fac520] rounded-lg py-2">
-              Weiterlesen
-            </button>
-          </Link>
-        </div>
+    <div className="bg-[#22221f] flex flex-col w-[32%] p-5 gap-y-4 rounded-lg">
+      {/* Render a placeholder image */}
+      <div className="w-full h-44 bg-[#fac520] rounded-lg"></div>
+      <div>
+        {/* Render the article title */}
+        <h2 className="font-bold text-2xl text-white">{article.title}</h2>
       </div>
-    </>
+      <div>
+        {/* Render the author and creation date */}
+        <p className="text-slate-300">
+          {article.author} • {dateFormat(article.createdAt)}
+        </p>
+      </div>
+      {/* Render the sanitized text */}
+      <div
+        className="text-slate-300 h-36 !overflow-hidden text-ellipsis"
+        dangerouslySetInnerHTML={{ __html: sanitizedData }}
+      ></div>
+      <div>
+        {/* Add a link to full blog post */}
+        <Link href={`/blog/${article.id}`}>
+          <button className="w-full bg-[#fac520] rounded-lg py-2">
+            Weiterlesen
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 };
 

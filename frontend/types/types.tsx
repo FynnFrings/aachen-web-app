@@ -9,3 +9,21 @@ export interface InputProps {
   searchInput: string;
   placeholder: string;
 }
+
+// Interfaces for Blog Page * START *
+
+export interface IBlogCard {
+  id: number | string;
+  imageUrl?: string;
+  title: string;
+  author: string;
+  htmlContent: string;
+  createdAt: ITimestamp;
+}
+
+export interface ITimestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
+// Interfaces for Blog Page * END *

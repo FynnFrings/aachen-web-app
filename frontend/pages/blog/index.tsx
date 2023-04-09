@@ -2,27 +2,38 @@ import BlogCard from "@/components/Blog/BlogCard";
 import DropdownList from "@/components/DropdownFilter/DropdownList";
 import SearchFiled from "@/components/SearchFiled";
 import Titel from "@/components/Titel";
+import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
-import { articles } from "./database";
 
-const BlogPage = () => {
+const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
   //TODO: USE useReduce INSTEAD OF USE STATE
+
   //*handling search field in search bar START
+
+  // state variable to manage input value in search bar
   const [searchInput, setSearchInput] = useState<string>("");
 
-  //function for changing value inside input
+  // function to update searchInput state based on user input
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
 
-  //state for filtering events by category
+  // state variable to manage selected category for article filtering
   const [selectItem, setSelectItem] = useState<string>("");
 
-  //function for filtering events by category
+  // function to update selectItem state based on user selection
   const itemSelection = (item: string): void => {
     setSelectItem(item);
   };
+
+  // array of articles filtered according to searchInput and selectItem state values
+  const filteredBlogs = articles.filter((article) => {
+    let isMatchedSearchByTittle =
+      article.title.toLowerCase().includes(searchInput.toLowerCase()) || // check if title includes search query
+      !searchInput; // if search query is empty, all articles should be returned
+    return isMatchedSearchByTittle;
+  });
 
   return (
     <>
@@ -39,22 +50,24 @@ const BlogPage = () => {
           />
           <DropdownList selectItem={selectItem} itemSelection={itemSelection} />
         </div>
-        <div className="flex flex-wrap flex-row justify-between gap-5 ">
-          {articles.map((article) => (
-            <BlogCard
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              author={article.author}
-              date={article.date}
-              text={article.text}
-              link={article.link}
-            />
+        <div className="flex flex-wrap flex-row gap-5 ">
+          {/* render BlogCard component for each filtered article */}
+          {filteredBlogs.map((article) => (
+            <BlogCard key={article.id} article={article} />
           ))}
         </div>
       </div>
     </>
   );
 };
+
+//Using Server Side Rendering function
+export async function getServerSideProps() {
+  // Fetch data from  API
+  const res = await fetch(`http://localhost:5050/blog/`);
+  const data = await res.json();
+  // Pass data to the page via props
+  return { props: { articles: data } };
+}
 
 export default BlogPage;

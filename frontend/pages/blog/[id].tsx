@@ -15,8 +15,8 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
           <Image
             src={article.imageUrl!}
             alt="background"
-            width={0}
-            height={0}
+            width={300}
+            height={300}
             className="md:aspect-[3/1] lg:aspect-[4/1] w-full bg-cover opacity-75 rounded-lg"
           />
           <div className="absolute -translate-x-1/2 -translate-y-1/2 top-[50%] left-[50%] text-center">

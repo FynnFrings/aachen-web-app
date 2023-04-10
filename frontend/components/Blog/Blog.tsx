@@ -1,4 +1,4 @@
-import BlogCard from "./BlogCard";
+import BlogCard from "./BlogCardCarousel";
 import BlogDesktop from "./BlogDesktop";
 import AachenPic2 from "../../public/AachenPics/aachen3.jpg";
 import Aachen5 from "../../public/AachenPics/aachen5.jpg";

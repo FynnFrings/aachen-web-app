@@ -14,7 +14,7 @@ body {
   max-width: 100vw;
 }
 body {
-  background-color: rgba(19, 19, 17, 1);
+  background-color: #131311;
 }
 *::selection {
   background: #FAC520;

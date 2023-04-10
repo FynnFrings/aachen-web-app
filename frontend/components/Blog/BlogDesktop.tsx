@@ -1,4 +1,4 @@
-import BlogCard from "./BlogCard";
+import BlogCardCarousel from "./BlogCardCarousel";
 import AachenPic4 from "../../public/AachenPics/aachen6.png";
 import Carousel, { CarouselItem } from "./Carousel";
 
@@ -7,13 +7,13 @@ const BlogDesktop = () => {
     <>
       <Carousel>
         <CarouselItem>
-          <BlogCard photo={AachenPic4} />
+          <BlogCardCarousel photo={AachenPic4} />
         </CarouselItem>
         <CarouselItem>
-          <BlogCard photo={AachenPic4} />
+          <BlogCardCarousel photo={AachenPic4} />
         </CarouselItem>
         <CarouselItem>
-          <BlogCard photo={AachenPic4} />
+          <BlogCardCarousel photo={AachenPic4} />
         </CarouselItem>
       </Carousel>
     </>

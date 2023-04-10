@@ -18,6 +18,7 @@ export interface IBlogCard {
   title: string;
   author: string;
   htmlContent: string;
+  shortDescription: string;
   createdAt: ITimestamp;
 }
 

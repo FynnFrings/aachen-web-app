@@ -8,7 +8,7 @@ import DOMPurify from "isomorphic-dompurify";
 // Define the BlogCard component which accepts an article object as a prop with type IBlogCard
 const BlogCard = ({ article }: { article: IBlogCard }) => {
   // Sanitize the article content to prevent malicious attacks
-  const sanitizedData: string = DOMPurify.sanitize(article.htmlContent);
+  const sanitizedData: string = DOMPurify.sanitize(article.shortDescription);
 
   // Return JSX to render the blog card
   return (
@@ -16,7 +16,7 @@ const BlogCard = ({ article }: { article: IBlogCard }) => {
       {/* Render a placeholder image */}
       <div className="w-full">
         <Image
-          className="w-full rounded-lg"
+          className="w-full h-44 object-cover rounded-lg"
           src={article.imageUrl!}
           alt="photo"
           width={"300"}
@@ -35,7 +35,7 @@ const BlogCard = ({ article }: { article: IBlogCard }) => {
       </div>
       {/* Render the sanitized text */}
       <div
-        className="text-slate-300 h-36 !overflow-hidden text-ellipsis"
+        className="text-slate-300 h-24 !overflow-hidden text-ellipsis"
         dangerouslySetInnerHTML={{ __html: sanitizedData }}
       ></div>
       <div>

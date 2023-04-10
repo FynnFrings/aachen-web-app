@@ -35,16 +35,6 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
     return isMatchedSearchByTittle;
   });
 
-  //sort the array by date from newest to oldest
-  let sortedDatesNewestToOldest = articles.sort((a, b) => {
-    let sortedDatesNewestToOldest =
-      (dateFormat(b.createdAt) as any) - (dateFormat(a.createdAt) as any);
-    return sortedDatesNewestToOldest;
-  });
-
-  //use previous result and reverse it to sort array by date from oldest to newest
-  let sortedDatesOldestToNewest = sortedDatesNewestToOldest.reverse();
-
   return (
     <>
       <div className="flex flex-col gap-14 py-20">
@@ -57,19 +47,11 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
             searchInput={searchInput}
             placeholder={"Search"}
           />
-          <DropdownList selectItem={selectItem} itemSelection={itemSelection} />
+          {/* <DropdownList selectItem={selectItem} itemSelection={itemSelection} /> */}
         </div>
         <div className="flex flex-col lg:flex-wrap lg:flex-row gap-5 ">
           {/* render BlogCard component for each filtered article */}
-          {(selectItem
-            ? (selectItem === "vom ältesten zu neusten"
-                ? sortedDatesOldestToNewest
-                : filteredBlogs) &&
-              (selectItem === "vom neusten zu ältesten"
-                ? sortedDatesNewestToOldest
-                : filteredBlogs)
-            : filteredBlogs
-          ).map((article) => (
+          {filteredBlogs.map((article) => (
             <BlogCard key={article.id} article={article} />
           ))}
         </div>

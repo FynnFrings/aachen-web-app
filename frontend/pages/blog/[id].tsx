@@ -17,7 +17,7 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
             alt="background"
             width={300}
             height={300}
-            className="md:aspect-[3/1] lg:aspect-[4/1] w-full bg-cover opacity-75 rounded-lg"
+            className="object-cover w-full h-64 bg-cover opacity-20 rounded-lg"
           />
           <div className="absolute -translate-x-1/2 -translate-y-1/2 top-[50%] left-[50%] text-center">
             <h1 className="text-3xl lg:text-5xl font-bold text-white">

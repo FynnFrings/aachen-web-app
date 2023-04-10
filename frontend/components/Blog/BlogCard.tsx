@@ -41,7 +41,7 @@ const BlogCard = ({ article }: { article: IBlogCard }) => {
       <div>
         {/* Add a link to full blog post */}
         <Link href={`/blog/${article.id}`}>
-          <button className="w-full bg-[#fac520] rounded-lg py-2">
+          <button className="w-full bg-[#fac520] rounded-lg py-2 hover:scale-95 transition duration-200">
             Weiterlesen
           </button>
         </Link>

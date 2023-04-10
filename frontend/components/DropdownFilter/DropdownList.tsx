@@ -5,7 +5,7 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 
 // A pure function that returns an array of strings
 const items = (): string[] => {
-  return ["item 1", "item 2", "item 3"];
+  return ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 };
 
 // The main component

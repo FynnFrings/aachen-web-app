@@ -2,6 +2,7 @@ import BlogCard from "@/components/Blog/BlogCard";
 import DropdownList from "@/components/DropdownFilter/DropdownList";
 import SearchFiled from "@/components/SearchFiled";
 import { IBlogCard } from "@/types/types";
+import { dateFormat } from "../../components/dateFormat";
 import { ChangeEvent, useState } from "react";
 
 const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
@@ -30,9 +31,19 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
   const filteredBlogs = articles.filter((article) => {
     let isMatchedSearchByTittle =
       article.title.toLowerCase().includes(searchInput.toLowerCase()) || // check if title includes search query
-      !searchInput; // if search query is empty, all articles should be returned
+      !searchInput; // if search query is empty, all articles should be returne
     return isMatchedSearchByTittle;
   });
+
+  //sort the array by date from newest to oldest
+  let sortedDatesNewestToOldest = articles.sort((a, b) => {
+    let sortedDatesNewestToOldest =
+      (dateFormat(b.createdAt) as any) - (dateFormat(a.createdAt) as any);
+    return sortedDatesNewestToOldest;
+  });
+
+  //use previous result and reverse it to sort array by date from oldest to newest
+  let sortedDatesOldestToNewest = sortedDatesNewestToOldest.reverse();
 
   return (
     <>
@@ -50,7 +61,15 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
         </div>
         <div className="flex flex-col lg:flex-wrap lg:flex-row gap-5 ">
           {/* render BlogCard component for each filtered article */}
-          {filteredBlogs.map((article) => (
+          {(selectItem
+            ? (selectItem === "vom ältesten zu neusten"
+                ? sortedDatesOldestToNewest
+                : filteredBlogs) &&
+              (selectItem === "vom neusten zu ältesten"
+                ? sortedDatesNewestToOldest
+                : filteredBlogs)
+            : filteredBlogs
+          ).map((article) => (
             <BlogCard key={article.id} article={article} />
           ))}
         </div>

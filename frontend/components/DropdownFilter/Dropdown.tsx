@@ -30,7 +30,7 @@ const Dropdown: React.FC<DropDownProps> = ({
         {items.map((item: string, index: number): JSX.Element => {
           return (
             <p
-              className="mb-2 mt-2"
+              className="my-5"
               key={index}
               onClick={(): void => {
                 // Call the itemSelection function when an item is clicked

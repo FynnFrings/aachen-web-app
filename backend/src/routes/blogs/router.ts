@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getAllBlogs, getBlogtById } from "./handlers";
+import { getAllBlogs, getBlogById } from "./handlers";
 
 const EventsRouter = Router();
 
 EventsRouter.get("/", getAllBlogs);
-EventsRouter.get("/:itemId", getBlogtById);
+EventsRouter.get("/:id", getBlogById);
 
 export default EventsRouter;

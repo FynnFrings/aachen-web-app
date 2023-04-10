@@ -1,7 +1,6 @@
 import BlogCard from "@/components/Blog/BlogCard";
 import DropdownList from "@/components/DropdownFilter/DropdownList";
 import SearchFiled from "@/components/SearchFiled";
-import Titel from "@/components/Titel";
 import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
 
@@ -38,10 +37,9 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
   return (
     <>
       <div className="flex flex-col gap-14 py-20">
-        <Titel
-          titel={"Unser Blog"}
-          background={"bg-gradient-to-b from-neutral-700 to-neutral-500"}
-        />
+        <div className=" bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
+          <h1 className="text-5xl font-bold text-white opa ">Unser Blog</h1>
+        </div>
         <div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
           <SearchFiled
             handleChange={handleChange}
@@ -50,7 +48,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
           />
           <DropdownList selectItem={selectItem} itemSelection={itemSelection} />
         </div>
-        <div className="flex flex-wrap flex-row gap-5 ">
+        <div className="flex flex-col lg:flex-wrap lg:flex-row gap-5 ">
           {/* render BlogCard component for each filtered article */}
           {filteredBlogs.map((article) => (
             <BlogCard key={article.id} article={article} />

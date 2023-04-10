@@ -1,5 +1,5 @@
 // Import required modules
-import { IBlogCard, ITimestamp } from "../../types/types";
+import { IBlogCard } from "../../types/types";
 import Link from "next/link";
 import Image from "next/image";
 import { dateFormat } from "../dateFormat";
@@ -12,9 +12,17 @@ const BlogCard = ({ article }: { article: IBlogCard }) => {
 
   // Return JSX to render the blog card
   return (
-    <div className="bg-[#22221f] flex flex-col w-[32%] p-5 gap-y-4 rounded-lg">
+    <div className="bg-[#22221f] flex flex-col w-full lg:w-[32%] p-5 gap-y-5 rounded-lg">
       {/* Render a placeholder image */}
-      <div className="w-full h-44 bg-[#fac520] rounded-lg"></div>
+      <div className="w-full">
+        <Image
+          className="w-full rounded-lg"
+          src={article.imageUrl!}
+          alt="photo"
+          width={"300"}
+          height={"0"}
+        />
+      </div>
       <div>
         {/* Render the article title */}
         <h2 className="font-bold text-2xl text-white">{article.title}</h2>

@@ -10,11 +10,8 @@ export const getAllBlogs: RequestHandler = async (req, res) => {
   res.json(blogList);
 };
 
-export const getBlogtById: RequestHandler<{ itemId: string }> = async (
-  req,
-  res
-) => {
-  getDoc(doc(database, `blog/${req.params.itemId}`))
+export const getBlogById: RequestHandler<{ id: string }> = async (req, res) => {
+  getDoc(doc(database, `blog/${req.params.id}`))
     .then((snapshot) => {
       snapshot.exists() ? res.json(snapshot.data()) : res.sendStatus(404);
     })

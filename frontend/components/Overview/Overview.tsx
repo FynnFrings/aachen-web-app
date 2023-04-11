@@ -3,7 +3,7 @@ import Angebot from "../../public/overview/angebot.svg";
 import Unternehmen from "../../public/overview/unternehmen_logo.svg";
 import Nacrichten from "../../public/overview/nachrichten_logo.svg";
 import OverviewCArd from "./OverviewCard";
-import Iphone from "../../public/iphone_pics/IMG_9530.png";
+import Iphone from "../../public/iphone_pics/IMG_9884.png";
 import Image from "next/image";
 
 const Overview = () => {

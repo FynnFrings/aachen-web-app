@@ -4,7 +4,7 @@ import Contact from "@/components/Contact";
 import Gallery from "@/components/Gallery";
 import Overview from "@/components/Overview/Overview";
 import Reviews from "@/components/Reviews/Reviews";
-import WeatherWidget from "@/components/WeatherWidget";
+// import WeatherWidget from "@/components/WeatherWidget";
 import { IBlogCard } from "@/types/types";
 
 export default function Home({ articles }: { articles: IBlogCard[] }) {
@@ -16,7 +16,6 @@ export default function Home({ articles }: { articles: IBlogCard[] }) {
       <Blog articles={articles} />
       <Gallery />
       <Contact />
-      <WeatherWidget />
     </>
   );
 }

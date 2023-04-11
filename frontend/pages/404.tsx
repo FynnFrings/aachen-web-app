@@ -3,7 +3,7 @@ import Link from "next/link";
 const ErrorPage = () => {
   return (
     <>
-      <div className="text-white w-screen flex flex-col items-center justify-center h-screen gap-y-6 bg-[url('../public/gradient.png')] bg-cover bg-top -mx-[6%]">
+      <div className="text-white w-screen flex flex-col items-center justify-center h-full gap-y-6 bg-[url('../public/gradient.png')] bg-cover bg-top -mx-[6%]">
         <h1 className="font-bold text-5xl">404</h1>
         <p>Kaiser Karl ist veschwunden</p>
         <Link href="/">

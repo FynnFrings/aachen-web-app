@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="w-full flex flex-col lg:flex-row text-center gap-y-8 lg:justify-center lg:gap-x-16">
             <div className="flex flex-col items-center">
               <h2 className="font-bold text-md mb-4">Mehr von uns</h2>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/api"}>
                 <p className="hover:text-[#FAC520] relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
                   Aachen App API
                 </p>
@@ -21,17 +21,17 @@ const Footer = () => {
             </div>
             <div className="flex flex-col items-center">
               <h2 className="font-bold text-md mb-4">Aachen App</h2>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/download"}>
                 <p className="hover:text-[#FAC520] relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
                   Download
                 </p>
               </Link>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/alfeedback"}>
                 <p className="hover:text-[#FAC520] relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
                   Allgemeinfeedback
                 </p>
               </Link>
-              <Link className="font-light text-xs" href={"/"}>
+              <Link className="font-light text-xs" href={"/feedback"}>
                 <p className="hover:text-[#FAC520] relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
                   Feedback als Unternehmen
                 </p>

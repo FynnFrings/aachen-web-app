@@ -1,7 +1,7 @@
 import { InputProps } from "@/types/types";
 import { FiSearch } from "react-icons/fi";
 
-const SearchFiled = (props: InputProps) => {
+const SearchField = (props: InputProps) => {
   const { placeholder, handleChange, searchInput } = props;
   return (
     <>
@@ -21,4 +21,4 @@ const SearchFiled = (props: InputProps) => {
   );
 };
 
-export default SearchFiled;
+export default SearchField;

@@ -38,10 +38,10 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
   const filteredArticles = [...(articles || [])] // Create a new array with the elements in the articles array (if it exists)
     .sort((a, b) => {
       return selectItem === "vom neusten zu ältesten" // Sort from newest to oldest or vice versa based on selected sorting criteria
-        ? b.createdAt?.seconds - a.createdAt?.seconds || // If seconds are equal, sort by nanoseconds
-            b.createdAt?.nanoseconds - a.createdAt?.nanoseconds
-        : a.createdAt?.seconds - b.createdAt?.seconds || // If seconds are equal, sort by nanoseconds
-            a.createdAt?.nanoseconds - b.createdAt?.nanoseconds;
+        ? b.createdAt?._seconds - a.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+            b.createdAt?._nanoseconds - a.createdAt?._nanoseconds
+        : a.createdAt?._seconds - b.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+            a.createdAt?._nanoseconds - b.createdAt?._nanoseconds;
     })
     .filter((article) => filterByTitle([article], searchInput).length > 0); // Filter articles by title and remove any that don't match.
 
@@ -73,7 +73,9 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
   // Fetch data from  API
-  const res = await fetch(`http://localhost:5050/blog/`);
+  const res = await fetch(
+    `https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
+  ); //http://localhost:5050/blog/
   const data = await res.json();
   // Pass data to the page via props
   return { props: { articles: data } };

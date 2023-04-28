@@ -16,5 +16,5 @@ export function dateFormat(
     console.log("CATCH");
   }
 
-  return "Unbekannt";
+  return "Datum Unbekannt";
 }

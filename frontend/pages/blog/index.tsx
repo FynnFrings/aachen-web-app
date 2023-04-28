@@ -74,7 +74,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 export async function getServerSideProps() {
   // Fetch data from  API
   const res = await fetch(
-    `https://us-central1-aachen-app-dev.cloudfunctions.net/getAllBlogs`
+    `https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
   ); //http://localhost:5050/blog/
   const data = await res.json();
   // Pass data to the page via props

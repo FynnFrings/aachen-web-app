@@ -22,7 +22,8 @@ export default function Home({ articles }: { articles: IBlogCard[] }) {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
   // Fetch data from  API
-  const res = await fetch(`http://localhost:5050/blog/`);
+  const res = await fetch(`https://us-central1-aachen-app-dev.cloudfunctions.net/getAllBlogs`); //http://localhost:5050/blog/
+  console.log(res);
   const data = await res.json();
   // Pass data to the page via props
   return { props: { articles: data } };

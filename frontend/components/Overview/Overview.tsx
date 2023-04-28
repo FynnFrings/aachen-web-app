@@ -39,7 +39,7 @@ const Overview = () => {
             <OverviewCArd
               logo={Nacrichten}
               name="Nachrichten"
-              description="Wir sind zwei junge Aachener, die sich Gedanken darum gemacht haben, wie wir unsere durch die Corona-Krise und den Onlinehandel geschwächte Stadt unterstützen können. Mit der Aachen App vereinen wir die Einfälle von uns und anderen Aachenern, mit der Absicht."
+              description="Die Nachrichten-Sektion der App bietet lokale und internationale Nachrichten sowie wichtige Updates zu aktuellen Ereignissen in Aachen. Sie können auch Benachrichtigungen erhalten, wenn es wichtige Neuigkeiten gibt."
             />
           </div>
         </div>

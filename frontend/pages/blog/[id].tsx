@@ -54,7 +54,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 
   // Declared url of events id
   const blogUrlId: string =
-    "https://us-central1-aachen-app-dev.cloudfunctions.net/getAllBlogs"; //`http://localhost:5050/blog/${id}`;
+    "https://us-central1-aachen-app-dev.cloudfunctions.net/getBlogById"; //`http://localhost:5050/blog/${id}`;
 
   // Fetching data
   const res = await fetch(`${blogUrlId}`, {

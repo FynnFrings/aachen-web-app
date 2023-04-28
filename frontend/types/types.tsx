@@ -23,8 +23,8 @@ export interface IBlogCard {
 }
 
 export interface ITimestamp {
-  seconds: number;
-  nanoseconds: number;
+  _seconds: number;
+  _nanoseconds: number;
 }
 
 // Interfaces for Blog Page * END *

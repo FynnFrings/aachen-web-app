@@ -25,7 +25,7 @@ const AdDownload = () => {
             </p>
           </div>
           <div>
-            <Link href={"/"}>
+            <Link href={"/download"}>
               <button className=" text-black px-14 py-4 bg-[#FAC520] font-semibold text-xl rounded-lg">
                 Download
               </button>
@@ -44,7 +44,7 @@ const AdDownload = () => {
                 Events. Angebote. Nachrichten. Dein Aachen
               </p>
               <div>
-                <Link href={"/"}>
+                <Link href={"/download"}>
                   <button className=" text-black px-14 py-4 bg-[#FAC520] font-semibold text-xl rounded-lg hover:scale-95 transition duration-200">
                     Download
                   </button>

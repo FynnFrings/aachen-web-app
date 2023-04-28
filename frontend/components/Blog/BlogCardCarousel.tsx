@@ -11,14 +11,14 @@ const BlogCardCarousel = ({ article }: { article: IBlogCard }) => {
       <div className="w-full bg-[#22221f] flex flex-col mx-4 px-4 py-4 gap-y-4 rounded-2xl md:w-[45%] md:flex md:flex-col md:justify-between lg:w-full lg:mx-0 lg:px-10 lg:py-10 lg:whitespace-normal">
         <div className="flex justify-center w-full items-center">
           <Image
-            className="block rounded-2xl w-full text-center lg:hidden"
+            className="block rounded-2xl w-full text-center h-64 object-cover lg:hidden"
             src={article.imageUrl!}
             alt="aachen"
             width={300}
             height={300}
           />
           <Image
-            className="lg:block rounded-2xl text-center w-full hidden"
+            className="lg:block rounded-2xl text-center w-full hidden h-72 object-cover"
             src={article.imageUrl!}
             alt="aachen"
             width={300}

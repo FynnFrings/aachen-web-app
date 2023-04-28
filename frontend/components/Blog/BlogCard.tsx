@@ -12,7 +12,7 @@ const BlogCard = ({ article }: { article: IBlogCard }) => {
 
   // Return JSX to render the blog card
   return (
-    <div className="bg-[#22221f] flex flex-col w-full lg:w-[32%] p-5 gap-y-5 rounded-lg">
+    <div className="bg-[#22221f] flex flex-col justify-between w-full lg:w-[32%] p-5 gap-y-5 rounded-lg">
       {/* Render a placeholder image */}
       <div className="w-full">
         <Image

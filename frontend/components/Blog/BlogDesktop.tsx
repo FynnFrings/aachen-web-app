@@ -1,5 +1,4 @@
 import BlogCardCarousel from "./BlogCardCarousel";
-import AachenPic4 from "../../public/AachenPics/aachen6.png";
 import Carousel, { CarouselItem } from "./Carousel";
 import { IBlogCard } from "@/types/types";
 

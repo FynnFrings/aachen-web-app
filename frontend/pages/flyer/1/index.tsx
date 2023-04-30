@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const Card = () => {
   const router = useRouter();
   useEffect(() => {
-    router.push(`/`);
+    router.push(`/download`);
   }, [router]);
   return (
     <div className="w-full h-96 flex justify-center items-center text-[#fac520] text-2xl">

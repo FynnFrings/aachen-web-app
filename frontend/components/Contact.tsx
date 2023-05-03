@@ -1,28 +1,71 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useReducer } from "react";
 import ContactAlert from "./ContactAlert";
+import sendEmail from "@/lib/sendEmail";
+
+// Defining expected input properties for `updateEvent` reducer
+interface Input {
+  email: string;
+  firstname: string;
+  lastname: string;
+  message: string;
+  alert: boolean;
+}
 
 const Contact = () => {
-  //TODO: USE useReduce INSTEAD OF USE STATE
-  const [firstname, setFirstname] = useState<string>();
-  const [lastname, setLastname] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [message, setMessage] = useState<string>();
-  const [alert, setAlert] = useState<boolean>(false);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Creating state and updating function using `useReducer`
+  const [event, updateEvent] = useReducer(
+    (prev: Input, next: Partial<Input>) => {
+      return { ...prev, ...next };
+    },
+    {
+      email: "",
+      message: "",
+      firstname: "",
+      lastname: "",
+      alert: false,
+    }
+  );
+  const [responseMessage, setResponseMessage] = useState({
+    isSuccessful: false,
+    alertMessage: "",
+  });
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setAlert(true);
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setMessage("");
+    try {
+      const req = await sendEmail(
+        event.email,
+        event.message,
+        event.firstname,
+        event.lastname
+      );
+      if (req.status === 250) {
+        setResponseMessage({
+          isSuccessful: true,
+          alertMessage: "Abgeschickt!",
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      setResponseMessage({
+        isSuccessful: false,
+        alertMessage: "Versuchen Sie bitte noch Mal!",
+      });
+    }
+    updateEvent({ email: "" });
+    updateEvent({ message: "" });
+    updateEvent({ firstname: "" });
+    updateEvent({ lastname: "" });
+    updateEvent({ alert: true });
   };
+
+  const alertMessage: string = responseMessage.alertMessage;
 
   //useEffect with timer for closing alert message wich react on "alert" state
   useEffect(() => {
     setTimeout(() => {
-      setAlert(false);
+      updateEvent({ alert: false });
     }, 7000);
-  }, [alert]);
+  }, [event.alert]);
   return (
     <>
       <div className="text-white flex flex-col items-center gap-y-14 py-20">
@@ -39,15 +82,15 @@ const Contact = () => {
                   type="text"
                   placeholder="Vorname"
                   required
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
+                  value={event.firstname}
+                  onChange={(e) => updateEvent({ firstname: e.target.value })}
                 />
                 <input
                   className="w-[48%] bg-transparent border border-white rounded-xl py-4 pl-2 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   type="text"
                   placeholder="Nachname"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
+                  value={event.lastname}
+                  onChange={(e) => updateEvent({ lastname: e.target.value })}
                 />
               </div>
               <div className="w-full">
@@ -56,8 +99,8 @@ const Contact = () => {
                   type="email"
                   placeholder="E-mail"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={event.email}
+                  onChange={(e) => updateEvent({ email: e.target.value })}
                 />
               </div>
               <div className="w-full">
@@ -65,8 +108,8 @@ const Contact = () => {
                   className="w-full bg-transparent border border-white rounded-xl pl-2 pt-2 pb-20 focus:!shadow-[#FAC520] focus:!shadow-input focus:!outline-offset-0 focus:!outline-none"
                   placeholder="Text"
                   required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  value={event.message}
+                  onChange={(e) => updateEvent({ message: e.target.value })}
                 />
               </div>
               <button
@@ -87,7 +130,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      {alert ? <ContactAlert /> : ""}
+      {event.alert ? <ContactAlert alertMessage={alertMessage} /> : ""}
     </>
   );
 };

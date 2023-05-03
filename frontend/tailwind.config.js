@@ -31,7 +31,7 @@ module.exports = {
       },
       popup: {
         "0%": {
-          bottom: "-4rem",
+          bottom: "-100%",
         },
         "100%": {
           bottom: "1rem",
@@ -42,7 +42,7 @@ module.exports = {
           bottom: "1rem",
         },
         "100%": {
-          bottom: "-4rem",
+          bottom: "-100%",
         },
       },
       slide: {

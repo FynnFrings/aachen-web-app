@@ -26,11 +26,15 @@ const Contact = () => {
     }
   );
   const [responseMessage, setResponseMessage] = useState({
-    isSuccessful: false,
+    backgroundColor: "",
     alertMessage: "",
+    fillColor: "",
   });
+  // Handling submit event for form
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // Prevent to refresh the page
     e.preventDefault();
+    // async function to send filled form
     try {
       const req = await sendEmail(
         event.email,
@@ -38,19 +42,22 @@ const Contact = () => {
         event.firstname,
         event.lastname
       );
-      if (req.status === 250) {
+      if (req.status === 200) {
         setResponseMessage({
-          isSuccessful: true,
           alertMessage: "Abgeschickt!",
+          backgroundColor: "bg-[#fac520]",
+          fillColor: "bg-[#f8e5af]",
         });
       }
     } catch (e) {
       console.log(e);
       setResponseMessage({
-        isSuccessful: false,
-        alertMessage: "Versuchen Sie bitte noch Mal!",
+        alertMessage: "Fehlgeschlagen",
+        backgroundColor: "bg-red-500",
+        fillColor: "bg-red-300",
       });
     }
+    // Resetting the `event` state properties back to empty strings on form submission
     updateEvent({ email: "" });
     updateEvent({ message: "" });
     updateEvent({ firstname: "" });
@@ -58,7 +65,10 @@ const Contact = () => {
     updateEvent({ alert: true });
   };
 
+  // Setting variables for alert message props
   const alertMessage: string = responseMessage.alertMessage;
+  const backgroundColor: string = responseMessage.backgroundColor;
+  const fillColor: string = responseMessage.fillColor;
 
   //useEffect with timer for closing alert message wich react on "alert" state
   useEffect(() => {
@@ -66,12 +76,14 @@ const Contact = () => {
       updateEvent({ alert: false });
     }, 7000);
   }, [event.alert]);
+  // Rendering the component
   return (
     <>
       <div className="text-white flex flex-col items-center gap-y-14 py-20">
         <h2 className="block text-5xl font-bold lg:hidden ">Kontakt</h2>
         <div className="w-full lg:flex lg:flex-row-reverse lg:justify-around lg:gap-x-6 lg:items-center">
           <div className="w-full bg-[#22221f] rounded-2xl py-8 px-4 lg:w-[55%]">
+            {/* Displaying a form for submitting messages */}
             <form
               onSubmit={handleSubmit}
               className=" flex flex-col items-center gap-y-8 font-light text-xl"
@@ -130,7 +142,16 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      {event.alert ? <ContactAlert alertMessage={alertMessage} /> : ""}
+      {/* Dispalying alert message depending on event.alert state */}
+      {event.alert ? (
+        <ContactAlert
+          alertMessage={alertMessage}
+          fill={fillColor}
+          background={backgroundColor}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };

@@ -29,7 +29,7 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
           </div>
         </div>
         <div>
-          <h2 className="text-white text-4xl font-bold mt-7">Titel</h2>
+          <h2 className="text-white text-4xl font-bold mt-7">{article.title}</h2>
           <p className="text-slate-300 text-xl mb-7">
             {article.author} • {dateFormat(article.createdAt)}
           </p>

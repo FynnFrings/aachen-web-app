@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const Flyer = () => {
+const Rollup = () => {
   const router = useRouter();
   useEffect(() => {
     router.push("/download");
@@ -15,4 +15,4 @@ const Flyer = () => {
   );
 };
 
-export default Flyer;
+export default Rollup;

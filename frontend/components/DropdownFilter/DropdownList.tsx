@@ -3,13 +3,12 @@ import Dropdown from "./Dropdown";
 import { IoIosArrowDown } from "react-icons/io";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
-// A pure function that returns an array of strings
-const items = (): string[] => {
-  return ["vom neusten zu ältesten", "vom ältesten zu neusten"];
-};
-
 // The main component
-const DropdownList = ({ selectItem, itemSelection }: any): JSX.Element => {
+const DropdownList = ({
+  selectItem,
+  itemSelection,
+  listOfItems,
+}: any): JSX.Element => {
   // State variable to manage dropdown visibility
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
@@ -54,7 +53,7 @@ const DropdownList = ({ selectItem, itemSelection }: any): JSX.Element => {
         {/* If dropdown is visible, render the DropDown component */}
         {showDropDown && (
           <Dropdown
-            items={items()} // Pass items array to DropDown component
+            items={listOfItems} // Pass items array to DropDown component
             showDropDown={false} // Pass dropdown visibility to DropDown component
             toggleDropDown={() => toggleDropDown()} // Pass toggle function to DropDown component
             itemSelection={itemSelection} // Pass item selection handler function to DropDown component

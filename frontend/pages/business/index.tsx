@@ -3,7 +3,7 @@ import BusinnesBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
 import { ChangeEvent, useState } from "react";
-import DropdownList from "@/components/DropdownFilter/DropdownList";
+import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 const Business = () => {
   //*handling search field in search bar START
 
@@ -45,7 +45,7 @@ const Business = () => {
           searchInput={searchInput}
           placeholder={"Search"}
         />
-        <DropdownList
+        <ListOfCategoryItems
           selectItem={selectItem}
           itemSelection={itemSelection}
           listOfItems={listOfItems}

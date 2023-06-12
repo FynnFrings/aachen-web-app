@@ -1,5 +1,5 @@
 import BlogCard from "@/components/Blog/BlogCard";
-import DropdownList from "@/components/DropdownFilter/DropdownList";
+import DropdownList from "@/components/DropdownFilter/ListOfCategoryItems";
 import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
 import SearchField from "@/components/SearchField";

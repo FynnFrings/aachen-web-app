@@ -1,9 +1,9 @@
-const ContactAlert = ({
-  alertMessage,
+const ContactResponseMessage = ({
+  response,
   fill,
   background,
 }: {
-  alertMessage: string;
+  response: string;
   fill: string;
   background: string;
 }) => {
@@ -12,7 +12,7 @@ const ContactAlert = ({
       <div
         className={`fixed z-10  left-[50%] -translate-x-[50%] w-[50%] lg:w-[25%] h-[7%] rounded-lg ${background} animate-popup flex items-center`}
       >
-        <h2 className="text-lg text-[#222] pl-2">{alertMessage}</h2>
+        <h2 className="text-lg text-[#222] pl-2">{response}</h2>
         <div
           className={`fixed h-2 bottom-0 ${fill} animate-fill rounded-b-lg`}
         ></div>
@@ -21,4 +21,4 @@ const ContactAlert = ({
   );
 };
 
-export default ContactAlert;
+export default ContactResponseMessage;

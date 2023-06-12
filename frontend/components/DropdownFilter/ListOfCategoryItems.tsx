@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Dropdown from "./Dropdown";
+import DropDownCategoryFilter from "./DropDownCategoryFilter";
 import { IoIosArrowDown } from "react-icons/io";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 // The main component
-const DropdownList = ({
+const ListOfCategoryItems = ({
   selectItem,
   itemSelection,
   listOfItems,
@@ -52,7 +52,7 @@ const DropdownList = ({
         </div>
         {/* If dropdown is visible, render the DropDown component */}
         {showDropDown && (
-          <Dropdown
+          <DropDownCategoryFilter
             items={listOfItems} // Pass items array to DropDown component
             showDropDown={false} // Pass dropdown visibility to DropDown component
             toggleDropDown={() => toggleDropDown()} // Pass toggle function to DropDown component
@@ -64,4 +64,4 @@ const DropdownList = ({
   );
 };
 
-export default DropdownList;
+export default ListOfCategoryItems;

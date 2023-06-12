@@ -1,5 +1,5 @@
 import BlogCard from "@/components/Blog/BlogCard";
-import DropdownList from "@/components/DropdownFilter/ListOfCategoryItems";
+import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
 import SearchField from "@/components/SearchField";
@@ -60,7 +60,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
             searchInput={searchInput}
             placeholder={"Search"}
           />
-          <DropdownList
+          <ListOfCategoryItems
             selectItem={selectItem}
             itemSelection={itemSelection}
             listOfItems={listOfItems}

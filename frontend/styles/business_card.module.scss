@@ -1,0 +1,112 @@
+.container {
+    width: 100%;
+    background-color: #22221f;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem/* 20px */;
+    row-gap: 1.25rem/* 20px */;
+    border-radius: 0.5rem/* 8px */;
+}
+
+.business_image_container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 2.875rem/* 66px */ ;
+}
+
+.business_image {
+    width: 100%;
+    height: 11rem/* 176px */;
+    object-fit: cover;
+    border-radius: 0.5rem/* 46px */;
+}
+
+.business_logo_container {
+    position: absolute;
+    bottom: -3.125rem /* 50px */;
+    left: 1.5rem /* 24px */;
+    border-radius: 50%;
+    width: 6.25rem/* 100px */;
+    height: 6.25rem/* 100px */;
+    padding: 0.625rem /* 10px */;
+    background-color: #22221f;
+}
+
+.business_logo {
+    border-radius: 50%;
+}
+
+.info_container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.625rem /* 10px */;
+
+    .business_name {
+        font-weight: 700;
+        font-size: 1.375rem /* 22px */;
+        line-height: 1.679rem /* 26.86px */;
+        color: white;
+    }
+
+    .business_category {
+        font-weight: 400;
+        font-size: 1rem/* 16px */;
+        line-height: 1.4rem/* 22.4px */;
+        opacity: 0.8;
+        color: white;
+    }
+
+    .business_time {
+        color: #FAC520;
+        font-size: 1rem/* 16px */;
+        line-height: 1.4rem/* 22.4px */;
+    }
+
+    .business_button {
+        width: 100%;
+        background-color: #FAC520;
+        border-radius: 0.5rem/* 8px */;
+        padding-top: 0.5rem/* 8px */;
+        padding-bottom: 0.5rem/* 8px */;
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        transition-duration: 200ms;
+    }
+    .business_button:hover {
+        transform: scale(.95);
+    }
+}
+
+.add_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .distance {
+        .text {
+            font-weight: 500;
+            font-size: 1.25rem/* 20px */;
+            line-height: 1.526rem/* 24.42px */;
+            color: white;
+            opacity: 0.9;
+        }
+    }
+    .posts {
+        .text {
+            font-weight: 500;
+            font-size: 1.25rem/* 20px */;
+            line-height: 1.526rem/* 24.42px */;
+            color: white;
+            opacity: 0.9;
+        }
+    }
+
+    .number {
+        font-weight: 400;
+        font-size: 2rem/* 32px */;
+        color: white;
+        opacity: 0.9;
+    }
+}

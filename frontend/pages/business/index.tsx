@@ -4,6 +4,7 @@ import Image from "next/image";
 import SearchField from "@/components/SearchField";
 import { ChangeEvent, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
+import BusinessCard from "@/components/Business/BusinessCard";
 const Business = () => {
   //*handling search field in search bar START
 
@@ -50,6 +51,9 @@ const Business = () => {
           itemSelection={itemSelection}
           listOfItems={listOfItems}
         />
+      </div>
+      <div className={styles.list_of_businesses}>
+        <BusinessCard />
       </div>
     </div>
   );

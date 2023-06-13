@@ -1,5 +1,8 @@
 .container {
     width: 100%;
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
     background-color: #22221f;
     display: flex;
     flex-direction: column;
@@ -7,6 +10,19 @@
     padding: 1.25rem/* 20px */;
     row-gap: 1.25rem/* 20px */;
     border-radius: 0.5rem/* 8px */;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-duration: 200ms;
+
+    @media screen and (min-width: 1024px) {
+        flex-basis: 32%;
+        width: 32%;
+    }
+}
+
+.container:hover {
+    transform: scale(.95);
 }
 
 .business_image_container {
@@ -42,11 +58,37 @@
     flex-direction: column;
     row-gap: 0.625rem /* 10px */;
 
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    row-gap: 0.625rem /* 10px */;
+
+    @media screen and (min-width: 1024px) {
+        width: 60%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     .business_name {
+        width: auto;
         font-weight: 700;
         font-size: 1.375rem /* 22px */;
         line-height: 1.679rem /* 26.86px */;
         color: white;
+
+        @media screen and (min-width: 1024px) {
+            width: 100%;
+        }
     }
 
     .business_category {
@@ -55,6 +97,11 @@
         line-height: 1.4rem/* 22.4px */;
         opacity: 0.8;
         color: white;
+        margin-right: 0;
+
+        @media screen and (min-width: 1024px) {
+            margin-right: 0.5rem/* 8px */ ;
+        }
     }
 
     .business_time {
@@ -62,27 +109,36 @@
         font-size: 1rem/* 16px */;
         line-height: 1.4rem/* 22.4px */;
     }
+}
 
-    .business_button {
-        width: 100%;
-        background-color: #FAC520;
-        border-radius: 0.5rem/* 8px */;
-        padding-top: 0.5rem/* 8px */;
-        padding-bottom: 0.5rem/* 8px */;
-        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        transition-duration: 200ms;
+.business_button {
+    width: 100%;
+    background-color: #FAC520;
+    border-radius: 0.5rem/* 8px */;
+    padding-top: 0.5rem/* 8px */;
+    padding-bottom: 0.5rem/* 8px */;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-duration: 200ms;
+
+    @media screen and (min-width: 1024px) {
+       width: 30%;
     }
-    .business_button:hover {
-        transform: scale(.95);
-    }
+}
+.business_button:hover {
+    transform: scale(.95);
 }
 
 .add_info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 5rem/* 80px */;
+
+    @media screen and (min-width: 1024px) {
+        justify-content: flex-start;
+    }
 
     .distance {
         .text {

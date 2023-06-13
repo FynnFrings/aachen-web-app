@@ -54,6 +54,10 @@ const Business = () => {
       </div>
       <div className={styles.list_of_businesses}>
         <BusinessCard />
+        <BusinessCard />
+        <BusinessCard />
+        <BusinessCard />
+        <BusinessCard />
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
             listOfItems={listOfItems}
           />
         </div>
-        <div className="flex flex-col lg:flex-wrap lg:flex-row gap-5 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {/* render BlogCard component for each filtered article */}
           {filteredArticles.map((article) => (
             <BlogCard key={article.id} article={article} />

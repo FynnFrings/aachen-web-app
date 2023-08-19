@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    position: relative;
     flex-direction: column;
     gap: 3.5rem/* 56px */;
     padding-top: 5rem/* 80px */;
@@ -44,13 +45,14 @@
 
 .list_of_businesses {
     width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(1,minmax(0,1fr));
     gap: 1.25rem/* 20px */;
 
+    @media screen and (min-width: 768px) {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
     @media screen and (min-width: 1024px) {
-        flex-wrap: wrap;
-        flex-direction: row;
+        grid-template-columns: repeat(3,minmax(0,1fr));
     }
 } 

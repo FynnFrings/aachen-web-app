@@ -7,7 +7,7 @@ type DropDownProps = {
   itemSelection: (category: string) => void; // A function to handle when an item is selected from the dropdown
 };
 
-const Dropdown: React.FC<DropDownProps> = ({
+const DropDownCategoryFilter: React.FC<DropDownProps> = ({
   items,
   itemSelection,
 }: DropDownProps): JSX.Element => {
@@ -46,4 +46,4 @@ const Dropdown: React.FC<DropDownProps> = ({
   );
 };
 
-export default Dropdown;
+export default DropDownCategoryFilter;

@@ -1,5 +1,5 @@
 import BlogCard from "@/components/Blog/BlogCard";
-import DropdownList from "@/components/DropdownFilter/DropdownList";
+import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
 import SearchField from "@/components/SearchField";
@@ -23,6 +23,9 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
   const itemSelection = (item: string): void => {
     setSelectItem(item);
   };
+
+  // declaring list of items, which will be displayed in DropdownList component (category filter)
+  const listOfItems = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
   // Function to filter articles by title
   const filterByTitle = (articles: any[], searchInput: string) => {
@@ -49,7 +52,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
     <>
       <div className="flex flex-col gap-14 py-20">
         <div className=" bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
-          <h1 className="text-5xl font-bold text-white opa ">Unser Blog</h1>
+          <h1 className="text-5xl font-bold text-white">Unser Blog</h1>
         </div>
         <div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
           <SearchField
@@ -57,9 +60,13 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
             searchInput={searchInput}
             placeholder={"Search"}
           />
-          <DropdownList selectItem={selectItem} itemSelection={itemSelection} />
+          <ListOfCategoryItems
+            selectItem={selectItem}
+            itemSelection={itemSelection}
+            listOfItems={listOfItems}
+          />
         </div>
-        <div className="flex flex-col lg:flex-wrap lg:flex-row gap-5 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {/* render BlogCard component for each filtered article */}
           {filteredArticles.map((article) => (
             <BlogCard key={article.id} article={article} />

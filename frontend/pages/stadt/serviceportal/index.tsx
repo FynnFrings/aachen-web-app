@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const Flyer = () => {
+const Serviceportal = () => {
   const router = useRouter();
   useEffect(() => {
-    router.push("/download");
+    router.push("https://serviceportal.aachen.de");
   }, [router]);
   return (
     <>
@@ -15,4 +15,4 @@ const Flyer = () => {
   );
 };
 
-export default Flyer;
+export default Serviceportal;

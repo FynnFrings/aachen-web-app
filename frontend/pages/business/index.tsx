@@ -6,7 +6,9 @@ import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import BusinessCard from "@/components/Business/BusinessCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
-const Business = ({ companies }: any) => {
+import { IBusinessCard } from "@/types/types";
+
+const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	// creating state for alert message
 	const [alert, isAlert] = useState<boolean>(false);
 
@@ -40,6 +42,20 @@ const Business = ({ companies }: any) => {
 	// declaring list of items, which will be displayed in DropdownList component (category filter)
 	const listOfItems = ["Restaurants", "Cafes", "Friseursalon"];
 
+	const searchByTitle = (businesses: any[], searchInput: any) => {
+		return businesses.filter((business) => {
+			const name = business.name.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
+			const lowercaseSearchInput = searchInput.toLowerCase();
+
+			// Check if the lowercased title includes the lowercased search input or if the search input is empty
+			return name.includes(lowercaseSearchInput) || !searchInput;
+		});
+	};
+
+	const filteredBusinesses = [...(businesses || [])].filter(
+		(business) => searchByTitle([business], searchInput).length > 0
+	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.banner}>
@@ -65,13 +81,19 @@ const Business = ({ companies }: any) => {
 				/>
 			</div>
 			<div className={styles.list_of_businesses}>
-				{companies.map((company: any) => (
-					<BusinessCard
-						handleSubmit={handleSubmit}
-						company={company}
-						key={company.id}
-					/>
-				))}
+				{filteredBusinesses
+					.filter(
+						(bussiness) =>
+							(bussiness.bannerImageUrl ?? bussiness.bigPhotoURL) &&
+							(bussiness.logoImageUrl ?? bussiness.photoURL)
+					)
+					.map((business: IBusinessCard) => (
+						<BusinessCard
+							handleSubmit={handleSubmit}
+							business={business}
+							key={business.itemId}
+						/>
+					))}
 			</div>
 			{alert ? <BusinessMerkenResponseMessage /> : ""}
 		</div>
@@ -81,10 +103,12 @@ const Business = ({ companies }: any) => {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+	const res = await fetch(
+		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
+	);
 	const data = await res.json();
 	// Pass data to the page via props
-	return { props: { companies: data } };
+	return { props: { businesses: data } };
 }
 
 export default Business;

@@ -32,7 +32,7 @@ const BusinessCard = ({
 				<div className={styles.business_logo_container}>
 					<Image
 						className={styles.business_logo}
-						src={business.logoImageUrl ?? business.logoImageUrl}
+						src={business.logoImageUrl ?? business.photoURL}
 						alt="business_image"
 						loading="lazy"
 						width={80}

@@ -53,6 +53,6 @@ export interface IBusinessCard {
 	description?: string;
 	totalEventCount?: number;
 	eventList?: [];
-	createdAt?: ITimestamp;
-	updatedAt?: ITimestamp;
+	createdAt: ITimestamp;
+	updatedAt: ITimestamp;
 }

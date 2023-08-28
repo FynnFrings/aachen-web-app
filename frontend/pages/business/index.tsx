@@ -31,16 +31,45 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	};
 
 	//*handling selectItems state in filter START
-	// state variable to manage selected category for article filtering
-	const [selectItem, setSelectItem] = useState<string>("");
+	// state variable to manage selected category for business filtering
+	const [selectItem, setSelectItem] = useState<string>("Alle");
 
-	// function to update selectItem state based on user selection
+	// state variable to manage selected newest and oldest for business filtering
+	const [selectDate, setSelectDate] = useState<string>("Deaktivieren");
+
+	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
 		setSelectItem(item);
 	};
 
+	const itemSelectionDate = (item: string): void => {
+		setSelectDate(item);
+	};
+
 	// declaring list of items, which will be displayed in DropdownList component (category filter)
-	const listOfItems = ["Restaurants", "Cafes", "Friseursalon"];
+	const listOfItems = [
+		"Alle",
+		"Bildungseinrichtung",
+		"Bekleidungsgeschäft",
+		"Schönheitssalon",
+		"Einzelhandel",
+		"Werkstatt",
+		"Lebensmittelgeschäft",
+		"Dienstleistung",
+		"Gaststätte",
+		"Geschäft",
+		"Restaurant",
+		"Beratung",
+		"Bäckerei",
+		"Cafe",
+		"Kunstgalerie",
+	];
+
+	const dateSelectItem = [
+		"Deaktivieren",
+		"vom neusten zu ältesten",
+		"vom ältesten zu neusten",
+	];
 
 	const searchByTitle = (businesses: any[], searchInput: any) => {
 		return businesses.filter((business) => {
@@ -52,9 +81,36 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		});
 	};
 
-	const filteredBusinesses = [...(businesses || [])].filter(
-		(business) => searchByTitle([business], searchInput).length > 0
-	);
+	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
+	const filteredBusinesses = [...(businesses || [])]
+		.sort((a, b) => {
+			// Sort the array based on the selectDate value
+			if (selectDate === "Deaktivieren") {
+				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
+				return 0;
+			}
+			if (selectDate === "vom neusten zu ältesten") {
+				// If selectDate is "vom neusten zu ältesten"
+				return (
+					b.createdAt?._seconds - a.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+					b.createdAt?._nanoseconds - a.createdAt?._nanoseconds
+				);
+			} else {
+				// For any other values of selectDate
+				return (
+					a.createdAt?._seconds - b.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+					a.createdAt?._nanoseconds - b.createdAt?._nanoseconds
+				);
+			}
+		})
+		.filter(
+			// Filter the array based on the selectItem value or business category
+			(business) => selectItem === "Alle" || business.category === selectItem
+		)
+		.filter(
+			// Filter the array based on the searchInput using a custom function searchByTitle
+			(business) => searchByTitle([business], searchInput).length > 0
+		);
 
 	return (
 		<div className={styles.container}>
@@ -74,11 +130,18 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 					searchInput={searchInput}
 					placeholder={"Search"}
 				/>
-				<ListOfCategoryItems
-					selectItem={selectItem}
-					itemSelection={itemSelection}
-					listOfItems={listOfItems}
-				/>
+				<div className={styles.select_filters}>
+					<ListOfCategoryItems
+						selectItem={selectItem}
+						itemSelection={itemSelection}
+						listOfItems={listOfItems}
+					/>
+					<ListOfCategoryItems
+						selectItem={selectDate}
+						itemSelection={itemSelectionDate}
+						listOfItems={dateSelectItem}
+					/>
+				</div>
 			</div>
 			<div className={styles.list_of_businesses}>
 				{filteredBusinesses

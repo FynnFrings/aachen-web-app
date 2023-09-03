@@ -6,12 +6,15 @@ import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import BusinessCard from "@/components/Business/BusinessCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
-const Business = ({ companies }: any) => {
+import { IBusinessCard } from "@/types/types";
+
+const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	// creating state for alert message
 	const [alert, isAlert] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
-	const handleSubmit: MouseEventHandler = () => {
+	const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
+		event.preventDefault();
 		isAlert(true);
 		setTimeout(() => {
 			isAlert(false);
@@ -29,16 +32,86 @@ const Business = ({ companies }: any) => {
 	};
 
 	//*handling selectItems state in filter START
-	// state variable to manage selected category for article filtering
-	const [selectItem, setSelectItem] = useState<string>("");
+	// state variable to manage selected category for business filtering
+	const [selectItem, setSelectItem] = useState<string>("Alle");
 
-	// function to update selectItem state based on user selection
+	// state variable to manage selected newest and oldest for business filtering
+	const [selectDate, setSelectDate] = useState<string>("Deaktivieren");
+
+	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
 		setSelectItem(item);
 	};
 
+	const itemSelectionDate = (item: string): void => {
+		setSelectDate(item);
+	};
+
 	// declaring list of items, which will be displayed in DropdownList component (category filter)
-	const listOfItems = ["Restaurants", "Cafes", "Friseursalon"];
+	const listOfItems = [
+		"Alle",
+		"Bildungseinrichtung",
+		"Bekleidungsgeschäft",
+		"Schönheitssalon",
+		"Einzelhandel",
+		"Werkstatt",
+		"Lebensmittelgeschäft",
+		"Dienstleistung",
+		"Gaststätte",
+		"Geschäft",
+		"Restaurant",
+		"Beratung",
+		"Bäckerei",
+		"Cafe",
+		"Kunstgalerie",
+	];
+
+	const dateSelectItem = [
+		"Deaktivieren",
+		"vom neusten zu ältesten",
+		"vom ältesten zu neusten",
+	];
+
+	const searchByTitle = (businesses: any[], searchInput: any) => {
+		return businesses.filter((business) => {
+			const name = business.name.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
+			const lowercaseSearchInput = searchInput.toLowerCase();
+
+			// Check if the lowercased title includes the lowercased search input or if the search input is empty
+			return name.includes(lowercaseSearchInput) || !searchInput;
+		});
+	};
+
+	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
+	const filteredBusinesses = [...(businesses || [])]
+		.sort((a, b) => {
+			// Sort the array based on the selectDate value
+			if (selectDate === "Deaktivieren") {
+				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
+				return 0;
+			}
+			if (selectDate === "vom neusten zu ältesten") {
+				// If selectDate is "vom neusten zu ältesten"
+				return (
+					b.createdAt?._seconds - a.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+					b.createdAt?._nanoseconds - a.createdAt?._nanoseconds
+				);
+			} else {
+				// For any other values of selectDate
+				return (
+					a.createdAt?._seconds - b.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
+					a.createdAt?._nanoseconds - b.createdAt?._nanoseconds
+				);
+			}
+		})
+		.filter(
+			// Filter the array based on the selectItem value or business category
+			(business) => selectItem === "Alle" || business.category === selectItem
+		)
+		.filter(
+			// Filter the array based on the searchInput using a custom function searchByTitle
+			(business) => searchByTitle([business], searchInput).length > 0
+		);
 
 	return (
 		<div className={styles.container}>
@@ -58,20 +131,33 @@ const Business = ({ companies }: any) => {
 					searchInput={searchInput}
 					placeholder={"Search"}
 				/>
-				<ListOfCategoryItems
-					selectItem={selectItem}
-					itemSelection={itemSelection}
-					listOfItems={listOfItems}
-				/>
+				<div className={styles.select_filters}>
+					<ListOfCategoryItems
+						selectItem={selectItem}
+						itemSelection={itemSelection}
+						listOfItems={listOfItems}
+					/>
+					<ListOfCategoryItems
+						selectItem={selectDate}
+						itemSelection={itemSelectionDate}
+						listOfItems={dateSelectItem}
+					/>
+				</div>
 			</div>
 			<div className={styles.list_of_businesses}>
-				{companies.map((company: any) => (
-					<BusinessCard
-						handleSubmit={handleSubmit}
-						company={company}
-						key={company.id}
-					/>
-				))}
+				{filteredBusinesses
+					.filter(
+						(bussiness) =>
+							(bussiness.bannerImageUrl ?? bussiness.bigPhotoURL) &&
+							(bussiness.logoImageUrl ?? bussiness.photoURL)
+					)
+					.map((business: IBusinessCard) => (
+						<BusinessCard
+							handleSubmit={handleSubmit}
+							business={business}
+							key={business.itemId}
+						/>
+					))}
 			</div>
 			{alert ? <BusinessMerkenResponseMessage /> : ""}
 		</div>
@@ -81,10 +167,13 @@ const Business = ({ companies }: any) => {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
-	const data = await res.json();
+	const res = await fetch(
+		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
+	);
+	const response = await res.json();
+	const data = response.slice(0, 10);
 	// Pass data to the page via props
-	return { props: { companies: data } };
+	return { props: { businesses: data } };
 }
 
 export default Business;

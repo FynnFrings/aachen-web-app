@@ -42,8 +42,8 @@ export interface IBusinessCard {
 	isEstablishment?: boolean;
 	weekdayText?: [];
 	location?: string;
-	itemId?: string;
-	couponList?: [];
+	itemId: string;
+	couponList: [];
 	totalCouponCount?: number;
 	photoURL?: string;
 	bannerImageUrl: string;
@@ -52,7 +52,20 @@ export interface IBusinessCard {
 	email?: string;
 	description?: string;
 	totalEventCount?: number;
-	eventList?: [];
+	eventList: [];
 	createdAt: ITimestamp;
 	updatedAt: ITimestamp;
+	openingHours?: IOpeningHours[];
+	openingHourPeriods?: IOpeningHours[];
+	dayList?: IOpeningHours[];
+}
+
+interface IOpeningHours {
+	open: IDay;
+	close: IDay;
+}
+
+interface IDay {
+	time: string;
+	day: number;
 }

@@ -13,7 +13,8 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [alert, isAlert] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
-	const handleSubmit: MouseEventHandler = () => {
+	const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
+		event.preventDefault();
 		isAlert(true);
 		setTimeout(() => {
 			isAlert(false);
@@ -169,7 +170,8 @@ export async function getServerSideProps() {
 	const res = await fetch(
 		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
 	);
-	const data = await res.json();
+	const response = await res.json();
+	const data = response.slice(0, 10);
 	// Pass data to the page via props
 	return { props: { businesses: data } };
 }

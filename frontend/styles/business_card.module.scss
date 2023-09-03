@@ -69,8 +69,15 @@
 		color: white;
 	}
 
-	.business_time {
+	.business_time_open {
 		color: #07df00c0;
+		font-weight: 300;
+		font-size: 1rem /* 16px */;
+		line-height: 1.4rem /* 22.4px */;
+	}
+
+	.business_time_close {
+		color: red;
 		font-weight: 300;
 		font-size: 1rem /* 16px */;
 		line-height: 1.4rem /* 22.4px */;

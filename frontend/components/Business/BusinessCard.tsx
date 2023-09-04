@@ -81,14 +81,18 @@ const BusinessCard = ({
 				{/* Render the name, category, opening hours, button */}
 				<div className={styles.info}>
 					<div className={styles.business_name}>{business.name}</div>
-					<div className={styles.business_category}>{business.category}</div>
+					<div className={styles.business_category}>
+						{business.category}
+					</div>
 					<p className={styles.dot}>•</p>
 					{businessOpeningHoursPeriods() ? (
 						<div className={styles.business_time_open}>
 							{`Geöffnet bis ${businessOpeningHoursPeriods()} Uhr`}
 						</div>
 					) : (
-						<div className={styles.business_time_close}>Geschlossen</div>
+						<div className={styles.business_time_close}>
+							Geschlossen
+						</div>
 					)}
 				</div>
 				{/* Render the additional information about distance and number of posts */}
@@ -104,7 +108,10 @@ const BusinessCard = ({
 						</p>
 						<p className={styles.text}>Beiträge</p>
 					</div>
-					<button className={styles.business_button} onClick={handleSubmit}>
+					<button
+						className={styles.business_button}
+						onClick={handleSubmit}
+					>
 						Merken
 						<Image
 							src={Notification}

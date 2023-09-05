@@ -233,6 +233,7 @@
         color: rgba(255, 255, 255, 0.7);
         padding: 1.4rem;
         .logo {
+            border-radius: 50%;
             @media (max-width: 768px) {
                 width: max-content;
                 height: max-content;

@@ -7,8 +7,9 @@ import MockupImage from "@/public/AachenPics/aachen6.png";
 import MockupImage2 from "@/public/aachen_pic_2.png";
 import { MouseEventHandler, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
+import { IBusinessCard } from "@/types/types";
 
-const BusinessDetailsPage = ({ company }: any) => {
+const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
 	// onClick function with setTimeout fuction to manage "alert" state
 	const handleSubmit: MouseEventHandler = () => {
@@ -17,38 +18,119 @@ const BusinessDetailsPage = ({ company }: any) => {
 			isAlert(false);
 		}, 3000);
 	};
+	//getting the number of months from the date of creation
+	const getMonthDifference = (startDate: any, endDate: any) => {
+		const start = new Date(startDate);
+		const end = new Date(endDate);
+
+		const startYear = start.getFullYear();
+		const endYear = end.getFullYear();
+		const startMonth = start.getMonth();
+		const endMonth = end.getMonth();
+
+		const yearDiff = endYear - startYear;
+		const monthDiff = endMonth - startMonth;
+
+		const totalMonths = yearDiff * 12 + monthDiff;
+
+		return totalMonths;
+	};
+
+	const currentDate = new Date();
+
+	const creationData = new Date(
+		business.createdAt._seconds * 1000 +
+			business.createdAt._nanoseconds / 1000000
+	);
+	const monthsDifference = getMonthDifference(creationData, currentDate);
+
+	const weekDay = currentDate.getDay();
+
+	const businessOpeningHoursPeriods = () => {
+		if (business.openingHourPeriods) {
+			const result = business.openingHourPeriods.find(
+				(day) => day.open.day === weekDay
+			);
+			const openTimeArray = result?.open.time.split("");
+			openTimeArray?.splice(2, 0, ":");
+			const openTime = openTimeArray?.join("");
+			return openTime;
+		}
+		return null;
+	};
+
+	const weekDaySchedule = (arr: any) => {
+		const daysOfWeekGerman = [
+			"Montag",
+			"Dienstag",
+			"Mittwoch",
+			"Donnerstag",
+			"Freitag",
+			"Samstag",
+			"Sonntag",
+		];
+		if (arr) {
+			return daysOfWeekGerman.map((item, id) => {
+				const openTime = arr[id] ? arr[id].open.time : "";
+				const closeTime = arr[id] ? arr[id].close.time : "";
+				const openingHours = `${openTime.slice(0, 2)}:${openTime.slice(
+					2
+				)} - ${closeTime.slice(0, 2)}:${closeTime.slice(2)}`;
+
+				return (
+					<p key={id}>
+						{item}:{" "}
+						<span>
+							{openingHours.length <= 5
+								? "Geschlossen"
+								: openingHours}
+						</span>
+					</p>
+				);
+			});
+		} else {
+			return daysOfWeekGerman.map((item, id) => {
+				return (
+					<p key={id}>
+						{item}: <span>Geschlossen</span>
+					</p>
+				);
+			});
+		}
+	};
+	console.log(business);
+
 	return (
 		<>
 			<div className={styles.business_header}>
 				<div className={styles.image_container}>
 					<Image
 						className={styles._image}
-						src={MockupImage}
+						src={business.bannerImageUrl ?? business.bigPhotoURL}
 						alt="business_image"
-						width={0}
-						height={0}
+						width={976}
+						height={350}
 					/>
 					{/* Render a placeholder logo */}
 					<Image
 						className={styles._logo}
-						src={MockupImage2}
+						src={business.logoImageUrl ?? business.photoURL}
 						alt="business_logo"
-						width={0}
-						height={0}
+						width={200}
+						height={200}
 					/>
 				</div>
 				<div className={styles.title}>
-					<h1>{company.name}</h1>
+					<h1>{business.name}</h1>
 					<p>
-						Einzelhandel{" "}
+						{business.category}{" "}
 						<span className={styles.opening_time}>
-							Öffnet 9 Uhr
+							{businessOpeningHoursPeriods()
+								? `Öffnet ${businessOpeningHoursPeriods()} Uhr`
+								: "Unbekannt"}
 						</span>
 					</p>
-					<p className={styles.description}>
-						Fairtrade Artikel, Geschenkideen und Kindsthandwerk aus
-						aller Welt. Ehrenamtlich geführt!
-					</p>
+					<p className={styles.description}>{business.description}</p>
 				</div>
 				<div className={styles.buttons}>
 					<button
@@ -79,7 +161,7 @@ const BusinessDetailsPage = ({ company }: any) => {
 							width={"28"}
 							src={"/building.svg"}
 						/>{" "}
-						{company.name}
+						{business.name}
 					</p>
 					<p>
 						<Image
@@ -88,7 +170,7 @@ const BusinessDetailsPage = ({ company }: any) => {
 							width={"28"}
 							src={"/graph.svg"}
 						/>{" "}
-						{company.category}
+						{business.category}
 					</p>
 					<p>
 						<Image
@@ -97,7 +179,7 @@ const BusinessDetailsPage = ({ company }: any) => {
 							width={"28"}
 							src={"/shop-remove.svg"}
 						/>{" "}
-						seit 24 Monaten Mitglied der Aachen App
+						seit {monthsDifference} Monaten Mitglied der Aachen App
 					</p>
 					<p>
 						<Image
@@ -106,7 +188,9 @@ const BusinessDetailsPage = ({ company }: any) => {
 							width={"28"}
 							src={"/ticket-star.svg"}
 						/>{" "}
-						Noch keine Coupons erstellt
+						{business.totalCouponCount <= 0
+							? "Noch keine Coupons erstellt"
+							: `${business.totalCouponCount} Coupons erstellt`}
 					</p>
 					<p>
 						<Image
@@ -114,54 +198,38 @@ const BusinessDetailsPage = ({ company }: any) => {
 							height={"28"}
 							width={"28"}
 							src={"/calendar.svg"}
-						/>{" "}
-						Noch keine Events erstellt
+						/>
+						{business.totalEventCount <= 0
+							? "Noch keine Events erstellt"
+							: `${business.totalEventCount} Events erstellt`}
 					</p>
 				</div>
 				<div className={styles.opening_time_table}>
 					<h2>Öffnungszeiten</h2>
-					<p>
-						Montag:<span>Unbekannt</span>
-					</p>
-					<p>
-						Dienstag:<span>Unbekannt</span>
-					</p>
-					<p>
-						Mittwoch:<span>Unbekannt</span>
-					</p>
-					<p>
-						Donnerstag:<span>Unbekannt</span>
-					</p>
-					<p>
-						Freitag:<span>Unbekannt</span>
-					</p>
-					<p>
-						Samstag:<span>Unbekannt</span>
-					</p>
-					<p>
-						Sonntag:<span>Unbekannt</span>
-					</p>
+					{weekDaySchedule(business.openingHourPeriods).map(
+						(text) => text
+					)}
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<EventMap latitude={1} longitude={1} />
+					<EventMap
+						latitude={business.latitude}
+						longitude={business.longitude}
+					/>
 					<div className={styles.route}>
 						<Link
 							target="_blank"
 							rel="noreferrer"
-							href={`https://maps.google.com/?q=${1},${1}`}
+							href={`https://maps.google.com/?q=${business.latitude},${business.longitude}`}
 						>
 							Route planen
 						</Link>
-						<span>
-							&quot;{"company.name"}&quot;, {"address.street"},{" "}
-							{"address.city"}
-						</span>
+						<span>{business.location}</span>
 					</div>
 				</div>
 				<div className={styles.website_link}>
 					<Image
-						src={"/business_logo.png"}
+						src={business.logoImageUrl ?? business.photoURL}
 						width="56"
 						height="56"
 						alt="Business logo"
@@ -169,9 +237,19 @@ const BusinessDetailsPage = ({ company }: any) => {
 					/>
 					<span>
 						<h2>Website</h2>
-						<a target="_blank" href={`http:/*`} rel="noreferrer">
-							{/* {website} */}
-						</a>
+						<Link
+							target="_blank"
+							href={
+								business.website == ""
+									? "/404"
+									: `${business.website}`
+							}
+							rel="noreferrer"
+						>
+							{business.website == ""
+								? "Unbekannt"
+								: business.website}
+						</Link>
 					</span>
 				</div>
 			</div>
@@ -198,7 +276,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	const data = await res.json();
 
 	// Pass data to the page via props
-	return { props: { company: data } };
+	return { props: { business: data } };
 }
 
 export default BusinessDetailsPage;

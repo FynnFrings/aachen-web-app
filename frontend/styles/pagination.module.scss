@@ -1,0 +1,67 @@
+.container {
+	width: 100%;
+}
+
+.pagination {
+	width: 100%;
+	display: flex;
+	gap: 0.5rem;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	@media screen and (min-width: 1024px) {
+		justify-content: flex-start;
+	}
+}
+
+.pageLink {
+	cursor: pointer;
+}
+
+.buttons {
+	color: #eaeaea;
+	cursor: pointer;
+}
+
+/* pagination pageItem */
+.pageItem {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1.5rem;
+	height: 2rem;
+	border: 1px solid #eaeaea;
+	color: #eaeaea;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	@media screen and (min-width: 1024px) {
+		width: 3.75rem;
+		height: 4rem;
+	}
+	@media screen and (min-width: 768px) {
+		width: 3.75rem;
+		height: 4rem;
+	}
+}
+
+/* pagination page item when active */
+.pageItemActive {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1.5rem;
+	height: 2rem;
+	border: 1px solid #eaeaea;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	background-color: #eaeaea;
+	@media screen and (min-width: 1024px) {
+		width: 3.75rem;
+		height: 4rem;
+	}
+	@media screen and (min-width: 768px) {
+		width: 3.75rem;
+		height: 4rem;
+	}
+}

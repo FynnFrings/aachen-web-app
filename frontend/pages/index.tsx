@@ -7,25 +7,25 @@ import Reviews from "@/components/Reviews/Reviews";
 import { IBlogCard } from "@/types/types";
 
 export default function Home({ articles }: { articles: IBlogCard[] }) {
-  return (
-    <>
-      <AdDownload />
-      <Reviews />
-      <Overview />
-      <Blog articles={articles} />
-      <Gallery />
-      <Contact />
-    </>
-  );
+	return (
+		<>
+			<AdDownload />
+			<Reviews />
+			<Overview />
+			<Blog articles={articles} />
+			<Gallery />
+			<Contact />
+		</>
+	);
 }
 
 //Using Server Side Rendering function
 export async function getServerSideProps() {
-  // Fetch data from  API
-  const res = await fetch(
-    `https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
-  ); //http://localhost:5050/blog/
-  const data = await res.json();
-  // Pass data to the page via props
-  return { props: { articles: data } };
+	// Fetch data from  API
+	const res = await fetch(
+		`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
+	); //http://localhost:5050/blog/
+	const data = await res.json();
+	// Pass data to the page via props
+	return { props: { articles: data } };
 }

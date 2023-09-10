@@ -129,10 +129,6 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		);
 
 	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
-	console.log(
-		"🚀 ~ file: index.tsx:132 ~ Business ~ paginatedPosts:",
-		businesses.length
-	);
 
 	return (
 		<div className={styles.container}>
@@ -193,11 +189,6 @@ export async function getServerSideProps() {
 	);
 	const response = await res.json();
 	// Pass data to the page via props
-	if (!response) {
-		return {
-			notFound: true,
-		};
-	}
 	return { props: { businesses: response } };
 }
 

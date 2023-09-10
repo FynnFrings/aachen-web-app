@@ -32,11 +32,11 @@ export interface ITimestamp {
 export interface IBusinessCard {
 	ownerId: string;
 	website?: string;
-	latitude?: number;
-	longitude?: number;
+	latitude: number;
+	longitude: number;
 	number?: number;
 	formattedAddress: string;
-	googleUrl?: string;
+	googleUrl: string;
 	name: string;
 	category: string;
 	isEstablishment?: boolean;
@@ -44,23 +44,25 @@ export interface IBusinessCard {
 	location?: string;
 	itemId: string;
 	couponList: [];
-	totalCouponCount?: number;
+	totalCouponCount: number;
 	photoURL?: string;
 	bannerImageUrl: string;
 	logoImageUrl: string;
 	bigPhotoURL?: string;
 	email?: string;
 	description?: string;
-	totalEventCount?: number;
+	totalEventCount: number;
 	eventList: [];
 	createdAt: ITimestamp;
 	updatedAt: ITimestamp;
 	openingHours?: IOpeningHours[];
 	openingHourPeriods?: IOpeningHours[];
 	dayList?: IOpeningHours[];
+	instagram: string;
+	whatsapp: string;
 }
 
-interface IOpeningHours {
+export interface IOpeningHours {
 	open: IDay;
 	close: IDay;
 }

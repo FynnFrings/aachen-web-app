@@ -129,6 +129,10 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		);
 
 	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
+	console.log(
+		"🚀 ~ file: index.tsx:132 ~ Business ~ paginatedPosts:",
+		businesses.length
+	);
 
 	return (
 		<div className={styles.container}>

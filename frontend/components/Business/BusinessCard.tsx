@@ -121,7 +121,7 @@ const BusinessCard = ({
 						</div>
 					) : (
 						<div className={styles.business_time_unknown}>
-							Unbekannte Uhrzeite
+							Öffnungszeiten unbekannt
 						</div>
 					)}
 				</div>

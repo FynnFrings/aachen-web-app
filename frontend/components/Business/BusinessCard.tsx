@@ -14,44 +14,66 @@ const BusinessCard = ({
 	business: IBusinessCard;
 }) => {
 	const todaysDate = new Date();
-	const time = todaysDate.getTime();
+	const time = Date.now();
 	const weekDay = todaysDate.getDay();
 
-	// const businessOpeningHours = () => {
-	// 	if (business.openingHours) {
-	// 		const result = business.openingHours.find(
-	// 			(day) => day.close.day === weekDay
-	// 		);
-	// 		const closeTimeArray = result?.close.time.split("");
-	// 		closeTimeArray?.splice(2, 0, ":");
-	// 		const closeTime = closeTimeArray?.join("");
-	// 		return closeTime;
-	// 	}
-	// 	return null;
-	// };
-
 	const businessOpeningHoursPeriods = () => {
-		if (business.openingHourPeriods) {
-			const result = business.openingHourPeriods.find(
-				(day) => day.close.day === weekDay
-			);
-			const closeTimeArray = result?.close.time.split("");
+		if (!business.openingHourPeriods) {
+			return null;
+		}
+		const result = business.openingHourPeriods.find(
+			(day) => day.close.day == weekDay
+		);
+		if (result && result.close.time !== "Geschlossen") {
+			const closeTimeArray = result.close.time.split("");
 			closeTimeArray?.splice(2, 0, ":");
 			const closeTime = closeTimeArray?.join("");
 			return closeTime;
+		} else {
+			return "Geschlossen";
 		}
-		return null;
 	};
-	// const businessDayList = () => {
-	// 	if (business.dayList) {
-	// 		const result = business.dayList.find((day) => day.close.day === weekDay);
-	// 		const closeTimeArray = result?.close.time.split("");
-	// 		closeTimeArray?.splice(2, 0, ":");
-	// 		const closeTime = closeTimeArray?.join("");
-	// 		return closeTime;
-	// 	}
-	// 	return null;
-	// };
+
+	const businessDayList = () => {
+		if (!business.dayList) {
+			return null;
+		}
+		const result = business.dayList.find(
+			(day) => day.close.day === weekDay
+		);
+		if (result && result.close.time !== "Geschlossen") {
+			const closeTimeArray = result?.close.time.split("");
+			closeTimeArray?.splice(2, 0, ":");
+			const closeTime = closeTimeArray?.join("");
+
+			return closeTime;
+		} else {
+			return "Geschlossen";
+		}
+	};
+
+	const closeTime = businessOpeningHoursPeriods() ?? businessDayList();
+
+	const checkTime = () => {
+		if (closeTime !== null && closeTime !== undefined) {
+			// Split the time string into hours and minutes
+			const [hours, minutes] = closeTime.split(":");
+
+			// Create a new Date object with the current date and the specified time
+			const currentDate = new Date();
+			currentDate.setHours(Number(hours), Number(minutes), 0, 0);
+
+			// Get the timestamp
+			const timestamp = currentDate.getTime();
+
+			if (timestamp < time) {
+				return "Geschlossen";
+			} else {
+				return closeTime;
+			}
+		}
+	};
+
 	return (
 		//Wrap an entire card in a link, which will redirect to business details page
 		<Link href={`/business/${business.itemId}`}>
@@ -85,13 +107,21 @@ const BusinessCard = ({
 						{business.category}
 					</div>
 					<p className={styles.dot}>•</p>
-					{businessOpeningHoursPeriods() ? (
-						<div className={styles.business_time_open}>
-							{`Geöffnet bis ${businessOpeningHoursPeriods()} Uhr`}
+					{closeTime !== null ? (
+						<div
+							className={
+								checkTime() !== "Geschlossen"
+									? styles.business_time_open
+									: styles.business_time_close
+							}
+						>
+							{checkTime() !== "Geschlossen"
+								? `Geöffnet bis ${checkTime()}`
+								: checkTime()}
 						</div>
 					) : (
-						<div className={styles.business_time_close}>
-							Geschlossen
+						<div className={styles.business_time_unknown}>
+							Unbekannte Uhrzeite
 						</div>
 					)}
 				</div>

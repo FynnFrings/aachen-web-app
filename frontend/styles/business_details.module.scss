@@ -37,6 +37,7 @@
         display: flex;
         position: relative;
         height: 27vw;
+        object-fit: cover;
         border-radius: 0.5rem;
         justify-content: center;
         width: 100%;
@@ -89,6 +90,7 @@
         grid-column-start: 1;
         grid-row-end: 3;
         grid-column-end: 2;
+        min-width: 30vw;
 
         @media (max-width: 768px) {
             grid-area: business_title;
@@ -181,6 +183,38 @@
         padding: 0;
     }
 
+    .information,
+    .opening_time_table,
+    .location {
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        padding: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        iframe {
+            height: 25rem;
+            border: 0;
+            border-radius: 0.75rem;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        p {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 1.25rem;
+            font-size: 1.125rem;
+        }
+    }
+
     .information {
         padding: 1.4rem;
         grid-area: information;
@@ -227,66 +261,34 @@
     .website_link {
         grid-area: link;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.7);
         padding: 1.4rem;
-        .logo {
-            border-radius: 50%;
-            @media (max-width: 768px) {
-                width: max-content;
-                height: max-content;
-            }
-            @media (min-width: 768px) and (max-width: 1024px) {
-                width: max-content;
-                height: max-content;
-            }
-        }
-        span {
-            margin-left: 1rem;
-            h2 {
-                color: #ffffff;
-                font-size: 1.125rem;
-            }
-            a {
-                font-size: 1rem;
-                color: rgba(255, 255, 255, 0.6);
-                text-decoration: underline;
-            }
-        }
-    }
 
-    .information,
-    .opening_time_table,
-    .location {
-        border-radius: 0.75rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.7);
-        padding: 1.4rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-
-        .map {
-            width: 58rem;
-            height: 25rem;
-            border: 0;
-            border-radius: 0.75rem;
-        }
-
-        h2 {
-            color: #ffffff;
-            font-size: 1.5rem;
-            padding-bottom: 1.5rem;
-        }
-
-        p {
+        .item {
             display: flex;
             flex-direction: row;
-            align-items: center;
-            padding-bottom: 1.25rem;
-            font-size: 1.125rem;
+            margin: 1rem 0 1rem 0;
+            .logo {
+                border-radius: 50%;
+            }
+            span {
+                margin-left: 1rem;
+                h2 {
+                    color: #ffffff;
+                    font-size: 1.125rem;
+                }
+                a {
+                    font-size: 1rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    text-decoration: underline;
+                }
+                a:hover {
+                    color: #fac520;
+                }
+            }
         }
     }
 }

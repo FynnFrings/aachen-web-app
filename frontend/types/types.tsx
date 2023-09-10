@@ -36,7 +36,7 @@ export interface IBusinessCard {
 	longitude: number;
 	number?: number;
 	formattedAddress: string;
-	googleUrl?: string;
+	googleUrl: string;
 	name: string;
 	category: string;
 	isEstablishment?: boolean;
@@ -58,9 +58,11 @@ export interface IBusinessCard {
 	openingHours?: IOpeningHours[];
 	openingHourPeriods?: IOpeningHours[];
 	dayList?: IOpeningHours[];
+	instagram: string;
+	whatsapp: string;
 }
 
-interface IOpeningHours {
+export interface IOpeningHours {
 	open: IDay;
 	close: IDay;
 }

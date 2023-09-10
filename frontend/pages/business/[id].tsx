@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/business_details.module.scss";
 import EventMap from "../../components/map";
-import MockupImage from "@/public/AachenPics/aachen6.png";
-import MockupImage2 from "@/public/aachen_pic_2.png";
 import { MouseEventHandler, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import { IBusinessCard } from "@/types/types";
+import InteractiveMap from "@/components/interactiveMap";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
+
 	// onClick function with setTimeout fuction to manage "alert" state
 	const handleSubmit: MouseEventHandler = () => {
 		isAlert(true);
@@ -18,6 +18,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			isAlert(false);
 		}, 3000);
 	};
+
 	//getting the number of months from the date of creation
 	const getMonthDifference = (startDate: any, endDate: any) => {
 		const start = new Date(startDate);
@@ -59,7 +60,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		return null;
 	};
 
-	const weekDaySchedule = (arr: any) => {
+	const weekSchedule = (scheduleData: any) => {
 		const daysOfWeekGerman = [
 			"Montag",
 			"Dienstag",
@@ -69,36 +70,50 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			"Samstag",
 			"Sonntag",
 		];
-		if (arr) {
-			return daysOfWeekGerman.map((item, id) => {
-				const openTime = arr[id] ? arr[id].open.time : "";
-				const closeTime = arr[id] ? arr[id].close.time : "";
-				const openingHours = `${openTime.slice(0, 2)}:${openTime.slice(
-					2
-				)} - ${closeTime.slice(0, 2)}:${closeTime.slice(2)}`;
 
+		// A function that converts time to the "HH:MM" format
+		const formatTime = (time: string) => {
+			const hours = time.slice(0, 2);
+			const minutes = time.slice(2);
+			return `${hours}:${minutes}`;
+		};
+
+		// Render a list of days of the week and opening & closing times
+		const scheduleItems = daysOfWeekGerman.map((dayOfWeek, index) => {
+			const scheduleItem = scheduleData.find(
+				(item: any) => item.open.day === index
+			);
+			if (scheduleItem) {
+				const openTime = formatTime(scheduleItem.open.time);
+				const closeTime = formatTime(scheduleItem.close.time);
 				return (
-					<p key={id}>
-						{item}:{" "}
+					<p key={index}>
+						{dayOfWeek}:{" "}
 						<span>
-							{openingHours.length <= 5
-								? "Geschlossen"
-								: openingHours}
+							{openTime.length && closeTime.length == 5
+								? `${openTime} - ${closeTime} Uhr`
+								: "Geschlossen"}
 						</span>
 					</p>
 				);
-			});
-		} else {
-			return daysOfWeekGerman.map((item, id) => {
+			} else {
 				return (
-					<p key={id}>
-						{item}: <span>Geschlossen</span>
+					<p key={index}>
+						{dayOfWeek}: <span>Geschlossen</span>
 					</p>
 				);
-			});
-		}
+			}
+		});
+		return scheduleItems;
 	};
-	console.log(business);
+
+	const hrefValidator = (href: any) => {
+		return href == ""
+			? "/404"
+			: href.slice(0, 3) == "www"
+			? "http://" + `${href}`
+			: `${href}`;
+	};
 
 	return (
 		<>
@@ -127,10 +142,12 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						<span className={styles.opening_time}>
 							{businessOpeningHoursPeriods()
 								? `Öffnet ${businessOpeningHoursPeriods()} Uhr`
-								: "Unbekannt"}
+								: "Öffnungszeiten unbekannt"}
 						</span>
 					</p>
-					<p className={styles.description}>{business.description}</p>
+					<p
+						className={styles.description}
+					>{`${business.description}`}</p>
 				</div>
 				<div className={styles.buttons}>
 					<button
@@ -179,7 +196,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							width={"28"}
 							src={"/shop-remove.svg"}
 						/>{" "}
-						seit {monthsDifference} Monaten Mitglied der Aachen App
+						{monthsDifference > 1
+							? `seit ${monthsDifference} Monaten Mitglied der Aachen App`
+							: `seit ${monthsDifference} Monat Mitglied der Aachen App`}
 					</p>
 					<p>
 						<Image
@@ -206,16 +225,15 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				</div>
 				<div className={styles.opening_time_table}>
 					<h2>Öffnungszeiten</h2>
-					{weekDaySchedule(business.openingHourPeriods).map(
-						(text) => text
+					{weekSchedule(
+						business.openingHourPeriods != null
+							? business.openingHourPeriods
+							: business.dayList
 					)}
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<EventMap
-						latitude={business.latitude}
-						longitude={business.longitude}
-					/>
+					<InteractiveMap business={business} />
 					<div className={styles.route}>
 						<Link
 							target="_blank"
@@ -224,33 +242,79 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						>
 							Route planen
 						</Link>
-						<span>{business.location}</span>
+						<span>
+							{business.formattedAddress ?? business.location}
+						</span>
 					</div>
 				</div>
 				<div className={styles.website_link}>
-					<Image
-						src={business.logoImageUrl ?? business.photoURL}
-						width="56"
-						height="56"
-						alt="Business logo"
-						className={styles.logo}
-					/>
-					<span>
-						<h2>Website</h2>
-						<Link
-							target="_blank"
-							href={
-								business.website == ""
-									? "/404"
-									: `${business.website}`
-							}
-							rel="noreferrer"
-						>
-							{business.website == ""
-								? "Unbekannt"
-								: business.website}
-						</Link>
-					</span>
+					<h2>Soziale Medien</h2>
+					<div className={styles.item}>
+						<Image
+							src={business.logoImageUrl ?? business.photoURL}
+							width="56"
+							height="56"
+							alt="Business logo"
+							className={styles.logo}
+						/>
+						<span>
+							<h2>Website</h2>
+							<Link
+								target="_blank"
+								rel="noreferrer"
+								href={hrefValidator(business.website) ?? `/*`}
+							>
+								{business.website == ""
+									? "Unbekannt"
+									: business.website}
+							</Link>
+						</span>
+					</div>
+					{business.instagram ? (
+						<div className={styles.item}>
+							<Image
+								src={"/instagram_logo.svg"}
+								width="56"
+								height="56"
+								alt="instagram logo"
+								className={styles.logo}
+							/>
+							<span>
+								<h2>Instagram</h2>
+								<Link
+									target="_blank"
+									rel="noreferrer"
+									href={`https://www.instagram.com/${business.instagram}/`}
+									style={{ textDecoration: "none" }}
+								>
+									@{business.instagram}
+								</Link>
+							</span>
+						</div>
+					) : null}
+					{business.whatsapp ? (
+						<div className={styles.item}>
+							<Image
+								src={"/whatsApp_logo.svg"}
+								width="56"
+								height="56"
+								alt="instagram logo"
+								className={styles.logo}
+								style={{ borderRadius: "10%" }}
+							/>
+							<span>
+								<h2>WhatsApp</h2>
+								<Link
+									target="_blank"
+									rel="noreferrer"
+									href={`https://wa.me/${business.whatsapp}`}
+									style={{ textDecoration: "none" }}
+								>
+									{business.whatsapp}
+								</Link>
+							</span>
+						</div>
+					) : null}
 				</div>
 			</div>
 		</>

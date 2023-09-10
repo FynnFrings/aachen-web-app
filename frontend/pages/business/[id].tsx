@@ -108,13 +108,14 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	};
 
 	const hrefValidator = (href: any) => {
-		return href == ""
+		return href == "" || href == null
 			? "/404"
 			: href.slice(0, 3) == "www"
 			? "http://" + `${href}`
 			: `${href}`;
 	};
 
+	console.log(business);
 	return (
 		<>
 			<div className={styles.business_header}>
@@ -264,7 +265,8 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								rel="noreferrer"
 								href={hrefValidator(business.website) ?? `/*`}
 							>
-								{business.website == ""
+								{business.website == "" ||
+								business.website == null
 									? "Unbekannt"
 									: business.website}
 							</Link>
@@ -284,7 +286,10 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								<Link
 									target="_blank"
 									rel="noreferrer"
-									href={`https://www.instagram.com/${business.instagram}/`}
+									href={`https://www.instagram.com/${business.instagram.replace(
+										/\s/g,
+										""
+									)}/`}
 									style={{ textDecoration: "none" }}
 								>
 									@{business.instagram}

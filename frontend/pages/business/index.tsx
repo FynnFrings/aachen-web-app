@@ -2,13 +2,22 @@ import styles from "@/styles/bussiness.module.scss";
 import BusinnesBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import BusinessCard from "@/components/Business/BusinessCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import { IBusinessCard } from "@/types/types";
+import Pagination from "@/components/Pagination";
+import { paginate } from "@/helpers/paginate";
 
 const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 9;
+
+	const onPageChange = (page: any) => {
+		setCurrentPage(page);
+	};
+
 	// creating state for alert message
 	const [alert, isAlert] = useState<boolean>(false);
 
@@ -84,6 +93,11 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 
 	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
 	const filteredBusinesses = [...(businesses || [])]
+		.filter(
+			(bussiness: IBusinessCard) =>
+				(bussiness.bannerImageUrl ?? bussiness.bigPhotoURL) &&
+				(bussiness.logoImageUrl ?? bussiness.photoURL)
+		)
 		.sort((a, b) => {
 			// Sort the array based on the selectDate value
 			if (selectDate === "Deaktivieren") {
@@ -113,6 +127,8 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 			// Filter the array based on the searchInput using a custom function searchByTitle
 			(business) => searchByTitle([business], searchInput).length > 0
 		);
+
+	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
 
 	return (
 		<div className={styles.container}>
@@ -146,22 +162,21 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 				</div>
 			</div>
 			<div className={styles.list_of_businesses}>
-				{filteredBusinesses
-					.filter(
-						(bussiness) =>
-							(bussiness.bannerImageUrl ??
-								bussiness.bigPhotoURL) &&
-							(bussiness.logoImageUrl ?? bussiness.photoURL)
-					)
-					.map((business: IBusinessCard) => (
-						<BusinessCard
-							handleSubmit={handleSubmit}
-							business={business}
-							key={business.itemId}
-						/>
-					))}
+				{paginatedPosts.map((business: IBusinessCard) => (
+					<BusinessCard
+						handleSubmit={handleSubmit}
+						business={business}
+						key={business.itemId}
+					/>
+				))}
 			</div>
 			{alert ? <BusinessMerkenResponseMessage /> : ""}
+			<Pagination
+				items={filteredBusinesses.length}
+				currentPage={currentPage}
+				pageSize={pageSize}
+				onPageChange={onPageChange}
+			/>
 		</div>
 	);
 };
@@ -172,9 +187,14 @@ export async function getServerSideProps() {
 	const res = await fetch(
 		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
 	);
-	const data = await res.json();
+	const response = await res.json();
 	// Pass data to the page via props
-	return { props: { businesses: data } };
+	if (!response) {
+		return {
+			notFound: true,
+		};
+	}
+	return { props: { businesses: response } };
 }
 
 export default Business;

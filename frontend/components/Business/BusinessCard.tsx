@@ -127,10 +127,6 @@ const BusinessCard = ({
 				</div>
 				{/* Render the additional information about distance and number of posts */}
 				<div className={styles.add_info}>
-					{/* <div className={styles.distance}>
-					<p className={styles.number}>521m</p>
-					<p className={styles.text}>entfernt</p>
-				</div> */}
 					<div className={styles.posts}>
 						<p className={styles.number}>
 							{(business.eventList.length ?? 0) +

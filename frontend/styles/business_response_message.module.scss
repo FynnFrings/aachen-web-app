@@ -1,0 +1,64 @@
+.container {
+	width: 70%;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	background-color: #fac520;
+	z-index: 1;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 10%;
+	border-radius: 0.5rem /* 8px */;
+	animation: popup 0.5s ease-in-out 1 forwards,
+		popupDelay 0.5s ease-in-out 2.5s 1 forwards;
+
+	@media screen and (min-width: 1024px) {
+		width: 25%;
+	}
+}
+
+.text {
+	width: 100%;
+	text-align: center;
+	font-size: 1.125rem /* 18px */;
+	line-height: 1.75rem /* 28px */;
+	color: #222;
+}
+
+.fill {
+	position: fixed;
+	height: 0.5rem /* 8px */;
+	bottom: 0px;
+	background-color: #f8e5af;
+	border-bottom-right-radius: 0.5rem /* 8px */;
+	border-bottom-left-radius: 0.5rem /* 8px */;
+	animation: fill 2s ease-out 1 forwards;
+}
+
+@keyframes popup {
+	0% {
+		bottom: -5%;
+	}
+	100% {
+		bottom: 1rem /* 16px */;
+	}
+}
+@keyframes popupDelay {
+	0% {
+		bottom: 1rem /* 16px */;
+	}
+	100% {
+		bottom: -100%;
+	}
+}
+
+@keyframes fill {
+	0% {
+		width: 0%;
+		border-bottom-right-radius: 0rem /* 0px */;
+	}
+	100% {
+		width: 100%;
+		border-bottom-right-radius: 0.5rem /* 8px */;
+	}
+}

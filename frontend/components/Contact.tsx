@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState, useReducer } from "react";
-import ContactAlert from "./ContactAlert";
+import ContactResponseMessage from "./ContactResponseMessage";
 import sendEmail from "@/lib/sendEmail";
 
 // Defining expected input properties for `updateEvent` reducer
@@ -27,7 +27,7 @@ const Contact = () => {
   );
   const [responseMessage, setResponseMessage] = useState({
     backgroundColor: "",
-    alertMessage: "",
+    reponse: "",
     fillColor: "",
   });
   // Handling submit event for form
@@ -44,7 +44,7 @@ const Contact = () => {
       );
       if (req.status === 200) {
         setResponseMessage({
-          alertMessage: "Abgeschickt!",
+          reponse: "Abgeschickt!",
           backgroundColor: "bg-[#fac520]",
           fillColor: "bg-[#f8e5af]",
         });
@@ -52,7 +52,7 @@ const Contact = () => {
     } catch (e) {
       console.log(e);
       setResponseMessage({
-        alertMessage: "Fehlgeschlagen",
+        reponse: "Fehlgeschlagen",
         backgroundColor: "bg-red-500",
         fillColor: "bg-red-300",
       });
@@ -66,7 +66,7 @@ const Contact = () => {
   };
 
   // Setting variables for alert message props
-  const alertMessage: string = responseMessage.alertMessage;
+  const response: string = responseMessage.reponse;
   const backgroundColor: string = responseMessage.backgroundColor;
   const fillColor: string = responseMessage.fillColor;
 
@@ -144,8 +144,8 @@ const Contact = () => {
       </div>
       {/* Dispalying alert message depending on event.alert state */}
       {event.alert ? (
-        <ContactAlert
-          alertMessage={alertMessage}
+        <ContactResponseMessage
+          response={response}
           fill={fillColor}
           background={backgroundColor}
         />

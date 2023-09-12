@@ -115,7 +115,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			: `${href}`;
 	};
 
-	console.log(business);
 	return (
 		<>
 			<div className={styles.business_header}>

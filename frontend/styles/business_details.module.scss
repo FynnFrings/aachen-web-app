@@ -125,6 +125,7 @@
         flex-direction: row;
         justify-content: center;
         color: #000000;
+        font-weight: bold;
 
         @media (max-width: 768px) {
             grid-area: business-button;
@@ -227,10 +228,9 @@
             font-size: 1.5rem;
             padding-bottom: 1.5rem;
         }
-        p {
-            img {
-                margin-right: 1rem;
-            }
+        .react_icons {
+            margin-right: 1.2rem;
+            color: rgba(250, 197, 32, 1);
         }
     }
 

@@ -1,5 +1,5 @@
 import styles from "@/styles/bussiness.module.scss";
-import BusinnesBanner from "@/public/business/business_banner.png";
+import BusinessBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
 import { ChangeEvent, MouseEventHandler, useState } from "react";
@@ -94,9 +94,9 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
 	const filteredBusinesses = [...(businesses || [])]
 		.filter(
-			(bussiness: IBusinessCard) =>
-				(bussiness.bannerImageUrl ?? bussiness.bigPhotoURL) &&
-				(bussiness.logoImageUrl ?? bussiness.photoURL)
+			(business: IBusinessCard) =>
+				(business.bannerImageUrl ?? business.bigPhotoURL) &&
+				(business.logoImageUrl ?? business.photoURL)
 		)
 		.sort((a, b) => {
 			// Sort the array based on the selectDate value
@@ -129,17 +129,17 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		);
 
 	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
-	console.log(
-		"🚀 ~ file: index.tsx:132 ~ Business ~ paginatedPosts:",
-		businesses.length
-	);
+	// console.log(
+	// 	"🚀 ~ file: index.tsx:132 ~ Business ~ paginatedPosts:",
+	// 	businesses.length
+	// );
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.banner}>
 				<Image
 					className={styles.business_banner}
-					src={BusinnesBanner}
+					src={BusinessBanner}
 					alt="business-banner"
 					width={0}
 					height={0}

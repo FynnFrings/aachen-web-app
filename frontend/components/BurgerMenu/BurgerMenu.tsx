@@ -1,22 +1,22 @@
-import HamburgerMenu from "../../public/menu.svg";
-import Image from "next/image";
 import Menu from "./Menu";
-import { useEffect, useState } from "react";
 
-const BurgerMenu = () => {
-  const [menu, setMenu] = useState(false);
+interface IMenu {
+	menu: boolean; // boolean flag to identify menu state (open/closed)
+	handleOnClick: () => void; // function to handle click events on menu button
+}
 
-  function handleOnClick() {
-    setMenu(true);
-  }
-  return (
-    <>
-      <button onClick={handleOnClick}>
-        <Image src={HamburgerMenu} alt="menu" width={40} height={40} />
-      </button>
-      {menu ? <Menu menu={menu} setMenu={setMenu} /> : ""}
-    </>
-  );
+const BurgerMenu = ({ menu, handleOnClick }: IMenu) => {
+	const menuContainerClass = `bg-[#131311] fixed lg:hidden top-12 right-0 z-10 flex flex-col justify-start items-center w-full h-fit ${
+		menu ? "translate-y-1/2" : "-translate-y-[150%]"
+	} rounded-bl-xl transition ease-in-out shadow-lg`;
+
+	return (
+		<>
+			<div className={menuContainerClass}>
+				<Menu handleOnClick={handleOnClick} menu={menu} />
+			</div>
+		</>
+	);
 };
 
 export default BurgerMenu;

@@ -1,5 +1,5 @@
 import { IBusinessCard } from "@/types/types";
-// const mapStyle = "height: 25rem, border: 0, border-radius: 0.75rem,";
+
 const InteractiveMap = ({ business }: { business: IBusinessCard }) => {
 	const KEY = `AIzaSyAVaJhLqgWQgtXC4jjjHCHmspVsLIJHFaE`;
 	const PARAMETERS = `q=${business.location}&center=${business.latitude},${business.longitude}&language=DE&zoom=17&maptype=roadmap`;

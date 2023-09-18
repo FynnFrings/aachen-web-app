@@ -84,7 +84,6 @@
     }
 
     .title {
-        margin-top: 2rem;
         color: rgb(255, 255, 255);
         grid-row-start: 2;
         grid-column-start: 1;
@@ -103,29 +102,24 @@
         h1 {
             font-size: 1.4rem;
         }
-
-        .opening_time {
-            color: rgba(250, 197, 32, 1);
-        }
-
-        .description {
-            margin-top: 1.125rem;
-            opacity: 0.6;
+        .event_time,
+        .event_location {
+            display: flex;
+            flex-direction: row;
+            .react_icons {
+                margin-right: 1rem;
+                color: rgba(250, 197, 32, 1);
+            }
+            span {
+                color: rgba(255, 255, 255, 0.7);
+            }
         }
     }
 
-    .buttons {
-        grid-row-start: 2;
-        grid-column-start: 2;
-        grid-row-end: 3;
-        grid-column-end: 3;
-
-        margin-top: 1rem;
+    .button {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        color: #000000;
-
+        justify-content: flex-end;
         @media (max-width: 768px) {
             grid-area: business-button;
         }
@@ -136,29 +130,15 @@
             align-items: end;
             flex-direction: column;
         }
-
-        .notification {
-            background: #fac520;
-            border: 0.1rem solid #fac520;
-        }
-
-        .contact {
-            color: #ffffff;
-            border: 0.1rem solid #ffffff;
-        }
-        .notification,
-        .contact {
-            min-width: 10rem;
+        .order {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            row-gap: 1rem;
             align-items: center;
-            margin: 0.5rem;
+            background-color: #fac520;
+            border-radius: 1rem;
             padding: 1rem 1.75rem;
-            border-radius: 0.5rem;
-            @media (min-width: 768px) and (max-width: 1024px) {
-                margin-right: 0;
-            }
+            color: black;
         }
     }
 }
@@ -169,7 +149,7 @@
     padding: 0 10%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        "information time"
+        "information information"
         "location location"
         "link link";
     row-gap: 2rem;
@@ -226,10 +206,6 @@
             color: #ffffff;
             font-size: 1.5rem;
             padding-bottom: 1.5rem;
-        }
-        .react_icons {
-            margin-right: 1.2rem;
-            color: rgba(250, 197, 32, 1);
         }
     }
 

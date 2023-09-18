@@ -1,12 +1,15 @@
-import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/business_details.module.scss";
-import EventMap from "../../components/map";
 import { MouseEventHandler, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import { IBusinessCard } from "@/types/types";
 import InteractiveMap from "@/components/interactiveMap";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { RiBuilding4Fill } from "react-icons/ri";
+import { AiFillPieChart } from "react-icons/ai";
+import { FaCalendarDays } from "react-icons/fa6";
+import { BiSolidCoupon } from "react-icons/bi";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -48,16 +51,20 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const weekDay = currentDate.getDay();
 
 	const businessOpeningHoursPeriods = () => {
-		if (business.openingHourPeriods) {
-			const result = business.openingHourPeriods.find(
-				(day) => day.open.day === weekDay
-			);
-			const openTimeArray = result?.open.time.split("");
+		if (!business.openingHourPeriods) {
+			return null;
+		}
+		const result = business.openingHourPeriods.find(
+			(day) => day.open.day == weekDay
+		);
+		if (result && result.open.time !== "Geschlossen") {
+			const openTimeArray = result.open.time.split("");
 			openTimeArray?.splice(2, 0, ":");
 			const openTime = openTimeArray?.join("");
 			return openTime;
+		} else {
+			return "Geschlossen";
 		}
-		return null;
 	};
 
 	const weekSchedule = (scheduleData: any) => {
@@ -115,7 +122,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			: `${href}`;
 	};
 
-	console.log(business);
 	return (
 		<>
 			<div className={styles.business_header}>
@@ -126,6 +132,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						alt="business_image"
 						width={976}
 						height={350}
+						loading="lazy"
 					/>
 					{/* Render a placeholder logo */}
 					<Image
@@ -134,6 +141,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						alt="business_logo"
 						width={200}
 						height={200}
+						loading="lazy"
 					/>
 				</div>
 				<div className={styles.title}>
@@ -155,11 +163,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						onClick={handleSubmit}
 						className={styles.notification}
 					>
-						<Image
-							alt="notification icon"
-							src={"/notification_icon.svg"}
-							height={"24"}
-							width={"24"}
+						<IoIosNotificationsOutline
+							style={{ marginRight: "0.2rem" }}
+							size={"24"}
 						/>
 						Merken
 					</button>
@@ -173,21 +179,17 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>
-						<Image
-							alt=""
-							height={"28"}
-							width={"28"}
-							src={"/building.svg"}
-						/>{" "}
+						<RiBuilding4Fill
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.name}
 					</p>
 					<p>
-						<Image
-							alt=""
-							height={"28"}
-							width={"28"}
-							src={"/graph.svg"}
-						/>{" "}
+						<AiFillPieChart
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.category}
 					</p>
 					<p>
@@ -195,6 +197,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							alt=""
 							height={"28"}
 							width={"28"}
+							className={styles.react_icons}
 							src={"/shop-remove.svg"}
 						/>{" "}
 						{monthsDifference > 1
@@ -202,22 +205,18 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							: `seit ${monthsDifference} Monat Mitglied der Aachen App`}
 					</p>
 					<p>
-						<Image
-							alt=""
-							height={"28"}
-							width={"28"}
-							src={"/ticket-star.svg"}
-						/>{" "}
+						<BiSolidCoupon
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.totalCouponCount <= 0
 							? "Noch keine Coupons erstellt"
 							: `${business.totalCouponCount} Coupons erstellt`}
 					</p>
 					<p>
-						<Image
-							alt=""
-							height={"28"}
-							width={"28"}
-							src={"/calendar.svg"}
+						<FaCalendarDays
+							size={28}
+							className={styles.react_icons}
 						/>
 						{business.totalEventCount <= 0
 							? "Noch keine Events erstellt"
@@ -234,7 +233,11 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<InteractiveMap business={business} />
+					<InteractiveMap
+						location={business.location}
+						latitude={business.latitude}
+						longitude={business.longitude}
+					/>
 					<div className={styles.route}>
 						<Link
 							target="_blank"
@@ -332,7 +335,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 
 	// Declared url of events id
 	const businessUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById"; //`http://localhost:5050/blog/${id}`;
+		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById"; //`http://localhost:5050/business/${id}`;
 
 	// Fetching data
 	const res = await fetch(`${businessUrlId}`, {

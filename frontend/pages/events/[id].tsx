@@ -166,7 +166,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 
 	// Declared url of events id
 	const EventUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getEventById"; //`http://localhost:5050/business/${id}`;
+		"https://us-central1-aachen-app.cloudfunctions.net/getEventById";
 
 	// Fetching data
 	const res = await fetch(`${EventUrlId}`, {

@@ -10,7 +10,6 @@ import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
 
 const Events = ({ events }: any) => {
-	console.log("🚀 ~ file: index.tsx:13 ~ events:", events);
 	const [currentPage, setCurrentPage] = useState(1);
 	const pageSize = 9;
 
@@ -41,39 +40,15 @@ const Events = ({ events }: any) => {
 	};
 
 	//*handling selectItems state in filter START
-	// state variable to manage selected category for business filtering
-	const [selectItem, setSelectItem] = useState<string>("Alle");
 
 	// state variable to manage selected newest and oldest for business filtering
 	const [selectDate, setSelectDate] = useState<string>("Deaktivieren");
 
 	//* functions to update selectItem state based on user selection
-	const itemSelection = (item: string): void => {
-		setSelectItem(item);
-	};
 
 	const itemSelectionDate = (item: string): void => {
 		setSelectDate(item);
 	};
-
-	// declaring list of items, which will be displayed in DropdownList component (category filter)
-	const listOfItems = [
-		"Alle",
-		"Bildungseinrichtung",
-		"Bekleidungsgeschäft",
-		"Schönheitssalon",
-		"Einzelhandel",
-		"Werkstatt",
-		"Lebensmittelgeschäft",
-		"Dienstleistung",
-		"Gaststätte",
-		"Geschäft",
-		"Restaurant",
-		"Beratung",
-		"Bäckerei",
-		"Cafe",
-		"Kunstgalerie",
-	];
 
 	const dateSelectItem = [
 		"Deaktivieren",
@@ -82,8 +57,8 @@ const Events = ({ events }: any) => {
 	];
 
 	const searchByTitle = (events: any[], searchInput: any) => {
-		return events.filter((business) => {
-			const name = business.name.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
+		return events.filter((event) => {
+			const name = event.title.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
 			const lowercaseSearchInput = searchInput.toLowerCase();
 
 			// Check if the lowercased title includes the lowercased search input or if the search input is empty
@@ -91,13 +66,21 @@ const Events = ({ events }: any) => {
 		});
 	};
 
+	// const filteredData: any = Object.values(
+	// 	events.reduce((acc: any, obj: any) => {
+	// 		const key = `${obj.businessId}-${obj.website}`;
+	// 		if (
+	// 			!acc[key] ||
+	// 			obj.startDate._seconds < acc[key].startDate._seconds
+	// 		) {
+	// 			acc[key] = obj;
+	// 		}
+	// 		return acc;
+	// 	}, {})
+	// );
+
 	// Create a new array called filtered events by spreading the contents of the events array (if it exists) or an empty array if events is null or undefined.
 	const filteredEvents = [...(events || [])]
-		.filter(
-			(events: any) =>
-				(events.bannerImageUrl ?? events.bigPhotoURL) &&
-				(events.logoImageUrl ?? events.photoURL)
-		)
 		.sort((a, b) => {
 			// Sort the array based on the selectDate value
 			if (selectDate === "Deaktivieren") {
@@ -119,10 +102,6 @@ const Events = ({ events }: any) => {
 			}
 		})
 		.filter(
-			// Filter the array based on the selectItem value or business category
-			(event) => selectItem === "Alle" || event.category === selectItem
-		)
-		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
 			(event) => searchByTitle([event], searchInput).length > 0
 		);
@@ -135,7 +114,8 @@ const Events = ({ events }: any) => {
 					className={styles.business_banner}
 					src={BusinessBanner}
 					alt="business-banner"
-					style={{ height: "auto", width: "auto" }}
+					width={0}
+					height={0}
 				/>
 				<h1 className={styles.banner_text}>Event</h1>
 			</div>
@@ -147,11 +127,6 @@ const Events = ({ events }: any) => {
 				/>
 				<div className={styles.select_filters}>
 					<ListOfCategoryItems
-						selectItem={selectItem}
-						itemSelection={itemSelection}
-						listOfItems={listOfItems}
-					/>
-					<ListOfCategoryItems
 						selectItem={selectDate}
 						itemSelection={itemSelectionDate}
 						listOfItems={dateSelectItem}
@@ -160,7 +135,7 @@ const Events = ({ events }: any) => {
 			</div>
 			<div className={styles.list_of_businesses}>
 				{/* {paginatedPosts */}
-				{events.map((event: any) => {
+				{paginatedPosts.map((event: any) => {
 					return <EventCard event={event} key={event.itemId} />;
 				})}
 			</div>

@@ -66,21 +66,21 @@ const Events = ({ events }: any) => {
 		});
 	};
 
-	const filteredData: any = Object.values(
-		events.reduce((acc: any, obj: any) => {
-			const key = `${obj.businessId}-${obj.website}`;
-			if (
-				!acc[key] ||
-				obj.startDate._seconds < acc[key].startDate._seconds
-			) {
-				acc[key] = obj;
-			}
-			return acc;
-		}, {})
-	);
+	// const filteredData: any = Object.values(
+	// 	events.reduce((acc: any, obj: any) => {
+	// 		const key = `${obj.businessId}-${obj.website}`;
+	// 		if (
+	// 			!acc[key] ||
+	// 			obj.startDate._seconds < acc[key].startDate._seconds
+	// 		) {
+	// 			acc[key] = obj;
+	// 		}
+	// 		return acc;
+	// 	}, {})
+	// );
 
 	// Create a new array called filtered events by spreading the contents of the events array (if it exists) or an empty array if events is null or undefined.
-	const filteredEvents = [...(filteredData || [])]
+	const filteredEvents = [...(events || [])]
 		.sort((a, b) => {
 			// Sort the array based on the selectDate value
 			if (selectDate === "Deaktivieren") {

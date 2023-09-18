@@ -11,8 +11,6 @@ import banner from "@/public/aachen_pic_2.png";
 const EventDetailsPage = ({ event }: any) => {
 	const [alert, isAlert] = useState<boolean>(false);
 
-	console.log(event);
-
 	// onClick function with setTimeout fuction to manage "alert" state
 	const handleSubmit: MouseEventHandler = () => {
 		isAlert(true);
@@ -152,7 +150,7 @@ const EventDetailsPage = ({ event }: any) => {
 								rel="noreferrer"
 								href={`/business/${event.businessId}`}
 							>
-								Link to businessd
+								Link to business
 							</Link>
 						</span>
 					</div>

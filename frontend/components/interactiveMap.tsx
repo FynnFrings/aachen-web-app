@@ -1,5 +1,3 @@
-import { IBusinessCard } from "@/types/types";
-// const mapStyle = "height: 25rem, border: 0, border-radius: 0.75rem,";
 const InteractiveMap = ({
 	location,
 	latitude,

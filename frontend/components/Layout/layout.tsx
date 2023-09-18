@@ -11,7 +11,10 @@ const Layout = ({ children, ...props }: Props) => {
 		//Set for all pages height and width to full screen
 		<div className="h-screen w-screen">
 			<Header />
-			<main className="px-20 lg:px-24 pt-[7rem] lg:pt-[8rem]" {...props}>
+			<main
+				className="px-10 md:px-20 lg:px-24 pt-[7rem] lg:pt-[8rem]"
+				{...props}
+			>
 				{children}
 			</main>
 			<Footer />

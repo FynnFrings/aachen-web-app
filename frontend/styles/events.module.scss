@@ -3,7 +3,6 @@
     position: relative;
     flex-direction: column;
     gap: 3.5rem /* 56px */;
-    padding-top: 5rem /* 80px */;
     padding-bottom: 5rem /* 80px */;
 }
 
@@ -51,6 +50,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    justify-content: end;
     gap: 1rem;
     @media screen and (min-width: 1024px) {
         display: flex;

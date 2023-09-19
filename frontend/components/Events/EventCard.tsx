@@ -17,7 +17,7 @@ const EventCard = ({ event }: any) => {
 		);
 		const dataOption: {} = {
 			year: "numeric",
-			month: "long",
+			month: "2-digit",
 			day: "numeric",
 		};
 		const timeOption: {} = {
@@ -48,14 +48,6 @@ const EventCard = ({ event }: any) => {
 			closeDate: validEndDate,
 		};
 	};
-	const truncateText = (text: string, maxWords: number) => {
-		const words = text.split(" "); // Розділити рядок на слова
-		if (words.length <= maxWords) {
-			return text; // Повернути весь текст, якщо він менше або дорівнює maxWords
-		}
-		const truncatedText = words.slice(0, maxWords).join(" "); // Вибрати перші maxWords слова і з'єднати їх назад у рядок
-		return `${truncatedText}...`; // Додати маркер "..." для позначення обрізаного тексту
-	};
 
 	return (
 		//Wrap an entire card in a link, which will redirect to event details page
@@ -76,23 +68,23 @@ const EventCard = ({ event }: any) => {
 				<div className={styles.info}>
 					<div className={styles.event_name}>
 						&quot;{event.title}&quot;
-						<div className={styles.posts}>
-							<p className={styles.text}>
-								{truncateText(event.description, 11)}
-							</p>
-						</div>
+						<div className={styles.text}>{event.description}</div>
 					</div>
 					{event.startDate || event.endDate !== null ? (
 						<div className={styles.event_time}>
 							<div>
 								<h2>Beginn</h2>
-								<p>{eventData().openTime} Uhr</p>
-								<p>{eventData().openDate}</p>
+								<p>
+									{eventData().openTime} Uhr,{" "}
+									{eventData().openDate}
+								</p>
 							</div>
 							<div>
 								<h2>Ende</h2>
-								<p>{eventData().closeTime} Uhr</p>
-								<p>{eventData().closeDate}</p>
+								<p>
+									{eventData().closeTime} Uhr,{" "}
+									{eventData().closeDate}
+								</p>
 							</div>
 						</div>
 					) : (
@@ -101,13 +93,10 @@ const EventCard = ({ event }: any) => {
 						</div>
 					)}
 				</div>
-				{/* Render the additional information about distance and number of posts */}
-				<div className={styles.add_info}>
-					<button className={styles.event_button}>
-						<FaBagShopping size={20} />
-						Bestellen
-					</button>
-				</div>
+				<button className={styles.event_button}>
+					<FaBagShopping size={20} />
+					Bestellen
+				</button>
 			</div>
 		</Link>
 	);

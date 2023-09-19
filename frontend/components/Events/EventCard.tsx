@@ -74,7 +74,7 @@ const EventCard = ({
 				{/* Render the name, category, opening hours, button */}
 				<div className={styles.info}>
 					<div className={styles.event_name}>
-						&quot;{event.title}&quot;
+						{event.title}
 						<div className={styles.text}>{event.description}</div>
 					</div>
 					{event.startDate || event.endDate !== null ? (

@@ -136,7 +136,13 @@ const Events = ({ events }: any) => {
 			<div className={styles.list_of_businesses}>
 				{/* {paginatedPosts */}
 				{paginatedPosts.map((event: any) => {
-					return <EventCard event={event} key={event.itemId} />;
+					return (
+						<EventCard
+							event={event}
+							key={event.itemId}
+							handleSubmit={handleSubmit}
+						/>
+					);
 				})}
 			</div>
 			{alert ? <BusinessMerkenResponseMessage /> : ""}

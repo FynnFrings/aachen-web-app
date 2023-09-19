@@ -71,12 +71,12 @@ const EventDetailsPage = ({ event }: any) => {
 
 	return (
 		<>
-			<div className={styles.business_header}>
+			<div className={styles.event_header}>
 				<div className={styles.image_container}>
 					<Image
 						className={styles._image}
 						src={event.imageUrl ?? banner}
-						alt="business_image"
+						alt="event_image"
 						width={976}
 						height={350}
 						loading="lazy"
@@ -111,7 +111,7 @@ const EventDetailsPage = ({ event }: any) => {
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
 				</div>
 			</div>
-			<div className={styles.business_details}>
+			<div className={styles.event_details}>
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>{event.description}</p>
@@ -134,13 +134,13 @@ const EventDetailsPage = ({ event }: any) => {
 						<span></span>
 					</div>
 				</div>
-				<div className={styles.website_link}>
+				<div className={styles.business_link}>
 					<div className={styles.item}>
 						<Image
 							src={event.imageUrl ?? banner}
 							width="56"
 							height="56"
-							alt="Business logo"
+							alt="event logo"
 							className={styles.logo}
 						/>
 						<span>

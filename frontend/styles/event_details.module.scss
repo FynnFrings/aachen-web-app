@@ -1,4 +1,4 @@
-.business_header {
+.event_header {
     padding: 0 10% 2rem 10%;
     display: grid;
     row-gap: 2rem;
@@ -7,15 +7,21 @@
     color: rgb(255, 255, 255);
     border-bottom: 1px solid rgba(71, 85, 105, 1);
 
-    @media screen and (max-width: 768px) {
-        display: grid;
-        padding: 0 0 1.5rem 0;
-        grid-template-columns: auto auto;
-        grid-template-rows: auto auto;
-        gap: 1rem 1rem;
-        grid-template-areas:
-            "business_logo business_title"
-            "business-button business-button";
+    @media screen and (max-width: 450px) {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+        row-gap: 1rem;
+        width: auto;
+        align-items: center;
+    }
+
+    @media (min-width: 450px) and (max-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1rem 0 1.5rem 0;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
@@ -43,12 +49,7 @@
         width: 100%;
 
         @media (max-width: 768px) {
-            grid-area: business_logo;
-            align-self: center;
-            height: auto;
-            ._image {
-                display: none;
-            }
+            display: none;
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -56,49 +57,15 @@
             border-radius: 0.5rem;
             justify-content: center;
         }
-
-        ._logo {
-            top: 18vw;
-            position: absolute;
-            width: 14vw;
-            // max-width: 200px;
-            border: 0.2rem solid rgba(19, 19, 17, 1);
-            border-radius: 100%;
-            min-width: 50px;
-
-            @media (max-width: 768px) {
-                position: relative;
-                width: 6rem;
-                height: 6rem;
-                top: 0;
-            }
-
-            @media (min-width: 768px) and (max-width: 1024px) {
-                top: 18vw;
-                position: absolute;
-                width: max-content;
-                height: max-content;
-                max-width: 150px;
-            }
-        }
     }
 
     .title {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
         color: rgb(255, 255, 255);
-        grid-row-start: 2;
-        grid-column-start: 1;
-        grid-row-end: 3;
-        grid-column-end: 2;
         min-width: 30vw;
 
-        @media (max-width: 768px) {
-            grid-area: business_title;
-            width: auto;
-        }
-
-        @media (min-width: 768px) and (max-width: 1024px) {
-            width: auto;
-        }
         h1 {
             font-size: 1.4rem;
         }
@@ -120,13 +87,10 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        @media (max-width: 768px) {
-            grid-area: business-button;
-        }
 
         @media (min-width: 768px) and (max-width: 1024px) {
             width: auto;
-            display: inline-flex;
+            display: flex;
             align-items: end;
             flex-direction: column;
         }
@@ -143,7 +107,7 @@
     }
 }
 
-.business_details {
+.event_details {
     display: grid;
     margin: 3rem 0 3rem 0;
     padding: 0 10%;
@@ -233,7 +197,7 @@
             }
         }
     }
-    .website_link {
+    .business_link {
         grid-area: link;
         display: flex;
         flex-direction: column;

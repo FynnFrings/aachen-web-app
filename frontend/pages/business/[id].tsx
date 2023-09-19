@@ -1,4 +1,3 @@
-// import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/business_details.module.scss";
@@ -11,7 +10,6 @@ import { RiBuilding4Fill } from "react-icons/ri";
 import { AiFillPieChart } from "react-icons/ai";
 import { FaCalendarDays } from "react-icons/fa6";
 import { BiSolidCoupon } from "react-icons/bi";
-//
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -235,7 +233,11 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<InteractiveMap business={business} />
+					<InteractiveMap
+						location={business.location}
+						latitude={business.latitude}
+						longitude={business.longitude}
+					/>
 					<div className={styles.route}>
 						<Link
 							target="_blank"

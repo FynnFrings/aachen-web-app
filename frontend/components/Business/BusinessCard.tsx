@@ -76,7 +76,6 @@ const BusinessCard = ({
 
 	return (
 		//Wrap an entire card in a link, which will redirect to business details page
-		// <Link href={`/business/${business.itemId}`}>
 		<Link href="/business/[id]" as={`/business/${business.itemId}`}>
 			<div className={styles.container}>
 				{/* Render a placeholder image */}

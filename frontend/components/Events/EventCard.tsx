@@ -3,8 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import banner from "@/public/AachenPics/aachen6.png";
 import { FaBagShopping } from "react-icons/fa6";
+import { MouseEventHandler } from "react";
 
-const EventCard = ({ event }: any) => {
+const EventCard = ({
+	handleSubmit,
+	event,
+}: {
+	handleSubmit: MouseEventHandler<HTMLButtonElement>;
+	event: any;
+}) => {
 	const todaysDate = new Date();
 
 	const eventData = () => {
@@ -93,7 +100,7 @@ const EventCard = ({ event }: any) => {
 						</div>
 					)}
 				</div>
-				<button className={styles.event_button}>
+				<button className={styles.event_button} onClick={handleSubmit}>
 					<FaBagShopping size={20} />
 					Bestellen
 				</button>

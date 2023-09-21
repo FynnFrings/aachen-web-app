@@ -137,11 +137,7 @@ const EventDetailsPage = ({ event }: any) => {
 							size={20}
 							className={styles.react_icons}
 						/>
-						<span>
-							{event.location !== ""
-								? event.location
-								: event.timeFrames[0].location}
-						</span>
+						<span>{validLocation().location}</span>
 					</div>
 					<div className={styles.event_time}>
 						<AiFillClockCircle

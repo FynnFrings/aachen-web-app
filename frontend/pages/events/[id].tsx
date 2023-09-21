@@ -9,7 +9,6 @@ import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import banner from "@/public/aachen_pic_2.png";
 
 const EventDetailsPage = ({ event }: any) => {
-	console.log("🚀 ~ file: [id].tsx:12 ~ EventDetailsPage ~ event:", event);
 	const [alert, isAlert] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
@@ -97,10 +96,6 @@ const EventDetailsPage = ({ event }: any) => {
 		}
 		return obj;
 	};
-	console.log(
-		"🚀 ~ file: [id].tsx:100 ~ validLocation ~ validLocation:",
-		validLocation()
-	);
 
 	const hrefValidator = (href: any) => {
 		return href == "" || href == null
@@ -120,10 +115,6 @@ const EventDetailsPage = ({ event }: any) => {
 			return true;
 		}
 	};
-	console.log(
-		"🚀 ~ file: [id].tsx:73 ~ EventDetailsPage ~ hasPayment:",
-		hasPayment()
-	);
 
 	return (
 		<>

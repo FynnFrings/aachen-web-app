@@ -65,10 +65,6 @@ const EventCard = ({
 			return true;
 		}
 	};
-	console.log(
-		"🚀 ~ file: [id].tsx:73 ~ EventDetailsPage ~ hasPayment:",
-		hasPayment()
-	);
 	return (
 		//Wrap an entire card in a link, which will redirect to event details page
 		<Link href={`/events/${event.itemId}`}>

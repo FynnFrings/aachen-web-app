@@ -9,6 +9,7 @@ import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import banner from "@/public/aachen_pic_2.png";
 
 const EventDetailsPage = ({ event }: any) => {
+	console.log("🚀 ~ file: [id].tsx:12 ~ EventDetailsPage ~ event:", event);
 	const [alert, isAlert] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
@@ -60,6 +61,46 @@ const EventDetailsPage = ({ event }: any) => {
 			</span>
 		);
 	};
+	const validLocation = () => {
+		const obj = {
+			location: "Aachen, Deutschland",
+			latitude: 50.775555,
+			longitude: 6.083611,
+		};
+		if (
+			event.location == "" ||
+			event.location == undefined ||
+			event.location == null
+		) {
+			obj.location = event.timeFrames[0].location;
+		} else {
+			obj.location = event.location;
+		}
+
+		if (
+			event.latitude == "" ||
+			event.latitude == undefined ||
+			event.latitude == null
+		) {
+			obj.latitude = event.timeFrames[0].latitude;
+		} else {
+			obj.latitude = event.latitude;
+		}
+		if (
+			event.longitude == "" ||
+			event.longitude == undefined ||
+			event.longitude == null
+		) {
+			obj.longitude = event.timeFrames[0].longitude;
+		} else {
+			obj.longitude = event.longitude;
+		}
+		return obj;
+	};
+	console.log(
+		"🚀 ~ file: [id].tsx:100 ~ validLocation ~ validLocation:",
+		validLocation()
+	);
 
 	const hrefValidator = (href: any) => {
 		return href == "" || href == null
@@ -68,6 +109,21 @@ const EventDetailsPage = ({ event }: any) => {
 			? "http://" + `${href}`
 			: `${href}`;
 	};
+	const hasPayment = () => {
+		if (
+			event.hasPayment == null ||
+			event.hasPayment == false ||
+			event.hasPayment == undefined
+		) {
+			return false;
+		} else {
+			return true;
+		}
+	};
+	console.log(
+		"🚀 ~ file: [id].tsx:73 ~ EventDetailsPage ~ hasPayment:",
+		hasPayment()
+	);
 
 	return (
 		<>
@@ -90,7 +146,11 @@ const EventDetailsPage = ({ event }: any) => {
 							size={20}
 							className={styles.react_icons}
 						/>
-						<span>{event.location}</span>
+						<span>
+							{event.location !== ""
+								? event.location
+								: event.timeFrames[0].location}
+						</span>
 					</div>
 					<div className={styles.event_time}>
 						<AiFillClockCircle
@@ -101,7 +161,15 @@ const EventDetailsPage = ({ event }: any) => {
 					</div>
 				</div>
 				<div className={styles.button}>
-					<button onClick={handleSubmit} className={styles.order}>
+					<button
+						onClick={handleSubmit}
+						className={styles.order}
+						style={
+							!hasPayment()
+								? { display: "none" }
+								: { display: "flex" }
+						}
+					>
 						<FaBagShopping
 							style={{ marginRight: "0.2rem" }}
 							size={"24"}
@@ -119,15 +187,17 @@ const EventDetailsPage = ({ event }: any) => {
 				<div className={styles.location}>
 					<h2>Standort</h2>
 					<InteractiveMap
-						location={event.location}
-						latitude={event.latitude}
-						longitude={event.longitude}
+						location={validLocation().location}
+						latitude={validLocation().latitude}
+						longitude={validLocation().longitude}
 					/>{" "}
 					<div className={styles.route}>
 						<Link
 							target="_blank"
 							rel="noreferrer"
-							href={`https://maps.google.com/?q=${event.latitude},${event.longitude}`}
+							href={`https://maps.google.com/?q=${
+								validLocation().location
+							}`}
 						>
 							Route planen
 						</Link>

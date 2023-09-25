@@ -12,8 +12,6 @@ const EventCard = ({
 	handleSubmit: MouseEventHandler<HTMLButtonElement>;
 	event: any;
 }) => {
-	const todaysDate = new Date();
-
 	const eventData = () => {
 		const fullStartDate = new Date(
 			event.startDate._seconds * 1000 +
@@ -56,6 +54,17 @@ const EventCard = ({
 		};
 	};
 
+	const hasPayment = () => {
+		if (
+			event.hasPayment == null ||
+			event.hasPayment == false ||
+			event.hasPayment == undefined
+		) {
+			return false;
+		} else {
+			return true;
+		}
+	};
 	return (
 		//Wrap an entire card in a link, which will redirect to event details page
 		<Link href={`/events/${event.itemId}`}>
@@ -76,6 +85,7 @@ const EventCard = ({
 					<div className={styles.event_name}>
 						{event.title}
 						<div className={styles.text}>{event.description}</div>
+						<span className={styles.more}>Mehr zeigen</span>
 					</div>
 					{event.startDate || event.endDate !== null ? (
 						<div className={styles.event_time}>
@@ -100,7 +110,15 @@ const EventCard = ({
 						</div>
 					)}
 				</div>
-				<button className={styles.event_button} onClick={handleSubmit}>
+				<button
+					className={styles.event_button}
+					style={
+						!hasPayment()
+							? { display: "none" }
+							: { display: "flex" }
+					}
+					onClick={handleSubmit}
+				>
 					<FaBagShopping size={20} />
 					Bestellen
 				</button>

@@ -16,6 +16,9 @@
 
 .container:hover {
     transform: scale(0.99);
+    .more {
+        opacity: 1;
+    }
 }
 
 .event_image_container {
@@ -53,6 +56,15 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+        }
+        .more {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: 600;
+            &:hover {
+                color: #fac520;
+                opacity: 1;
+            }
         }
     }
 

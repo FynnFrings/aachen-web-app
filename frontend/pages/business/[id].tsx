@@ -242,7 +242,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						<Link
 							target="_blank"
 							rel="noreferrer"
-							href={`https://maps.google.com/?q=${business.latitude},${business.longitude}`}
+							href={`https://maps.google.com/?q=${business.location}`}
 						>
 							Route planen
 						</Link>

@@ -74,7 +74,7 @@ const EventCard = ({
 	};
 
 	return isOpen ? (
-		<div className={`styles.container`}>
+		<div className={styles.container}>
 			<div className={styles.full_description}>
 				<p>{event.description}</p>
 				<button onClick={toggleButton} className={styles.more}>

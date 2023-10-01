@@ -12,6 +12,9 @@ const InteractiveMap = ({
 	const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${KEY}&${PARAMETERS}`;
 	return (
 		<iframe
+			style={{ filter: "invert(80%) hue-rotate(180deg)" }}
+			data-type="lazy"
+			data-src={mapUrl}
 			referrerPolicy="no-referrer-when-downgrade"
 			src={mapUrl}
 			allowFullScreen

@@ -51,9 +51,9 @@ const Events = ({ events }: any) => {
 	};
 
 	const dateSelectItem = [
-		"Deaktivieren",
 		"vom neusten zu ältesten",
 		"vom ältesten zu neusten",
+		"Deaktivieren",
 	];
 
 	const searchByTitle = (events: any[], searchInput: any) => {
@@ -83,16 +83,17 @@ const Events = ({ events }: any) => {
 	const filteredEvents = [...(events || [])]
 		.sort((a, b) => {
 			// Sort the array based on the selectDate value
-			if (selectDate === "Deaktivieren") {
-				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
-				return 0;
-			}
+
 			if (selectDate === "vom neusten zu ältesten") {
 				// If selectDate is "vom neusten zu ältesten"
 				return (
 					b.endDate._seconds - a.startDate._seconds || // If seconds are equal, sort by nanoseconds
 					b.endDate._nanoseconds - a.startDate._nanoseconds
 				);
+			}
+			if (selectDate === "Deaktivieren") {
+				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
+				return 0;
 			} else {
 				// For any other values of selectDate
 				return (
@@ -135,23 +136,31 @@ const Events = ({ events }: any) => {
 			</div>
 			<div className={styles.list_of_businesses}>
 				{/* {paginatedPosts */}
-				{paginatedPosts.map((event: any) => {
-					return (
-						<EventCard
-							event={event}
-							key={event.itemId}
-							handleSubmit={handleSubmit}
-						/>
-					);
-				})}
+				{paginatedPosts.length !== 0 ? (
+					paginatedPosts.map((event: any) => {
+						return (
+							<EventCard
+								event={event}
+								key={event.itemId}
+								handleSubmit={handleSubmit}
+							/>
+						);
+					})
+				) : (
+					<div style={{ color: "white" }}>Nichts gefunden</div>
+				)}
 			</div>
 			{alert ? <BusinessMerkenResponseMessage /> : ""}
-			<Pagination
-				items={filteredEvents.length}
-				currentPage={currentPage}
-				pageSize={pageSize}
-				onPageChange={onPageChange}
-			/>
+			{paginatedPosts.length !== 0 ? (
+				<Pagination
+					items={filteredEvents.length}
+					currentPage={currentPage}
+					pageSize={pageSize}
+					onPageChange={onPageChange}
+				/>
+			) : (
+				""
+			)}
 		</div>
 	);
 };

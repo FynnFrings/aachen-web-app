@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import banner from "@/public/AachenPics/aachen6.png";
 import { FaBagShopping } from "react-icons/fa6";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 
 const EventCard = ({
 	handleSubmit,
@@ -65,7 +65,24 @@ const EventCard = ({
 			return true;
 		}
 	};
-	return (
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleButton = (event: any) => {
+		event.preventDefault();
+		setIsOpen(!isOpen);
+	};
+
+	return isOpen ? (
+		<div className={`styles.container`}>
+			<div className={styles.full_description}>
+				<p>{event.description}</p>
+				<button onClick={toggleButton} className={styles.more}>
+					Weniger anzeigen
+				</button>
+			</div>
+		</div>
+	) : (
 		//Wrap an entire card in a link, which will redirect to event details page
 		<Link href={`/events/${event.itemId}`}>
 			<div className={styles.container}>
@@ -85,7 +102,9 @@ const EventCard = ({
 					<div className={styles.event_name}>
 						{event.title}
 						<div className={styles.text}>{event.description}</div>
-						<span className={styles.more}>Mehr zeigen</span>
+						<button onClick={toggleButton} className={styles.more}>
+							Mehr anzeigen
+						</button>
 					</div>
 					{event.startDate || event.endDate !== null ? (
 						<div className={styles.event_time}>

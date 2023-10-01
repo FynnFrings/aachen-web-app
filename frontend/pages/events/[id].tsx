@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/event_details.module.scss";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import InteractiveMap from "@/components/interactiveMap";
 import { AiFillClockCircle } from "react-icons/ai";
@@ -97,13 +97,14 @@ const EventDetailsPage = ({ event }: any) => {
 		return obj;
 	};
 
-	const hrefValidator = (href: any) => {
-		return href == "" || href == null
-			? "/404"
-			: href.slice(0, 3) == "www"
-			? "http://" + `${href}`
-			: `${href}`;
-	};
+	// const hrefValidator = (href: any) => {
+	// 	return href == "" || href == null
+	// 		? "/404"
+	// 		: href.slice(0, 3) == "www"
+	// 		? "http://" + `${href}`
+	// 		: `${href}`;
+	// };
+
 	const hasPayment = () => {
 		if (
 			event.hasPayment == null ||
@@ -188,7 +189,7 @@ const EventDetailsPage = ({ event }: any) => {
 						>
 							Route planen
 						</Link>
-						<span></span>
+						<span>{validLocation().location}</span>
 					</div>
 				</div>
 				<div className={styles.business_link}>

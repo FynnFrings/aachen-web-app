@@ -1,3 +1,4 @@
+//////////////////////////////
 .container {
     width: 100%;
     height: 100%;
@@ -12,58 +13,72 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
     transition-duration: 200ms;
-}
+    &:hover {
+        transform: scale(0.99);
+    }
 
-.container:hover {
-    transform: scale(0.99);
+    .full_description {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        display: flex;
+        height: auto;
+        color: #ffffff;
+    }
+
     .more {
-        opacity: 1;
-    }
-}
+        border-radius: 5px;
+        align-self: start;
+        font-size: 1rem;
+        color: #ffffff;
+        font-weight: 600;
+        transition: color 0.5s ease-in-out;
+        transition-duration: 150ms;
+        transition-duration: 200ms;
 
-.event_image_container {
-    width: 100%;
-    position: relative;
-    .event_image {
-        width: 100%;
-        height: 11rem /* 176px */;
-        object-fit: cover;
-        border-radius: 0.5rem /* 46px */;
-        object-position: 50% 50%;
-    }
-}
-
-.info {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    row-gap: 0.625rem /* 10px */;
-
-    .event_name {
-        width: 100%;
-        font-weight: 700;
-        font-size: 1.375rem /* 22px */;
-        line-height: 1.679rem /* 26.86px */;
-        color: white;
-
-        .text {
-            font-weight: 200;
-            font-size: 1rem /* 16px */;
-            line-height: 1.526rem /* 24.42px */;
-            color: white;
-            opacity: 0.7;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+        &:hover {
+            color: #fac520;
         }
-        .more {
-            font-size: 1rem;
-            color: #ffffff;
-            font-weight: 600;
-            &:hover {
-                color: #fac520;
-                opacity: 1;
+    }
+
+    .event_image_container {
+        width: 100%;
+        position: relative;
+        .event_image {
+            width: 100%;
+            height: 11rem /* 176px */;
+            object-fit: cover;
+            border-radius: 0.5rem /* 46px */;
+            object-position: 50% 50%;
+        }
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        row-gap: 0.625rem /* 10px */;
+
+        .event_name {
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.375rem /* 22px */;
+            line-height: 1.679rem /* 26.86px */;
+            color: white;
+
+            .text {
+                font-weight: 200;
+                font-size: 1rem /* 16px */;
+                line-height: 1.526rem /* 24.42px */;
+                color: white;
+                opacity: 0.7;
+                transition: ease-in 1s;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
         }
     }

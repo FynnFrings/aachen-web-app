@@ -74,7 +74,7 @@ const EventCard = ({
 	};
 
 	return isOpen ? (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${styles.scale_in_center}`}>
 			<div className={styles.full_description}>
 				<p>{event.description}</p>
 				<button onClick={toggleButton} className={styles.more}>
@@ -85,7 +85,7 @@ const EventCard = ({
 	) : (
 		//Wrap an entire card in a link, which will redirect to event details page
 		<Link href={`/events/${event.itemId}`}>
-			<div className={styles.container}>
+			<div className={`${styles.container} ${styles.scale_in_center}`}>
 				{/* Render a placeholder image */}
 				<div className={styles.event_image_container}>
 					<Image

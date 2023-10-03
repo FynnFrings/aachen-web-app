@@ -62,8 +62,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			openTimeArray?.splice(2, 0, ":");
 			const openTime = openTimeArray?.join("");
 			return openTime;
-		} else {
-			return "Geschlossen";
 		}
 	};
 

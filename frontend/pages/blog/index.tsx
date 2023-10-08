@@ -4,6 +4,7 @@ import { IBlogCard } from "@/types/types";
 import { ChangeEvent, useState } from "react";
 import SearchField from "@/components/SearchField";
 import searchByTitle from "@/helpers/searchByTitle";
+import searchByDate from "@/helpers/filterByDate";
 
 const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 	//*handling search field in search bar START
@@ -18,7 +19,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 
 	//*handling selectItems state in filter START
 	// state variable to manage selected category for article filtering
-	const [selectItem, setSelectItem] = useState<string>("");
+	const [selectItem, setSelectItem] = useState<string>("vom neusten zu ältesten");
 
 	// function to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
@@ -30,13 +31,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 
 	// Array of filtered articles sorted according to selected sorting criteria
 	const filteredArticles = [...(articles || [])] // Create a new array with the elements in the articles array (if it exists)
-		.sort((a, b) => {
-			return selectItem === "vom neusten zu ältesten" // Sort from newest to oldest or vice versa based on selected sorting criteria
-				? b.createdAt?._seconds - a.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
-						b.createdAt?._nanoseconds - a.createdAt?._nanoseconds
-				: a.createdAt?._seconds - b.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
-						a.createdAt?._nanoseconds - b.createdAt?._nanoseconds;
-		})
+		.sort((a, b) => searchByDate(selectItem, a, b))
 		.filter((article) => searchByTitle([article], searchInput).length > 0); // Filter articles by title with custom helper function and remove any that don't match.
 
 	return (
@@ -71,9 +66,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(
-		`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
-	); //http://localhost:5050/blog/
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`); //http://localhost:5050/blog/
 	const data = await res.json();
 	// Pass data to the page via props
 	return { props: { articles: data } };

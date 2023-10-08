@@ -9,9 +9,7 @@
 	transform: translateX(-50%);
 	height: 10%;
 	border-radius: 0.5rem /* 8px */;
-	animation:
-		popup 0.5s ease-in-out 1 forwards,
-		popupDelay 0.5s ease-in-out 2.5s 1 forwards;
+	animation: popup 0.5s ease-in-out 1 forwards, popupDelay 0.5s ease-in-out 2.5s 1 forwards;
 
 	@media screen and (min-width: 1024px) {
 		width: 25%;

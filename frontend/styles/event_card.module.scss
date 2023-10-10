@@ -60,7 +60,6 @@
     }
 
     .more {
-        border-radius: 5px;
         align-self: start;
         font-size: 1rem;
         color: #ffffff;
@@ -68,9 +67,19 @@
         transition: color 0.5s ease-in-out;
         transition-duration: 150ms;
         transition-duration: 200ms;
-
-        &:hover {
+        text-decoration: none;
+        background-image: linear-gradient(#fac520, #fac520);
+        background-size: 0% 0.15em;
+        background-position-y: 100%;
+        background-position-x: 0%;
+        background-repeat: no-repeat;
+        transition: background-size 300ms ease-in-out;
+        &:hover,
+        &:active,
+        :focus {
+            opacity: 1;
             color: #fac520;
+            background-size: 100% 0.15em;
         }
     }
 

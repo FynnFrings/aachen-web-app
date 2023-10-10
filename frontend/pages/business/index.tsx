@@ -9,6 +9,8 @@ import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenR
 import { IBusinessCard } from "@/types/types";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
+import searchByTitle from "@/helpers/searchByTitle";
+import searchByDate from "@/helpers/filterByDate";
 
 const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +47,7 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [selectItem, setSelectItem] = useState<string>("Alle");
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>("Deaktivieren");
+	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
 
 	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
@@ -75,53 +77,14 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		"Kunstgalerie",
 	];
 
-	const dateSelectItem = [
-		"Deaktivieren",
-		"vom neusten zu ältesten",
-		"vom ältesten zu neusten",
-	];
-
-	const searchByTitle = (businesses: any[], searchInput: any) => {
-		return businesses.filter((business) => {
-			const name = business.name.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
-			const lowercaseSearchInput = searchInput.toLowerCase();
-
-			// Check if the lowercased title includes the lowercased search input or if the search input is empty
-			return name.includes(lowercaseSearchInput) || !searchInput;
-		});
-	};
+	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
 	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
 	const filteredBusinesses = [...(businesses || [])]
-		.filter(
-			(business: IBusinessCard) =>
-				(business.bannerImageUrl ?? business.bigPhotoURL) &&
-				(business.logoImageUrl ?? business.photoURL)
-		)
-		.sort((a, b) => {
-			// Sort the array based on the selectDate value
-			if (selectDate === "Deaktivieren") {
-				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
-				return 0;
-			}
-			if (selectDate === "vom neusten zu ältesten") {
-				// If selectDate is "vom neusten zu ältesten"
-				return (
-					b.createdAt?._seconds - a.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
-					b.createdAt?._nanoseconds - a.createdAt?._nanoseconds
-				);
-			} else {
-				// For any other values of selectDate
-				return (
-					a.createdAt?._seconds - b.createdAt?._seconds || // If seconds are equal, sort by nanoseconds
-					a.createdAt?._nanoseconds - b.createdAt?._nanoseconds
-				);
-			}
-		})
+		.sort((a, b) => searchByDate(selectDate, a, b))
 		.filter(
 			// Filter the array based on the selectItem value or business category
-			(business) =>
-				selectItem === "Alle" || business.category === selectItem
+			(business) => selectItem === "Alle" || business.category === selectItem
 		)
 		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
@@ -184,10 +147,11 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(
-		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`);
+	const allBusinesses = await res.json();
+	const response = allBusinesses.filter(
+		(a: IBusinessCard) => (a.bannerImageUrl ?? a.bigPhotoURL) && (a.logoImageUrl ?? a.photoURL)
 	);
-	const response = await res.json();
 	// Pass data to the page via props
 	return { props: { businesses: response } };
 }

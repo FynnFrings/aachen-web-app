@@ -7,6 +7,8 @@ import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems
 import EventCard from "@/components/Events/EventCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import Pagination from "@/components/Pagination";
+import searchByDate from "@/helpers/filterByDate";
+import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
 
 const Events = ({ events }: any) => {
@@ -42,7 +44,9 @@ const Events = ({ events }: any) => {
 	//*handling selectItems state in filter START
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>("Deaktivieren");
+	const [selectDate, setSelectDate] = useState<string>(
+		"vom neusten zu ältesten"
+	);
 
 	//* functions to update selectItem state based on user selection
 
@@ -53,19 +57,9 @@ const Events = ({ events }: any) => {
 	const dateSelectItem = [
 		"vom neusten zu ältesten",
 		"vom ältesten zu neusten",
-		"Deaktivieren",
 	];
 
-	const searchByTitle = (events: any[], searchInput: any) => {
-		return events.filter((event) => {
-			const name = event.title.toLowerCase() || ""; // Get the lowercased title or set it as an empty string if it doesn't exist
-			const lowercaseSearchInput = searchInput.toLowerCase();
-
-			// Check if the lowercased title includes the lowercased search input or if the search input is empty
-			return name.includes(lowercaseSearchInput) || !searchInput;
-		});
-	};
-
+	// ! We will need it later
 	// const filteredData: any = Object.values(
 	// 	events.reduce((acc: any, obj: any) => {
 	// 		const key = `${obj.businessId}-${obj.website}`;
@@ -81,27 +75,7 @@ const Events = ({ events }: any) => {
 
 	// Create a new array called filtered events by spreading the contents of the events array (if it exists) or an empty array if events is null or undefined.
 	const filteredEvents = [...(events || [])]
-		.sort((a, b) => {
-			// Sort the array based on the selectDate value
-
-			if (selectDate === "vom neusten zu ältesten") {
-				// If selectDate is "vom neusten zu ältesten"
-				return (
-					b.endDate._seconds - a.startDate._seconds || // If seconds are equal, sort by nanoseconds
-					b.endDate._nanoseconds - a.startDate._nanoseconds
-				);
-			}
-			if (selectDate === "Deaktivieren") {
-				// If selectDate is "Deaktivieren", return 0 to indicate no sorting
-				return 0;
-			} else {
-				// For any other values of selectDate
-				return (
-					a.startDate._seconds - b.endDate._seconds || // If seconds are equal, sort by nanoseconds
-					a.startDate._nanoseconds - b.endDate._nanoseconds
-				);
-			}
-		})
+		.sort((a, b) => searchByDate(selectDate, a, b))
 		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
 			(event) => searchByTitle([event], searchInput).length > 0
@@ -172,6 +146,7 @@ export async function getServerSideProps() {
 		`https://us-central1-aachen-app.cloudfunctions.net/getAllEvents`
 	);
 	const response = await res.json();
+
 	// Pass data to the page via props
 	return { props: { events: response } };
 }

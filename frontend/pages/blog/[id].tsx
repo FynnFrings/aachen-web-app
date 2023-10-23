@@ -1,6 +1,7 @@
 import { dateFormat } from "@/components/dateFormat";
 import { IBlogCard } from "@/types/types";
 import DOMPurify from "isomorphic-dompurify";
+import Head from "next/head";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -10,6 +11,9 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 	const sanitizedData: string = DOMPurify.sanitize(article.htmlContent);
 	return (
 		<>
+			<Head>
+				<title>{article.title} | Aachen App</title>
+			</Head>
 			<div className="flex flex-col gap-5 items-start my-16">
 				<div className="relative w-full flex justify-center">
 					<Image
@@ -29,7 +33,9 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 					</div>
 				</div>
 				<div>
-					<h2 className="text-white text-4xl font-bold mt-7">{article.title}</h2>
+					<h2 className="text-white text-4xl font-bold mt-7">
+						{article.title}
+					</h2>
 					<p className="text-slate-300 text-xl mb-7">
 						{article.author} • {dateFormat(article.createdAt)}
 					</p>
@@ -53,7 +59,8 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	const id = context.params.id;
 
 	// Declared url of events id
-	const blogUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getBlogById"; //`http://localhost:5050/blog/${id}`;
+	const blogUrlId: string =
+		"https://us-central1-aachen-app.cloudfunctions.net/getBlogById"; //`http://localhost:5050/blog/${id}`;
 
 	// Fetching data
 	const res = await fetch(`${blogUrlId}`, {

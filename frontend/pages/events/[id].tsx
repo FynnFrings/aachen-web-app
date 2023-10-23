@@ -7,6 +7,7 @@ import InteractiveMap from "@/components/interactiveMap";
 import { AiFillClockCircle } from "react-icons/ai";
 import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import banner from "@/public/aachen_pic_2.png";
+import Head from "next/head";
 
 const EventDetailsPage = ({ event }: any) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -119,6 +120,9 @@ const EventDetailsPage = ({ event }: any) => {
 
 	return (
 		<>
+			<Head>
+				<title>{event.title} | Aachen App</title>
+			</Head>
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>
 					<Image

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aachen-web-app.vercel.app/sitemap.xml

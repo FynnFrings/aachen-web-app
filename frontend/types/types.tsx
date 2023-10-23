@@ -30,6 +30,7 @@ export interface ITimestamp {
 // Interfaces for Blog Page * END *
 
 export interface IBusinessCard {
+	telegram: string;
 	ownerId: string;
 	website?: string;
 	latitude: number;

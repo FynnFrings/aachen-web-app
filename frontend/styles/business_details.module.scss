@@ -7,7 +7,7 @@
 	color: rgb(255, 255, 255);
 	border-bottom: 1px solid rgba(71, 85, 105, 1);
 
-	@media screen and (max-width: 449px) {
+	@media screen and (max-width: 450px) {
 		display: flex;
 		flex-direction: column;
 		padding-top: 1rem;
@@ -16,18 +16,18 @@
 		align-items: center;
 	}
 
-	@media (min-width: 450px) and (max-width: 768px) {
+	@media (min-width: 450px) and (max-width: 769px) {
 		display: grid;
 		padding: 0 0 1.5rem 0;
 		grid-template-columns: auto auto;
 		grid-template-rows: auto auto;
 		gap: 1rem 1rem;
 		grid-template-areas:
-			"business_title business_title"
+			"business_logo business_title"
 			"business-button business-button";
 	}
 
-	@media (min-width: 768px) and (max-width: 1024px) {
+	@media (min-width: 769px) and (max-width: 1024px) {
 		margin: 2rem 0 0 0;
 		display: grid;
 		width: 100%;
@@ -51,7 +51,7 @@
 		justify-content: center;
 		width: 100%;
 
-		@media (max-width: 768px) {
+		@media (max-width: 769px) {
 			grid-area: business_logo;
 			align-self: center;
 			height: auto;
@@ -60,7 +60,7 @@
 			}
 		}
 
-		@media (min-width: 768px) and (max-width: 1024px) {
+		@media (min-width: 769px) and (max-width: 1024px) {
 			display: flex;
 			border-radius: 0.5rem;
 			justify-content: center;
@@ -75,14 +75,14 @@
 			border-radius: 100%;
 			min-width: 50px;
 
-			@media (max-width: 768px) {
+			@media (max-width: 769px) {
 				position: relative;
 				width: 6rem;
 				height: 6rem;
 				top: 0;
 			}
 
-			@media (min-width: 768px) and (max-width: 1024px) {
+			@media (min-width: 769px) and (max-width: 1024px) {
 				top: 18vw;
 				position: absolute;
 				width: max-content;
@@ -101,12 +101,12 @@
 		grid-column-end: 2;
 		min-width: 30vw;
 
-		@media (max-width: 768px) {
+		@media (max-width: 769px) {
 			grid-area: business_title;
 			width: auto;
 		}
 
-		@media (min-width: 768px) and (max-width: 1024px) {
+		@media (min-width: 769px) and (max-width: 1024px) {
 			width: auto;
 		}
 		h1 {
@@ -134,12 +134,16 @@
 		flex-direction: row;
 		justify-content: center;
 		color: #000000;
-
-		@media (max-width: 768px) {
+		@media screen and (max-width: 400px) {
+			display: flex;
+			flex-direction: column;
+			margin: 0;
+		}
+		@media (min-width: 400px) and (max-width: 769px) {
 			grid-area: business-button;
 		}
 
-		@media (min-width: 768px) and (max-width: 1024px) {
+		@media (min-width: 769px) and (max-width: 1024px) {
 			width: auto;
 			display: inline-flex;
 			align-items: flex-end;
@@ -184,7 +188,7 @@
 	row-gap: 2rem;
 	column-gap: 2rem;
 
-	@media (max-width: 768px) {
+	@media (max-width: 950px) {
 		display: flex;
 		flex-direction: column;
 		margin-top: 2rem;
@@ -247,6 +251,13 @@
 		p {
 			justify-content: space-between;
 		}
+		// @media (max-width: 950px) {
+		// 	align-items: center;
+		// 	p {
+		// 		align-self: normal;
+		// 		justify-content: space-around;
+		// 	}
+		// }
 	}
 	.location {
 		grid-area: location;
@@ -271,27 +282,32 @@
 		display: flex;
 		flex-direction: column;
 		border-radius: 12px;
+
 		background: rgba(255, 255, 255, 0.1);
 		color: rgba(255, 255, 255, 0.7);
 		padding: 1.4rem;
-
 		.item {
 			display: flex;
 			flex-direction: row;
 			margin: 1rem 0 1rem 0;
 			.logo {
+				height: fit-content;
 				border-radius: 50%;
 			}
-			span {
+			div {
+				display: flex;
+				flex-direction: column;
 				margin-left: 1rem;
+				flex-wrap: wrap;
+
 				h2 {
 					color: #ffffff;
 					font-size: 1.125rem;
 				}
 				a {
-					font-size: 1rem;
 					color: rgba(255, 255, 255, 0.6);
 					text-decoration: underline;
+					word-break: break-all;
 				}
 				a:hover {
 					color: #fac520;

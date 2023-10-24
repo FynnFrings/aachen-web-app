@@ -1,5 +1,3 @@
-// import MainSkeleton from "@/components/SpinnerSkeletons/mainSkeleton";
-
 const Spinner = () => {
 	return (
 		<>

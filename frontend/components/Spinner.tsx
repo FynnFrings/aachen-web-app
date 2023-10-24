@@ -1,4 +1,4 @@
-import MainSkeleton from "./SpinnerSkeletons/mainSkeleton";
+import MainSkeleton from "@/components/SpinnerSkeletons/mainSkeleton";
 
 const Spinner = () => {
 	return (

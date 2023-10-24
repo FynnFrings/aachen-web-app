@@ -1,17 +1,17 @@
-import { CgCloseR } from "react-icons/cg";
 import styles from "../styles/popUpContact.module.scss";
 import Link from "next/link";
-import { AiFillInstagram, AiFillPhone } from "react-icons/ai";
+import { AiFillInstagram, AiFillPhone, AiOutlineClose } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { BsTelegram } from "react-icons/bs";
 import { IoLogoWhatsapp } from "react-icons/io";
+
 const PopUpContact = ({ open, popUpOpener, businessContacts }: any) => {
 	return (
 		<div className={styles.popup_container_open}>
 			<div className={styles.popup_header}>
 				<h2>Kontaktieren</h2>
 				<button onClick={popUpOpener}>
-					<CgCloseR className={styles.close_button} />
+					<AiOutlineClose className={styles.close_button} size={24} />
 				</button>
 			</div>
 			{businessContacts.instagram != null ? (

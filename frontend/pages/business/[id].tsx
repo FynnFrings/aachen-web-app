@@ -132,7 +132,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		telegram: business.telegram ?? null,
 		whatsapp: business.whatsapp ?? null,
 		email: business.email ?? null,
-		webSite: business.website ?? null,
 		phoneNum: business.number ?? null,
 	};
 	return (

@@ -9,7 +9,7 @@ const PopUpContact = ({ open, popUpOpener, businessContacts }: any) => {
 	return (
 		<div className={styles.popup_container_open}>
 			<div className={styles.popup_header}>
-				<h2>Contact</h2>
+				<h2>Kontaktieren</h2>
 				<button onClick={popUpOpener}>
 					<CgCloseR className={styles.close_button} />
 				</button>
@@ -69,10 +69,10 @@ const PopUpContact = ({ open, popUpOpener, businessContacts }: any) => {
 			) : (
 				""
 			)}
-			{businessContacts.number != null ? (
+			{businessContacts.phoneNum != null ? (
 				<div className={styles.contacts_item}>
 					<AiFillPhone size={30} color="#fac520 " />
-					{businessContacts.number}
+					{businessContacts.phoneNum}
 				</div>
 			) : (
 				""

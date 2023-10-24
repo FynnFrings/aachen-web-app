@@ -41,7 +41,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 				<title>Blog | Aachen App</title>
 			</Head>
 			<div className="flex flex-col gap-14 py-20">
-				<div className=" bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
+				<div className="bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
 					<h1 className="text-5xl font-bold text-white">Unser Blog</h1>
 				</div>
 				<div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
@@ -56,7 +56,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 						listOfItems={listOfItems}
 					/>
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 					{/* render BlogCard component for each filtered article */}
 					{filteredArticles.map((article) => (
 						<BlogCard key={article.id} article={article} />

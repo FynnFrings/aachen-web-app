@@ -21,9 +21,7 @@ const BusinessCard = ({
 		if (!business.openingHourPeriods) {
 			return null;
 		}
-		const result = business.openingHourPeriods.find(
-			(day) => day.close.day == weekDay
-		);
+		const result = business.openingHourPeriods.find((day) => day.close.day == weekDay);
 		if (result && result.close.time !== "Geschlossen") {
 			const closeTimeArray = result.close.time.split("");
 			closeTimeArray?.splice(2, 0, ":");
@@ -38,9 +36,7 @@ const BusinessCard = ({
 		if (!business.dayList) {
 			return null;
 		}
-		const result = business.dayList.find(
-			(day) => day.close.day === weekDay
-		);
+		const result = business.dayList.find((day) => day.close.day === weekDay);
 		if (result && result.close.time !== "Geschlossen") {
 			const closeTimeArray = result?.close.time.split("");
 			closeTimeArray?.splice(2, 0, ":");
@@ -103,9 +99,7 @@ const BusinessCard = ({
 				{/* Render the name, category, opening hours, button */}
 				<div className={styles.info}>
 					<div className={styles.business_name}>{business.name}</div>
-					<div className={styles.business_category}>
-						{business.category}
-					</div>
+					<div className={styles.business_category}>{business.category}</div>
 					<p className={styles.dot}>•</p>
 					{closeTime !== null ? (
 						<div
@@ -120,31 +114,20 @@ const BusinessCard = ({
 								: checkTime()}
 						</div>
 					) : (
-						<div className={styles.business_time_unknown}>
-							Öffnungszeiten unbekannt
-						</div>
+						<div className={styles.business_time_unknown}>Öffnungszeiten unbekannt</div>
 					)}
 				</div>
 				{/* Render the additional information about distance and number of posts */}
 				<div className={styles.add_info}>
 					<div className={styles.posts}>
 						<p className={styles.number}>
-							{(business.eventList.length ?? 0) +
-								(business.couponList.length ?? 0)}
+							{(business.eventList.length ?? 0) + (business.couponList.length ?? 0)}
 						</p>
 						<p className={styles.text}>Beiträge</p>
 					</div>
-					<button
-						className={styles.business_button}
-						onClick={handleSubmit}
-					>
+					<button className={styles.business_button} onClick={handleSubmit}>
 						Merken
-						<Image
-							src={Notification}
-							alt={"notification"}
-							width={20}
-							height={20}
-						/>
+						<Image src={Notification} alt={"notification"} width={20} height={20} />
 					</button>
 				</div>
 			</div>

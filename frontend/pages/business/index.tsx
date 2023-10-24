@@ -11,6 +11,7 @@ import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
 import searchByTitle from "@/helpers/searchByTitle";
 import searchByDate from "@/helpers/filterByDate";
+import Head from "next/head";
 
 const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,9 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [selectItem, setSelectItem] = useState<string>("Alle");
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
+	const [selectDate, setSelectDate] = useState<string>(
+		"vom neusten zu ältesten"
+	);
 
 	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
@@ -77,14 +80,18 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		"Kunstgalerie",
 	];
 
-	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
+	const dateSelectItem = [
+		"vom neusten zu ältesten",
+		"vom ältesten zu neusten",
+	];
 
 	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
 	const filteredBusinesses = [...(businesses || [])]
 		.sort((a, b) => searchByDate(selectDate, a, b))
 		.filter(
 			// Filter the array based on the selectItem value or business category
-			(business) => selectItem === "Alle" || business.category === selectItem
+			(business) =>
+				selectItem === "Alle" || business.category === selectItem
 		)
 		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
@@ -94,63 +101,77 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.banner}>
-				<Image
-					className={styles.business_banner}
-					src={BusinessBanner}
-					alt="business-banner"
-					width={0}
-					height={0}
+		<>
+			<Head>
+				<title>Business | Aachen App</title>
+				<meta
+					property="og:title"
+					content="Business | Aachen App"
+					key="title"
 				/>
-				<h1 className={styles.banner_text}>Business</h1>
-			</div>
-			<div className={styles.filters}>
-				<SearchField
-					handleChange={handleChange}
-					searchInput={searchInput}
-					placeholder={"Search"}
-				/>
-				<div className={styles.select_filters}>
-					<ListOfCategoryItems
-						selectItem={selectItem}
-						itemSelection={itemSelection}
-						listOfItems={listOfItems}
+			</Head>
+			<div className={styles.container}>
+				<div className={styles.banner}>
+					<Image
+						className={styles.business_banner}
+						src={BusinessBanner}
+						alt="business-banner"
+						width={0}
+						height={0}
 					/>
-					<ListOfCategoryItems
-						selectItem={selectDate}
-						itemSelection={itemSelectionDate}
-						listOfItems={dateSelectItem}
-					/>
+					<h1 className={styles.banner_text}>Business</h1>
 				</div>
-			</div>
-			<div className={styles.list_of_businesses}>
-				{paginatedPosts.map((business: IBusinessCard) => (
-					<BusinessCard
-						handleSubmit={handleSubmit}
-						business={business}
-						key={business.itemId}
+				<div className={styles.filters}>
+					<SearchField
+						handleChange={handleChange}
+						searchInput={searchInput}
+						placeholder={"Search"}
 					/>
-				))}
+					<div className={styles.select_filters}>
+						<ListOfCategoryItems
+							selectItem={selectItem}
+							itemSelection={itemSelection}
+							listOfItems={listOfItems}
+						/>
+						<ListOfCategoryItems
+							selectItem={selectDate}
+							itemSelection={itemSelectionDate}
+							listOfItems={dateSelectItem}
+						/>
+					</div>
+				</div>
+				<div className={styles.list_of_businesses}>
+					{paginatedPosts.map((business: IBusinessCard) => (
+						<BusinessCard
+							handleSubmit={handleSubmit}
+							business={business}
+							key={business.itemId}
+						/>
+					))}
+				</div>
+				{alert ? <BusinessMerkenResponseMessage /> : ""}
+				<Pagination
+					items={filteredBusinesses.length}
+					currentPage={currentPage}
+					pageSize={pageSize}
+					onPageChange={onPageChange}
+				/>
 			</div>
-			{alert ? <BusinessMerkenResponseMessage /> : ""}
-			<Pagination
-				items={filteredBusinesses.length}
-				currentPage={currentPage}
-				pageSize={pageSize}
-				onPageChange={onPageChange}
-			/>
-		</div>
+		</>
 	);
 };
 
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`);
+	const res = await fetch(
+		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
+	);
 	const allBusinesses = await res.json();
 	const response = allBusinesses.filter(
-		(a: IBusinessCard) => (a.bannerImageUrl ?? a.bigPhotoURL) && (a.logoImageUrl ?? a.photoURL)
+		(a: IBusinessCard) =>
+			(a.bannerImageUrl ?? a.bigPhotoURL) &&
+			(a.logoImageUrl ?? a.photoURL)
 	);
 	// Pass data to the page via props
 	return { props: { businesses: response } };

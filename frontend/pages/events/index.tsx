@@ -10,6 +10,7 @@ import Pagination from "@/components/Pagination";
 import searchByDate from "@/helpers/filterByDate";
 import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
+import Head from "next/head";
 
 const Events = ({ events }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +45,9 @@ const Events = ({ events }: any) => {
 	//*handling selectItems state in filter START
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
+	const [selectDate, setSelectDate] = useState<string>(
+		"vom neusten zu ältesten"
+	);
 
 	//* functions to update selectItem state based on user selection
 
@@ -52,7 +55,10 @@ const Events = ({ events }: any) => {
 		setSelectDate(item);
 	};
 
-	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
+	const dateSelectItem = [
+		"vom neusten zu ältesten",
+		"vom ältesten zu neusten",
+	];
 
 	// ! We will need it later
 	// const filteredData: any = Object.values(
@@ -78,66 +84,73 @@ const Events = ({ events }: any) => {
 	const paginatedPosts = paginate(filteredEvents, currentPage, pageSize);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.banner}>
-				<Image
-					className={styles.business_banner}
-					src={BusinessBanner}
-					alt="business-banner"
-					width={0}
-					height={0}
-				/>
-				<h1 className={styles.banner_text}>Event</h1>
-			</div>
-			<div className={styles.filters}>
-				<SearchField
-					handleChange={handleChange}
-					searchInput={searchInput}
-					placeholder={"Search"}
-				/>
-				<div className={styles.select_filters}>
-					<ListOfCategoryItems
-						selectItem={selectDate}
-						itemSelection={itemSelectionDate}
-						listOfItems={dateSelectItem}
+		<>
+			<Head>
+				<title>Event | Aachen App</title>
+			</Head>
+			<div className={styles.container}>
+				<div className={styles.banner}>
+					<Image
+						className={styles.business_banner}
+						src={BusinessBanner}
+						alt="business-banner"
+						width={0}
+						height={0}
 					/>
+					<h1 className={styles.banner_text}>Event</h1>
 				</div>
-			</div>
-			<div className={styles.list_of_businesses}>
-				{/* {paginatedPosts */}
+				<div className={styles.filters}>
+					<SearchField
+						handleChange={handleChange}
+						searchInput={searchInput}
+						placeholder={"Search"}
+					/>
+					<div className={styles.select_filters}>
+						<ListOfCategoryItems
+							selectItem={selectDate}
+							itemSelection={itemSelectionDate}
+							listOfItems={dateSelectItem}
+						/>
+					</div>
+				</div>
+				<div className={styles.list_of_businesses}>
+					{/* {paginatedPosts */}
+					{paginatedPosts.length !== 0 ? (
+						paginatedPosts.map((event: any) => {
+							return (
+								<EventCard
+									event={event}
+									key={event.itemId}
+									handleSubmit={handleSubmit}
+								/>
+							);
+						})
+					) : (
+						<div style={{ color: "white" }}>Nichts gefunden</div>
+					)}
+				</div>
+				{alert ? <BusinessMerkenResponseMessage /> : ""}
 				{paginatedPosts.length !== 0 ? (
-					paginatedPosts.map((event: any) => {
-						return (
-							<EventCard
-								event={event}
-								key={event.itemId}
-								handleSubmit={handleSubmit}
-							/>
-						);
-					})
+					<Pagination
+						items={filteredEvents.length}
+						currentPage={currentPage}
+						pageSize={pageSize}
+						onPageChange={onPageChange}
+					/>
 				) : (
-					<div style={{ color: "white" }}>Nichts gefunden</div>
+					""
 				)}
 			</div>
-			{alert ? <BusinessMerkenResponseMessage /> : ""}
-			{paginatedPosts.length !== 0 ? (
-				<Pagination
-					items={filteredEvents.length}
-					currentPage={currentPage}
-					pageSize={pageSize}
-					onPageChange={onPageChange}
-				/>
-			) : (
-				""
-			)}
-		</div>
+		</>
 	);
 };
 
 //Using Server Side Rendering function
 export async function getServerSideProps() {
 	// Fetch data from  API
-	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllEvents`);
+	const res = await fetch(
+		`https://us-central1-aachen-app.cloudfunctions.net/getAllEvents`
+	);
 	const response = await res.json();
 
 	// Pass data to the page via props

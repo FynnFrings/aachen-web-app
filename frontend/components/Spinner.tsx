@@ -1,5 +1,7 @@
 // import MainSkeleton from "@/components/SpinnerSkeletons/mainSkeleton";
 
+import MainSkeleton from "./SpinnerSkeletons/MainSkeleton";
+
 const Spinner = () => {
 	return (
 		<>
@@ -10,33 +12,9 @@ const Spinner = () => {
 					<div className="animate-pulse w-2/6 bg-opacity-75 bg-neutral-500 rounded-lg h-14"></div>
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-					<div className="animate-pulse bg-[#22221f] flex flex-col justify-between w-full basis-full p-5 gap-y-5 rounded-lg">
-						<div className="w-full">
-							<div className="w-full h-44 object-cover rounded-lg bg-neutral-500 bg-opacity-75"></div>
-						</div>
-						<div className="h-9 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-6 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-28 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-10 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-					</div>
-					<div className="animate-pulse bg-[#22221f] flex flex-col justify-between w-full basis-full p-5 gap-y-5 rounded-lg">
-						<div className="w-full">
-							<div className="w-full h-44 object-cover rounded-lg bg-neutral-500 bg-opacity-75"></div>
-						</div>
-						<div className="h-9 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-6 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-28 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-10 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-					</div>
-					<div className="animate-pulse bg-[#22221f] flex flex-col justify-between w-full basis-full p-5 gap-y-5 rounded-lg">
-						<div className="w-full">
-							<div className="w-full h-44 object-cover rounded-lg bg-neutral-500 bg-opacity-75"></div>
-						</div>
-						<div className="h-9 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-6 w-4/6 bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-28 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-						<div className="h-10 w-full bg-neutral-500 rounded-lg bg-opacity-75"></div>
-					</div>
+					<MainSkeleton />
+					<MainSkeleton />
+					<MainSkeleton />
 				</div>
 			</div>
 		</>

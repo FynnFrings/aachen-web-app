@@ -20,9 +20,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 
 	//*handling selectItems state in filter START
 	// state variable to manage selected category for article filtering
-	const [selectItem, setSelectItem] = useState<string>(
-		"vom neusten zu ältesten"
-	);
+	const [selectItem, setSelectItem] = useState<string>("vom neusten zu ältesten");
 
 	// function to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
@@ -44,9 +42,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 			</Head>
 			<div className="flex flex-col gap-14 py-20">
 				<div className=" bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
-					<h1 className="text-5xl font-bold text-white">
-						Unser Blog
-					</h1>
+					<h1 className="text-5xl font-bold text-white">Unser Blog</h1>
 				</div>
 				<div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
 					<SearchField
@@ -72,11 +68,9 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 };
 
 //Using Server Side Rendering function
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from  API
-	const res = await fetch(
-		`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`
-	); //http://localhost:5050/blog/
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`);
 	const data = await res.json();
 	// Pass data to the page via props
 	return { props: { articles: data } };

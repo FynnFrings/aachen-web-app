@@ -22,8 +22,7 @@ const EventDetailsPage = ({ event }: any) => {
 
 	const eventDate = () => {
 		const fullStartDate = new Date(
-			event.startDate._seconds * 1000 +
-				event.startDate._nanoseconds / 1000000
+			event.startDate._seconds * 1000 + event.startDate._nanoseconds / 1000000
 		);
 		const fullEndDate = new Date(
 			event.endDate._seconds * 1000 + event.endDate._nanoseconds / 1000000
@@ -38,26 +37,13 @@ const EventDetailsPage = ({ event }: any) => {
 			minute: "numeric",
 			hour12: false,
 		};
-		const validStartDate = fullStartDate.toLocaleDateString(
-			"de-DE",
-			dataOption
-		);
-		const validStartTime = fullStartDate.toLocaleTimeString(
-			"de-DE",
-			timeOption
-		);
-		const validEndDate = fullEndDate.toLocaleDateString(
-			"de-DE",
-			dataOption
-		);
-		const validEndTime = fullEndDate.toLocaleTimeString(
-			"de-DE",
-			timeOption
-		);
+		const validStartDate = fullStartDate.toLocaleDateString("de-DE", dataOption);
+		const validStartTime = fullStartDate.toLocaleTimeString("de-DE", timeOption);
+		const validEndDate = fullEndDate.toLocaleDateString("de-DE", dataOption);
+		const validEndTime = fullEndDate.toLocaleTimeString("de-DE", timeOption);
 		return (
 			<span>
-				{validStartDate}, {validStartTime}uhr - {validEndDate},{" "}
-				{validEndTime}uhr
+				{validStartDate}, {validStartTime}uhr - {validEndDate}, {validEndTime}uhr
 			</span>
 		);
 	};
@@ -67,30 +53,18 @@ const EventDetailsPage = ({ event }: any) => {
 			latitude: 50.775555,
 			longitude: 6.083611,
 		};
-		if (
-			event.location == "" ||
-			event.location == undefined ||
-			event.location == null
-		) {
+		if (event.location == "" || event.location == undefined || event.location == null) {
 			obj.location = event.timeFrames[0].location;
 		} else {
 			obj.location = event.location;
 		}
 
-		if (
-			event.latitude == "" ||
-			event.latitude == undefined ||
-			event.latitude == null
-		) {
+		if (event.latitude == "" || event.latitude == undefined || event.latitude == null) {
 			obj.latitude = event.timeFrames[0].latitude;
 		} else {
 			obj.latitude = event.latitude;
 		}
-		if (
-			event.longitude == "" ||
-			event.longitude == undefined ||
-			event.longitude == null
-		) {
+		if (event.longitude == "" || event.longitude == undefined || event.longitude == null) {
 			obj.longitude = event.timeFrames[0].longitude;
 		} else {
 			obj.longitude = event.longitude;
@@ -138,17 +112,11 @@ const EventDetailsPage = ({ event }: any) => {
 				<div className={styles.title}>
 					<h1>{event.title}</h1>
 					<div className={styles.event_location}>
-						<FaLocationDot
-							size={20}
-							className={styles.react_icons}
-						/>
+						<FaLocationDot size={20} className={styles.react_icons} />
 						<span>{validLocation().location}</span>
 					</div>
 					<div className={styles.event_time}>
-						<AiFillClockCircle
-							size={20}
-							className={styles.react_icons}
-						/>
+						<AiFillClockCircle size={20} className={styles.react_icons} />
 						{eventDate()}
 					</div>
 				</div>
@@ -156,16 +124,9 @@ const EventDetailsPage = ({ event }: any) => {
 					<button
 						onClick={handleSubmit}
 						className={styles.order}
-						style={
-							!hasPayment()
-								? { display: "none" }
-								: { display: "flex" }
-						}
+						style={!hasPayment() ? { display: "none" } : { display: "flex" }}
 					>
-						<FaBagShopping
-							style={{ marginRight: "0.2rem" }}
-							size={"24"}
-						/>
+						<FaBagShopping style={{ marginRight: "0.2rem" }} size={"24"} />
 						Bestellen
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
@@ -187,9 +148,7 @@ const EventDetailsPage = ({ event }: any) => {
 						<Link
 							target="_blank"
 							rel="noreferrer"
-							href={`https://maps.google.com/?q=${
-								validLocation().location
-							}`}
+							href={`https://maps.google.com/?q=${validLocation().location}`}
 						>
 							Route planen
 						</Link>
@@ -222,19 +181,34 @@ const EventDetailsPage = ({ event }: any) => {
 	);
 };
 
-export async function getServerSideProps(context: { params: { id: string } }) {
+// This function gets called at build time
+export async function getStaticPaths() {
+	const EventUrl: string = "https://us-central1-aachen-app.cloudfunctions.net/getAllEvents";
+	// Call an external API endpoint to get posts
+	const res = await fetch(EventUrl);
+	const data = await res.json();
+
+	// Get the paths we want to pre-render based on posts
+	const paths = data.map((event: any) => ({
+		params: { id: event.id },
+	}));
+
+	// We'll pre-render only these paths at build time.
+	// { fallback: false } means other routes should 404.
+	return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }: any) {
 	// Fetch data from  API
-	const id = context.params.id;
 
 	// Declared url of events id
-	const EventUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getEventById";
+	const EventUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getEventById";
 
 	// Fetching data
 	const res = await fetch(`${EventUrlId}`, {
 		method: "POST",
 		mode: "cors",
-		body: JSON.stringify({ id: id }),
+		body: JSON.stringify({ id: params.id }),
 	});
 
 	// Store in "data" as json file

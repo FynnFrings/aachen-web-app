@@ -50,8 +50,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const currentDate = new Date();
 
 	const creationData = new Date(
-		business.createdAt._seconds * 1000 +
-			business.createdAt._nanoseconds / 1000000
+		business.createdAt._seconds * 1000 + business.createdAt._nanoseconds / 1000000
 	);
 	const monthsDifference = getMonthDifference(creationData, currentDate);
 
@@ -61,9 +60,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		if (!business.openingHourPeriods) {
 			return null;
 		}
-		const result = business.openingHourPeriods.find(
-			(day) => day.open.day == weekDay
-		);
+		const result = business.openingHourPeriods.find((day) => day.open.day == weekDay);
 		if (result && result.open.time !== "Geschlossen") {
 			const openTimeArray = result.open.time.split("");
 			openTimeArray?.splice(2, 0, ":");
@@ -92,9 +89,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 
 		// Render a list of days of the week and opening & closing times
 		const scheduleItems = daysOfWeekGerman.map((dayOfWeek, index) => {
-			const scheduleItem = scheduleData.find(
-				(item: any) => item.open.day === index
-			);
+			const scheduleItem = scheduleData.find((item: any) => item.open.day === index);
 			if (scheduleItem) {
 				const openTime = formatTime(scheduleItem.open.time);
 				const closeTime = formatTime(scheduleItem.close.time);
@@ -170,19 +165,11 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								: ""}
 						</span>
 					</p>
-					<p
-						className={styles.description}
-					>{`${business.description}`}</p>
+					<p className={styles.description}>{`${business.description}`}</p>
 				</div>
 				<div className={styles.buttons}>
-					<button
-						onClick={handleSubmit}
-						className={styles.notification}
-					>
-						<IoIosNotificationsOutline
-							style={{ marginRight: "0.2rem" }}
-							size={"24"}
-						/>
+					<button onClick={handleSubmit} className={styles.notification}>
+						<IoIosNotificationsOutline style={{ marginRight: "0.2rem" }} size={"24"} />
 						Merken
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
@@ -204,17 +191,11 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>
-						<RiBuilding4Fill
-							size={28}
-							className={styles.react_icons}
-						/>
+						<RiBuilding4Fill size={28} className={styles.react_icons} />
 						{business.name}
 					</p>
 					<p>
-						<AiFillPieChart
-							size={28}
-							className={styles.react_icons}
-						/>
+						<AiFillPieChart size={28} className={styles.react_icons} />
 						{business.category}
 					</p>
 					<p>
@@ -230,19 +211,13 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							: `seit ${monthsDifference} Monat Mitglied der Aachen App`}
 					</p>
 					<p>
-						<BiSolidCoupon
-							size={28}
-							className={styles.react_icons}
-						/>
+						<BiSolidCoupon size={28} className={styles.react_icons} />
 						{business.totalCouponCount <= 0
 							? "Noch keine Coupons erstellt"
 							: `${business.totalCouponCount} Coupons erstellt`}
 					</p>
 					<p>
-						<FaCalendarDays
-							size={28}
-							className={styles.react_icons}
-						/>
+						<FaCalendarDays size={28} className={styles.react_icons} />
 						{business.totalEventCount <= 0
 							? "Noch keine Events erstellt"
 							: `${business.totalEventCount} Events erstellt`}
@@ -271,9 +246,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						>
 							Route planen
 						</Link>
-						<span>
-							{business.formattedAddress ?? business.location}
-						</span>
+						<span>{business.formattedAddress ?? business.location}</span>
 					</div>
 				</div>
 				<div className={styles.website_link}>
@@ -293,8 +266,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								rel="noreferrer"
 								href={hrefValidator(business.website) ?? `/*`}
 							>
-								{business.website == "" ||
-								business.website == null
+								{business.website == "" || business.website == null
 									? "Unbekannt"
 									: business.website}
 							</Link>
@@ -354,9 +326,26 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	);
 };
 
-export async function getServerSideProps(context: { params: { id: string } }) {
+// This function gets called at build time
+export async function getStaticPaths() {
+	const BusinesstUrl: string =
+		"https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses";
+	// Call an external API endpoint to get posts
+	const res = await fetch(BusinesstUrl);
+	const data = await res.json();
+
+	// Get the paths we want to pre-render based on posts
+	const paths: IBusinessCard[] = data.map((business: IBusinessCard) => ({
+		params: { id: business.itemId },
+	}));
+
+	// We'll pre-render only these paths at build time.
+	// { fallback: false } means other routes should 404.
+	return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }: any) {
 	// Fetch data from  API
-	const id = context.params.id;
 
 	// Declared url of events id
 	const businessUrlId: string =
@@ -366,7 +355,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	const res = await fetch(`${businessUrlId}`, {
 		method: "POST",
 		mode: "cors",
-		body: JSON.stringify({ id: id }),
+		body: JSON.stringify({ id: params.id }),
 	});
 
 	// Store in "data" as json file

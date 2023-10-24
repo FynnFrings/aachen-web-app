@@ -48,9 +48,7 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [selectItem, setSelectItem] = useState<string>("Alle");
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>(
-		"vom neusten zu ältesten"
-	);
+	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
 
 	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
@@ -80,18 +78,14 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		"Kunstgalerie",
 	];
 
-	const dateSelectItem = [
-		"vom neusten zu ältesten",
-		"vom ältesten zu neusten",
-	];
+	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
 	// Create a new array called filteredBusinesses by spreading the contents of the businesses array (if it exists) or an empty array if businesses is null or undefined.
 	const filteredBusinesses = [...(businesses || [])]
 		.sort((a, b) => searchByDate(selectDate, a, b))
 		.filter(
 			// Filter the array based on the selectItem value or business category
-			(business) =>
-				selectItem === "Alle" || business.category === selectItem
+			(business) => selectItem === "Alle" || business.category === selectItem
 		)
 		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
@@ -104,11 +98,7 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		<>
 			<Head>
 				<title>Business | Aachen App</title>
-				<meta
-					property="og:title"
-					content="Business | Aachen App"
-					key="title"
-				/>
+				<meta property="og:title" content="Business | Aachen App" key="title" />
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>
@@ -162,16 +152,12 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 };
 
 //Using Server Side Rendering function
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from  API
-	const res = await fetch(
-		`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`
-	);
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`);
 	const allBusinesses = await res.json();
 	const response = allBusinesses.filter(
-		(a: IBusinessCard) =>
-			(a.bannerImageUrl ?? a.bigPhotoURL) &&
-			(a.logoImageUrl ?? a.photoURL)
+		(a: IBusinessCard) => (a.bannerImageUrl ?? a.bigPhotoURL) && (a.logoImageUrl ?? a.photoURL)
 	);
 	// Pass data to the page via props
 	return { props: { businesses: response } };

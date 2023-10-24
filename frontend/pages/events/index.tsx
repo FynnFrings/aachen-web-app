@@ -45,9 +45,7 @@ const Events = ({ events }: any) => {
 	//*handling selectItems state in filter START
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>(
-		"vom neusten zu ältesten"
-	);
+	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
 
 	//* functions to update selectItem state based on user selection
 
@@ -55,10 +53,7 @@ const Events = ({ events }: any) => {
 		setSelectDate(item);
 	};
 
-	const dateSelectItem = [
-		"vom neusten zu ältesten",
-		"vom ältesten zu neusten",
-	];
+	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
 	// ! We will need it later
 	// const filteredData: any = Object.values(
@@ -146,11 +141,9 @@ const Events = ({ events }: any) => {
 };
 
 //Using Server Side Rendering function
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from  API
-	const res = await fetch(
-		`https://us-central1-aachen-app.cloudfunctions.net/getAllEvents`
-	);
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllEvents`);
 	const response = await res.json();
 
 	// Pass data to the page via props

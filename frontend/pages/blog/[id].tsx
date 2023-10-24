@@ -33,9 +33,7 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 					</div>
 				</div>
 				<div>
-					<h2 className="text-white text-4xl font-bold mt-7">
-						{article.title}
-					</h2>
+					<h2 className="text-white text-4xl font-bold mt-7">{article.title}</h2>
 					<p className="text-slate-300 text-xl mb-7">
 						{article.author} • {dateFormat(article.createdAt)}
 					</p>
@@ -54,19 +52,34 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 	);
 };
 
-export async function getServerSideProps(context: { params: { id: string } }) {
+// This function gets called at build time
+export async function getStaticPaths() {
+	const BlogUrl: string = "https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs";
+	// Call an external API endpoint to get posts
+	const res = await fetch(BlogUrl);
+	const data = await res.json();
+
+	// Get the paths we want to pre-render based on posts
+	const paths: IBlogCard[] = data.map((blog: IBlogCard) => ({
+		params: { id: blog.id },
+	}));
+
+	// We'll pre-render only these paths at build time.
+	// { fallback: false } means other routes should 404.
+	return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }: any) {
 	// Fetch data from  API
-	const id = context.params.id;
 
 	// Declared url of events id
-	const blogUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getBlogById"; //`http://localhost:5050/blog/${id}`;
+	const blogUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getBlogById"; //`http://localhost:5050/blog/${id}`;
 
 	// Fetching data
 	const res = await fetch(`${blogUrlId}`, {
 		method: "POST",
 		mode: "cors",
-		body: JSON.stringify({ id: id }),
+		body: JSON.stringify({ id: params.id }),
 	});
 
 	// Store in "data" as json file

@@ -181,26 +181,9 @@ const EventDetailsPage = ({ event }: any) => {
 	);
 };
 
-// This function gets called at build time
-export async function getStaticPaths() {
-	const EventUrl: string = "https://us-central1-aachen-app.cloudfunctions.net/getAllEvents";
-	// Call an external API endpoint to get posts
-	const res = await fetch(EventUrl);
-	const data = await res.json();
-
-	// Get the paths we want to pre-render based on posts
-	const paths = data.map((event: any) => ({
-		params: { id: event.id },
-	}));
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: false } means other routes should 404.
-	return { paths, fallback: true };
-}
-
-export async function getStaticProps({ params }: any) {
+export async function getServerSideProps(context: { params: { id: string } }) {
 	// Fetch data from  API
-
+	const id = context.params.id;
 	// Declared url of events id
 	const EventUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getEventById";
 
@@ -208,7 +191,7 @@ export async function getStaticProps({ params }: any) {
 	const res = await fetch(`${EventUrlId}`, {
 		method: "POST",
 		mode: "cors",
-		body: JSON.stringify({ id: params.id }),
+		body: JSON.stringify({ id: id }),
 	});
 
 	// Store in "data" as json file

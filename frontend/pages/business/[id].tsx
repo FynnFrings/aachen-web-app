@@ -326,27 +326,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	);
 };
 
-// This function gets called at build time
-export async function getStaticPaths() {
-	const BusinesstUrl: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses";
-	// Call an external API endpoint to get posts
-	const res = await fetch(BusinesstUrl);
-	const data = await res.json();
-
-	// Get the paths we want to pre-render based on posts
-	const paths: IBusinessCard[] = data.map((business: IBusinessCard) => ({
-		params: { id: business.itemId },
-	}));
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: false } means other routes should 404.
-	return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }: any) {
+export async function getServerSideProps(context: { params: { id: string } }) {
 	// Fetch data from  API
-
+	const id = context.params.id;
 	// Declared url of events id
 	const businessUrlId: string =
 		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById"; //`http://localhost:5050/business/${id}`;
@@ -355,7 +337,7 @@ export async function getStaticProps({ params }: any) {
 	const res = await fetch(`${businessUrlId}`, {
 		method: "POST",
 		mode: "cors",
-		body: JSON.stringify({ id: params.id }),
+		body: JSON.stringify({ id: id }),
 	});
 
 	// Store in "data" as json file

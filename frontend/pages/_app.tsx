@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	useEffect(() => {
-		const handleRouteChange = (url: any) => {
+		const handleRouteChange = () => {
 			setLoading(true);
 		};
 

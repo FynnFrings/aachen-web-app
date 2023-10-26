@@ -22,7 +22,7 @@ module.exports = {
 			popup: "popup 0.5s ease-in-out 1 forwards, popupDelay 0.5s ease-in-out 4s 1 forwards",
 			slide: "slide 0.5s ease 0s 1 normal forwards",
 			slideBack: "slideBack 0.5s ease 0s 1 normal forwards",
-			pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+			loader: "loader 1s linear infinite",
 		},
 		keyframes: {
 			fill: {
@@ -61,12 +61,15 @@ module.exports = {
 					transform: "translateX(600px)",
 				},
 			},
-			pulse: {
-				"0%, 100%": {
-					opacity: 1,
+			loader: {
+				"0%": {
+					transform: "translateX(-100%)" /* Start from the left side */,
 				},
 				"50%": {
-					opacity: 0.5,
+					transform: "translateX(100%)" /* Move to the right side */,
+				},
+				"100%": {
+					transform: "translateX(200%)" /* Move to the right side */,
 				},
 			},
 		},

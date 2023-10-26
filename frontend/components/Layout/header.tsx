@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import CloseButton from "../../public/close.png";
+import { AiOutlineClose } from "react-icons/ai";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
-import HamburgerMenu from "../../public/menu.svg";
 import { useState } from "react";
 
 const Header = () => {
@@ -17,20 +17,11 @@ const Header = () => {
 		<>
 			<header
 				className={`w-full bg-[#131311] fixed top-0 z-50 flex justify-between items-center px-5 py-5 lg:px-10 lg:py-5 transition-all ease-in-out
-                ${
-					scrollPosition > 0 && menu === false
-						? "shadow-lg"
-						: "shadow-none"
-				}`}
+                ${scrollPosition > 0 && menu === false ? "shadow-lg" : "shadow-none"}`}
 			>
 				<div>
 					<Link href={"/"}>
-						<Image
-							src={"/logo_hd.png"}
-							alt="logo"
-							width={80}
-							height={80}
-						/>
+						<Image src={"/logo_hd.png"} alt="logo" width={80} height={80} />
 					</Link>
 				</div>
 				<div className="lg:hidden block">
@@ -38,19 +29,9 @@ const Header = () => {
 					{/* The hamburger button that toggles the menu */}
 					<button type="button" onClick={(): void => handleOnClick()}>
 						{menu ? (
-							<Image
-								src={CloseButton}
-								alt="close"
-								width={40}
-								height={40}
-							/>
+							<AiOutlineClose className="text-white w-7 h-7" />
 						) : (
-							<Image
-								src={HamburgerMenu}
-								alt="menu"
-								width={40}
-								height={40}
-							/>
+							<RxHamburgerMenu className="text-white w-10 h-10 " />
 						)}
 					</button>
 				</div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Menu({ handleOnClick }: any) {
 	return (
 		<>
-			<div className="flex flex-col items-start text-white text-xl gap-y-5 mb-5">
+			<div className="flex flex-col items-start text-white text-xl gap-y-5 pt-10 pb-5">
 				<Link
 					onClick={handleOnClick}
 					className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
@@ -21,17 +21,17 @@ export default function Menu({ handleOnClick }: any) {
 				<Link
 					onClick={handleOnClick}
 					className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
-					href={"coupons"}
+					href={"/coupons"}
 				>
 					Coupons
 				</Link>
-				{/*<Link
-            onClick={handleOnClick}
-            className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
-            href={"/"}
-          >
-            Nachrichtem
-          </Link> */}
+				{/* <Link
+					onClick={handleOnClick}
+					className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"
+					href={"/"}
+				>
+					Nachrichtem
+				</Link> */}
 				<Link
 					onClick={handleOnClick}
 					className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300"

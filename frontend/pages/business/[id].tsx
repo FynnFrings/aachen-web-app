@@ -13,6 +13,7 @@ import { BiSolidCoupon } from "react-icons/bi";
 import { CgCloseR } from "react-icons/cg";
 import Head from "next/head";
 import PopUpOpener from "@/components/popUpContact";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -129,6 +130,13 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		email: business.email ?? null,
 		phoneNum: business.number ?? null,
 	};
+
+	const ref: any = useOutsideClick(handleClickOutside);
+
+	function handleClickOutside() {
+		isOpen(false);
+	}
+
 	return (
 		<>
 			<Head>
@@ -173,7 +181,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						Merken
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
-					<button onClick={popUpOpener} className={styles.contact}>
+					<button onClick={popUpOpener} className={styles.contact} ref={ref}>
 						Kontaktieren
 					</button>
 					{open ? (

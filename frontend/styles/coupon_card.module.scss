@@ -1,0 +1,78 @@
+.coupon_item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.25rem;
+    background-color: #22221f;
+    border-radius: 0.5rem /* 8px */;
+    padding: 1.5rem /* 20px */;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-duration: 200ms;
+    color: #fff;
+    // width: 29.5rem;
+    &:hover {
+        transform: scale(0.99);
+    }
+    .banner {
+        height: 13.6875rem;
+        background-color: rgba(217, 217, 217, 0.15);
+        border-radius: 0.5rem;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: rgba(225, 255, 225, 0.8);
+            font-weight: 400;
+        }
+        button {
+            color: #fff;
+            transition: color ease-out 0.2s;
+            :hover {
+                color: #fac520;
+                transition: color ease-in 0.2s;
+            }
+        }
+    }
+    .business_container {
+        display: flex;
+        flex-direction: row;
+        padding: 0.625rem;
+        border-radius: 0.5rem;
+        background-color: rgba(19, 19, 17, 0.87);
+        justify-content: space-between;
+        align-items: center;
+        transition: color ease-out 0.2s;
+
+        &:hover {
+            color: #fac520;
+            transition: color ease-in 0.2s;
+        }
+
+        .logo {
+            width: 3.75rem;
+            height: 3.75rem;
+            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .info {
+            h2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+            }
+            p {
+                font-size: 1rem;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+}

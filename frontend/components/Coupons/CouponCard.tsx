@@ -16,7 +16,7 @@ const CouponCard = ({ coupon, id }: any) => {
 	return (
 		<>
 			<Link
-				href={"#"}
+				href="/events"
 				className={styles.coupon_item}
 				style={{
 					gridArea: layoutProperties[id].gridArea,
@@ -36,7 +36,7 @@ const CouponCard = ({ coupon, id }: any) => {
 						<BsBookmark size={32}></BsBookmark>
 					</button>
 				</div>
-				<Link href={"/business"} className={styles.business_container}>
+				<Link href="/business" className={styles.business_container}>
 					<div className={styles.logo}></div>
 					<div className={styles.info}>
 						<h2>{coupon.businessName}</h2>

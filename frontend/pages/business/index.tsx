@@ -12,6 +12,7 @@ import { paginate } from "@/helpers/paginate";
 import searchByTitle from "@/helpers/searchByTitle";
 import searchByDate from "@/helpers/filterByDate";
 import Head from "next/head";
+import Nothing from "@/components/Nothing";
 
 const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -130,22 +131,36 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 						/>
 					</div>
 				</div>
-				<div className={styles.list_of_businesses}>
-					{paginatedPosts.map((business: IBusinessCard) => (
-						<BusinessCard
-							handleSubmit={handleSubmit}
-							business={business}
-							key={business.itemId}
-						/>
-					))}
+				<div
+					className={
+						paginatedPosts.length
+							? styles.list_of_businesses
+							: "w-full flex flex-row justify-center"
+					}
+				>
+					{paginatedPosts.length ? (
+						paginatedPosts.map((business: IBusinessCard) => (
+							<BusinessCard
+								handleSubmit={handleSubmit}
+								business={business}
+								key={business.itemId}
+							/>
+						))
+					) : (
+						<Nothing list_name="Businesses" />
+					)}
 				</div>
 				{alert ? <BusinessMerkenResponseMessage /> : ""}
-				<Pagination
-					items={filteredBusinesses.length}
-					currentPage={currentPage}
-					pageSize={pageSize}
-					onPageChange={onPageChange}
-				/>
+				{paginatedPosts.length ? (
+					<Pagination
+						items={filteredBusinesses.length}
+						currentPage={currentPage}
+						pageSize={pageSize}
+						onPageChange={onPageChange}
+					/>
+				) : (
+					""
+				)}
 			</div>
 		</>
 	);

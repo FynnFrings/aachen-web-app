@@ -11,6 +11,7 @@ import searchByDate from "@/helpers/filterByDate";
 import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
 import Head from "next/head";
+import Nothing from "@/components/Nothing";
 
 const Events = ({ events }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -108,7 +109,13 @@ const Events = ({ events }: any) => {
 						/>
 					</div>
 				</div>
-				<div className={styles.list_of_businesses}>
+				<div
+					className={
+						paginatedPosts.length !== 0
+							? styles.list_of_businesses
+							: "w-full flex flex-row justify-center"
+					}
+				>
 					{/* {paginatedPosts */}
 					{paginatedPosts.length !== 0 ? (
 						paginatedPosts.map((event: any) => {
@@ -121,7 +128,7 @@ const Events = ({ events }: any) => {
 							);
 						})
 					) : (
-						<div style={{ color: "white" }}>Nichts gefunden</div>
+						<Nothing list_name="Events" />
 					)}
 				</div>
 				{alert ? <BusinessMerkenResponseMessage /> : ""}

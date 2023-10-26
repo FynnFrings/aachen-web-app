@@ -178,17 +178,17 @@ const Coupons = () => {
 					) : (
 						<div style={{ color: "white" }}>Nichts gefunden</div>
 					)}
-					{paginatedPosts.length !== 0 ? (
-						<Pagination
-							items={filteredEvents.length}
-							currentPage={currentPage}
-							pageSize={pageSize}
-							onPageChange={onPageChange}
-						/>
-					) : (
-						""
-					)}
 				</div>
+				{paginatedPosts.length !== 0 ? (
+					<Pagination
+						items={filteredEvents.length}
+						currentPage={currentPage}
+						pageSize={pageSize}
+						onPageChange={onPageChange}
+					/>
+				) : (
+					""
+				)}
 			</div>
 		</>
 	);

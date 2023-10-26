@@ -1,18 +1,15 @@
-import MainSkeleton from "./SpinnerSkeletons/MainSkeleton";
+import Image from "next/image";
+import Logo from "@/public/logo_hd.png";
 
 const Spinner = () => {
 	return (
 		<>
-			<div className="flex flex-col gap-14 py-20">
-				<div className="animate-pulse bg-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg"></div>
-				<div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
-					<div className="animate-pulse w-2/6 bg-opacity-75 bg-neutral-500 rounded-lg h-14"></div>
-					<div className="animate-pulse w-2/6 bg-opacity-75 bg-neutral-500 rounded-lg h-14"></div>
-				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-					<MainSkeleton />
-					<MainSkeleton />
-					<MainSkeleton />
+			<div className="h-screen w-full">
+				<div className="absolute w-2/5 lg:w-1/4 left-1/2 -translate-x-1/2 top-1/2 flex flex-col items-center">
+					<Image src={Logo} alt="Aachen App" width={200} height={200} className="" />
+					<div className="h-3 w-full bg-transparent rounded-lg overflow-hidden">
+						<div className="h-full w-1/2 bg-[#FAC520] animate-loader rounded-lg"></div>
+					</div>
 				</div>
 			</div>
 		</>

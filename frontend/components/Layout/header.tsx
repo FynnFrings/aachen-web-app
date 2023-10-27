@@ -21,7 +21,13 @@ const Header = () => {
 			>
 				<div>
 					<Link href={"/"}>
-						<Image src={"/logo_hd.png"} alt="logo" width={80} height={80} />
+						<Image
+							className="hover:scale-95 transition duration-200"
+							src={"/logo_hd.png"}
+							alt="logo"
+							width={80}
+							height={80}
+						/>
 					</Link>
 				</div>
 				<div className="lg:hidden block">
@@ -49,13 +55,8 @@ const Header = () => {
 						<li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
 							<Link href={"/blog"}>Blog</Link>
 						</li>
-						<li>
-							<Link
-								className="bg-[#FAC520] rounded-lg py-4 px-8 last:ml-10 text-black"
-								href={"/download"}
-							>
-								Download
-							</Link>
+						<li className="bg-[#FAC520] rounded-lg py-4 px-8 last:ml-10 text-black hover:scale-95 transition duration-200">
+							<Link href={"/download"}>Download</Link>
 						</li>
 					</ul>
 				</div>

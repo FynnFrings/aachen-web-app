@@ -44,9 +44,7 @@ const Coupons = () => {
 	//*handling selectItems state in filter START
 
 	// state variable to manage selected newest and oldest for business filtering
-	const [selectDate, setSelectDate] = useState<string>(
-		"vom neusten zu ältesten"
-	);
+	const [selectDate, setSelectDate] = useState<string>("vom neusten zu ältesten");
 
 	//* functions to update selectItem state based on user selection
 
@@ -54,10 +52,7 @@ const Coupons = () => {
 		setSelectDate(item);
 	};
 
-	const dateSelectItem = [
-		"vom neusten zu ältesten",
-		"vom ältesten zu neusten",
-	];
+	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
 	const couponTestArr = [
 		{
@@ -138,10 +133,10 @@ const Coupons = () => {
 			businessType: "Dienstleistung",
 		},
 	];
-	console.log(
-		"🚀 ~ file: index.tsx:45 ~ Coupons ~ couponTestArr:",
-		couponTestArr
-	);
+	// console.log(
+	// 	"🚀 ~ file: index.tsx:45 ~ Coupons ~ couponTestArr:",
+	// 	couponTestArr
+	// );
 
 	const filteredEvents = [...(couponTestArr || [])]
 		.sort((a, b) => searchByDate(selectDate, a, b))
@@ -184,13 +179,7 @@ const Coupons = () => {
 				<div className={styles.list_of_coupons}>
 					{paginatedPosts.length !== 0 ? (
 						paginatedPosts.map((coupon: any, index: any) => {
-							return (
-								<CouponCard
-									key={index}
-									coupon={coupon}
-									id={index}
-								/>
-							);
+							return <CouponCard key={index} coupon={coupon} id={index} />;
 						})
 					) : (
 						<div style={{ color: "white" }}>Nichts gefunden</div>

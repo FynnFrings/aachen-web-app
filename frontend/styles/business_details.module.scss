@@ -153,16 +153,18 @@
 		.notification {
 			background: #fac520;
 			border: 0.1rem solid #fac520;
+			transition: scale 0.2s ease;
 		}
 
 		.contact {
 			color: #ffffff;
 			border: 0.1rem solid #ffffff;
 			&:hover {
-				border: 2px solid rgba(255, 255, 255, 0.4);
+				border: solid rgba(255, 255, 255, 0.4);
 				background: rgba(255, 255, 255, 0.1);
 				transition: background ease-out 0.2s;
 				transition: border ease-in 0.2s;
+				transition: scale 0.2s ease;
 			}
 		}
 		.notification,
@@ -180,6 +182,11 @@
 			}
 		}
 	}
+}
+
+.notification:hover,
+.contact:hover {
+	scale: 0.95;
 }
 
 .business_details {

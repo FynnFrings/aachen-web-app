@@ -4,7 +4,7 @@ import styles from "@/styles/coupons.module.scss";
 import BusinessBanner from "@/public/business/business_banner.png";
 import SearchField from "@/components/SearchField";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import searchByDate from "@/helpers/filterByDate";
 import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
@@ -12,9 +12,26 @@ import Pagination from "@/components/Pagination";
 import CouponCard from "@/components/Coupons/CouponCard";
 
 const Coupons = () => {
+	const [windowWidth, setWindowWidth] = useState(Number);
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setWindowWidth(window.innerWidth);
+			window.addEventListener("resize", handleResize);
+
+			return () => {
+				window.removeEventListener("resize", handleResize);
+			};
+		}
+	}, []);
+
 	const [searchInput, setSearchInput] = useState<string>("");
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = 5;
+	const pageSize = windowWidth >= 1129 ? 5 : 6;
 
 	const onPageChange = (page: any) => {
 		setCurrentPage(page);

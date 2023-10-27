@@ -158,6 +158,12 @@
 		.contact {
 			color: #ffffff;
 			border: 0.1rem solid #ffffff;
+			&:hover {
+				border: 2px solid rgba(255, 255, 255, 0.4);
+				background: rgba(255, 255, 255, 0.1);
+				transition: background ease-out 0.2s;
+				transition: border ease-in 0.2s;
+			}
 		}
 		.notification,
 		.contact {

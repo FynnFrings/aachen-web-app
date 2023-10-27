@@ -64,6 +64,7 @@
 .list_of_coupons {
     display: flex;
     flex-direction: column;
+
     // grid-template-columns: repeat(1, minmax(1, 1fr));
     gap: 1rem /* 20px */;
     // @media screen and (max-width: 1128px) {
@@ -71,11 +72,10 @@
     //     flex-direction: column;
     // }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (max-width: 768px) {
         display: flex;
     }
-    @media screen and (min-width: 1128px) {
-        width: 100%;
+    @media screen and (min-width: 768px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }

@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react";
 import SearchField from "@/components/SearchField";
 import searchByTitle from "@/helpers/searchByTitle";
 import searchByDate from "@/helpers/filterByDate";
+import Head from "next/head";
 
 const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 	//*handling search field in search bar START
@@ -36,8 +37,11 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 
 	return (
 		<>
+			<Head>
+				<title>Blog | Aachen App</title>
+			</Head>
 			<div className="flex flex-col gap-14 py-20">
-				<div className=" bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
+				<div className="bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">
 					<h1 className="text-5xl font-bold text-white">Unser Blog</h1>
 				</div>
 				<div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
@@ -52,7 +56,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 						listOfItems={listOfItems}
 					/>
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 					{/* render BlogCard component for each filtered article */}
 					{filteredArticles.map((article) => (
 						<BlogCard key={article.id} article={article} />
@@ -64,9 +68,9 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 };
 
 //Using Server Side Rendering function
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from  API
-	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`); //http://localhost:5050/blog/
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`);
 	const data = await res.json();
 	// Pass data to the page via props
 	return { props: { articles: data } };

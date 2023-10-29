@@ -1,11 +1,11 @@
-import styles from "@/styles/business_card.module.scss";
-import Image from "next/image";
-import Notification from "@/public/business/notification.svg";
-import Link from "next/link";
-import { MouseEventHandler } from "react";
-import { IBusinessCard } from "@/types/types";
+import styles from "@/styles/business_card.module.scss"; // Import the SCSS styles
+import Image from "next/image"; // Import the Next.js Image component
+import Notification from "@/public/business/notification.svg"; // Import the notification icon
+import Link from "next/link"; // Import the Next.js Link component
+import { MouseEventHandler } from "react"; // Import MouseEventHandler from React
+import { IBusinessCard } from "@/types/types"; // Import the IBusinessCard type from the specified module
 
-// Return JSX to render the business card
+// Define the BusinessCard component
 const BusinessCard = ({
 	handleSubmit,
 	business,
@@ -13,17 +13,17 @@ const BusinessCard = ({
 	handleSubmit: MouseEventHandler<HTMLButtonElement>;
 	business: IBusinessCard;
 }) => {
+	// Get the current date and time
 	const todaysDate = new Date();
 	const time = Date.now();
 	const weekDay = todaysDate.getDay();
 
+	// Function to determine business opening hours based on day of the week
 	const businessOpeningHoursPeriods = () => {
 		if (!business.openingHourPeriods) {
 			return null;
 		}
-		const result = business.openingHourPeriods.find(
-			(day) => day.close.day == weekDay
-		);
+		const result = business.openingHourPeriods.find((day) => day.close.day == weekDay);
 		if (result && result.close.time !== "Geschlossen") {
 			const closeTimeArray = result.close.time.split("");
 			closeTimeArray?.splice(2, 0, ":");
@@ -34,26 +34,26 @@ const BusinessCard = ({
 		}
 	};
 
+	// Function to determine business opening hours based on day of the week (alternative)
 	const businessDayList = () => {
 		if (!business.dayList) {
 			return null;
 		}
-		const result = business.dayList.find(
-			(day) => day.close.day === weekDay
-		);
+		const result = business.dayList.find((day) => day.close.day === weekDay);
 		if (result && result.close.time !== "Geschlossen") {
 			const closeTimeArray = result?.close.time.split("");
 			closeTimeArray?.splice(2, 0, ":");
 			const closeTime = closeTimeArray?.join("");
-
 			return closeTime;
 		} else {
 			return "Geschlossen";
 		}
 	};
 
+	// Determine the closing time of the business for the current day
 	const closeTime = businessOpeningHoursPeriods() ?? businessDayList();
 
+	// Check if the business is open and determine the closing time
 	const checkTime = () => {
 		if (closeTime !== null && closeTime !== undefined) {
 			// Split the time string into hours and minutes
@@ -75,8 +75,8 @@ const BusinessCard = ({
 	};
 
 	return (
-		//Wrap an entire card in a link, which will redirect to business details page
-		<Link href="/business/[id]" as={`/business/${business.itemId}`}>
+		// Wrap the entire card in a link, which redirects to the business details page
+		<Link className="animate-fade" href="/business/[id]" as={`/business/${business.itemId}`}>
 			<div className={styles.container}>
 				{/* Render a placeholder image */}
 				<div className={styles.business_image_container}>
@@ -100,12 +100,10 @@ const BusinessCard = ({
 						/>
 					</div>
 				</div>
-				{/* Render the name, category, opening hours, button */}
+				{/* Render the name, category, opening hours, and a button */}
 				<div className={styles.info}>
 					<div className={styles.business_name}>{business.name}</div>
-					<div className={styles.business_category}>
-						{business.category}
-					</div>
+					<div className={styles.business_category}>{business.category}</div>
 					<p className={styles.dot}>•</p>
 					{closeTime !== null ? (
 						<div
@@ -120,31 +118,20 @@ const BusinessCard = ({
 								: checkTime()}
 						</div>
 					) : (
-						<div className={styles.business_time_unknown}>
-							Öffnungszeiten unbekannt
-						</div>
+						<div className={styles.business_time_unknown}>Öffnungszeiten unbekannt</div>
 					)}
 				</div>
-				{/* Render the additional information about distance and number of posts */}
+				{/* Render additional information about distance and the number of posts */}
 				<div className={styles.add_info}>
 					<div className={styles.posts}>
 						<p className={styles.number}>
-							{(business.eventList.length ?? 0) +
-								(business.couponList.length ?? 0)}
+							{(business.eventList.length ?? 0) + (business.couponList.length ?? 0)}
 						</p>
 						<p className={styles.text}>Beiträge</p>
 					</div>
-					<button
-						className={styles.business_button}
-						onClick={handleSubmit}
-					>
+					<button className={styles.business_button} onClick={handleSubmit}>
 						Merken
-						<Image
-							src={Notification}
-							alt={"notification"}
-							width={20}
-							height={20}
-						/>
+						<Image src={Notification} alt={"notification"} width={20} height={20} />
 					</button>
 				</div>
 			</div>

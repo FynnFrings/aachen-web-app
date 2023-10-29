@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import DropDownCategoryFilter from "./DropDownCategoryFilter";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 // The main component
-const ListOfCategoryItems = ({
-	selectItem,
-	itemSelection,
-	listOfItems,
-}: any): JSX.Element => {
+const ListOfCategoryItems = ({ selectItem, itemSelection, listOfItems }: any): JSX.Element => {
 	// State variable to manage dropdown visibility
 	const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
@@ -24,9 +20,7 @@ const ListOfCategoryItems = ({
 	}
 
 	// Function to handle dismiss event when focus is lost
-	const dismissHandler = (
-		event: React.FocusEvent<HTMLButtonElement>
-	): void => {
+	const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
 		if (event.currentTarget.contains(event.target)) {
 			setShowDropDown(false);
 		}
@@ -41,18 +35,18 @@ const ListOfCategoryItems = ({
 				// Toggle dropdown visibility on button click
 				onClick={(): void => toggleDropDown()}
 				// Handle focus lost event
-				onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
-					dismissHandler(e)
-				}
+				onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
 				ref={ref}
 			>
 				<div className="w-full flex justify-between items-center ">
 					{/* Display selected item or default message */}
-					<p className="ml-5">
-						{selectItem ? selectItem : "Select filter"}
-					</p>
+					<p className="ml-5">{selectItem ? selectItem : "Select filter"}</p>
 					{/* Arrow icon */}
-					<IoIosArrowDown className="mr-5" />
+					{showDropDown ? (
+						<IoIosArrowUp className="mr-5" />
+					) : (
+						<IoIosArrowDown className="mr-5" />
+					)}
 				</div>
 				{/* If dropdown is visible, render the DropDown component */}
 				{showDropDown && (

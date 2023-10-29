@@ -11,6 +11,8 @@ import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
 import searchByTitle from "@/helpers/searchByTitle";
 import searchByDate from "@/helpers/filterByDate";
+import Head from "next/head";
+import Nothing from "@/components/Nothing";
 
 const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -94,58 +96,78 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 	const paginatedPosts = paginate(filteredBusinesses, currentPage, pageSize);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.banner}>
-				<Image
-					className={styles.business_banner}
-					src={BusinessBanner}
-					alt="business-banner"
-					width={0}
-					height={0}
-				/>
-				<h1 className={styles.banner_text}>Business</h1>
-			</div>
-			<div className={styles.filters}>
-				<SearchField
-					handleChange={handleChange}
-					searchInput={searchInput}
-					placeholder={"Search"}
-				/>
-				<div className={styles.select_filters}>
-					<ListOfCategoryItems
-						selectItem={selectItem}
-						itemSelection={itemSelection}
-						listOfItems={listOfItems}
+		<>
+			<Head>
+				<title>Business | Aachen App</title>
+				<meta property="og:title" content="Business | Aachen App" key="title" />
+			</Head>
+			<div className={styles.container}>
+				<div className={styles.banner}>
+					<Image
+						className={styles.business_banner}
+						src={BusinessBanner}
+						alt="business-banner"
+						width={0}
+						height={0}
 					/>
-					<ListOfCategoryItems
-						selectItem={selectDate}
-						itemSelection={itemSelectionDate}
-						listOfItems={dateSelectItem}
-					/>
+					<h1 className={styles.banner_text}>Business</h1>
 				</div>
-			</div>
-			<div className={styles.list_of_businesses}>
-				{paginatedPosts.map((business: IBusinessCard) => (
-					<BusinessCard
-						handleSubmit={handleSubmit}
-						business={business}
-						key={business.itemId}
+				<div className={styles.filters}>
+					<SearchField
+						handleChange={handleChange}
+						searchInput={searchInput}
+						placeholder={"Search"}
 					/>
-				))}
+					<div className={styles.select_filters}>
+						<ListOfCategoryItems
+							selectItem={selectItem}
+							itemSelection={itemSelection}
+							listOfItems={listOfItems}
+						/>
+						<ListOfCategoryItems
+							selectItem={selectDate}
+							itemSelection={itemSelectionDate}
+							listOfItems={dateSelectItem}
+						/>
+					</div>
+				</div>
+				<div
+					className={
+						paginatedPosts.length
+							? styles.list_of_businesses
+							: "w-full flex flex-row justify-center"
+					}
+				>
+					{paginatedPosts.length ? (
+						paginatedPosts.map((business: IBusinessCard) => (
+							<BusinessCard
+								handleSubmit={handleSubmit}
+								business={business}
+								key={business.itemId}
+							/>
+						))
+					) : (
+						<Nothing list_name="Businesses" />
+					)}
+				</div>
+				{alert ? <BusinessMerkenResponseMessage /> : ""}
+				{paginatedPosts.length ? (
+					<Pagination
+						items={filteredBusinesses.length}
+						currentPage={currentPage}
+						pageSize={pageSize}
+						onPageChange={onPageChange}
+					/>
+				) : (
+					""
+				)}
 			</div>
-			{alert ? <BusinessMerkenResponseMessage /> : ""}
-			<Pagination
-				items={filteredBusinesses.length}
-				currentPage={currentPage}
-				pageSize={pageSize}
-				onPageChange={onPageChange}
-			/>
-		</div>
+		</>
 	);
 };
 
 //Using Server Side Rendering function
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from  API
 	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`);
 	const allBusinesses = await res.json();

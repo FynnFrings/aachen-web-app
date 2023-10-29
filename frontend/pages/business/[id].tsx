@@ -10,9 +10,14 @@ import { RiBuilding4Fill } from "react-icons/ri";
 import { AiFillPieChart } from "react-icons/ai";
 import { FaCalendarDays } from "react-icons/fa6";
 import { BiSolidCoupon } from "react-icons/bi";
+import { CgCloseR } from "react-icons/cg";
+import Head from "next/head";
+import PopUpOpener from "@/components/popUpContact";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
+	const [open, isOpen] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
 	const handleSubmit: MouseEventHandler = () => {
@@ -22,6 +27,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		}, 3000);
 	};
 
+	const popUpOpener = () => {
+		isOpen(!open);
+	};
 	//getting the number of months from the date of creation
 	const getMonthDifference = (startDate: any, endDate: any) => {
 		const start = new Date(startDate);
@@ -115,8 +123,26 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			: `${href}`;
 	};
 
+	const businessContacts = {
+		instagram: business.instagram ?? null,
+		telegram: business.telegram ?? null,
+		whatsapp: business.whatsapp ?? null,
+		email: business.email ?? null,
+		phoneNum: business.number ?? null,
+	};
+
+	const ref: any = useOutsideClick(handleClickOutside);
+
+	function handleClickOutside() {
+		isOpen(false);
+	}
+
 	return (
 		<>
+			<Head>
+				<title>{business.name} | Aachen App</title>
+			</Head>
+
 			<div className={styles.business_header}>
 				<div className={styles.image_container}>
 					<Image
@@ -155,9 +181,18 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						Merken
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
-					<Link href={"/kontaktiren"}>
-						<button className={styles.contact}>Kontaktieren</button>
-					</Link>
+					<button onClick={popUpOpener} className={styles.contact} ref={ref}>
+						Kontaktieren
+					</button>
+					{open ? (
+						<PopUpOpener
+							popUpOpener={popUpOpener}
+							open={open}
+							businessContacts={businessContacts}
+						/>
+					) : (
+						""
+					)}
 				</div>
 			</div>
 			<div className={styles.business_details}>
@@ -232,7 +267,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							alt="Business logo"
 							className={styles.logo}
 						/>
-						<span>
+						<div>
 							<h2>Website</h2>
 							<Link
 								target="_blank"
@@ -243,7 +278,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 									? "Unbekannt"
 									: business.website}
 							</Link>
-						</span>
+						</div>
 					</div>
 					{business.instagram ? (
 						<div className={styles.item}>
@@ -254,7 +289,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								alt="instagram logo"
 								className={styles.logo}
 							/>
-							<span>
+							<div>
 								<h2>Instagram</h2>
 								<Link
 									target="_blank"
@@ -267,7 +302,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								>
 									@{business.instagram}
 								</Link>
-							</span>
+							</div>
 						</div>
 					) : null}
 					{business.whatsapp ? (
@@ -280,7 +315,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								className={styles.logo}
 								style={{ borderRadius: "10%" }}
 							/>
-							<span>
+							<div>
 								<h2>WhatsApp</h2>
 								<Link
 									target="_blank"
@@ -290,7 +325,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								>
 									{business.whatsapp}
 								</Link>
-							</span>
+							</div>
 						</div>
 					) : null}
 				</div>
@@ -302,7 +337,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 export async function getServerSideProps(context: { params: { id: string } }) {
 	// Fetch data from  API
 	const id = context.params.id;
-
 	// Declared url of events id
 	const businessUrlId: string =
 		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById"; //`http://localhost:5050/business/${id}`;

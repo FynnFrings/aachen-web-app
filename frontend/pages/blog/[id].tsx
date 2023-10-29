@@ -1,6 +1,7 @@
 import { dateFormat } from "@/components/dateFormat";
 import { IBlogCard } from "@/types/types";
 import DOMPurify from "isomorphic-dompurify";
+import Head from "next/head";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -10,6 +11,9 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 	const sanitizedData: string = DOMPurify.sanitize(article.htmlContent);
 	return (
 		<>
+			<Head>
+				<title>{article.title} | Aachen App</title>
+			</Head>
 			<div className="flex flex-col gap-5 items-start my-16">
 				<div className="relative w-full flex justify-center">
 					<Image

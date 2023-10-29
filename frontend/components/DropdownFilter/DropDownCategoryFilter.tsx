@@ -25,7 +25,7 @@ const DropDownCategoryFilter: React.FC<DropDownProps> = ({
 
 	return (
 		<>
-			<div className="absolute h-fit top-14 w-full z-10 text-center border rounded-xl bg-[#131311] overflow-scroll overflow-x-hidden">
+			<div className="absolute h-fit top-14 w-full z-10 text-center border rounded-xl bg-[#131311] overflow-scroll overflow-x-hidden animate-fade animate-duration-300 animate-ease-out">
 				{/* Map over the items passed as props and render them in the dropdown */}
 				{items.map((item: string, index: number): JSX.Element => {
 					return (

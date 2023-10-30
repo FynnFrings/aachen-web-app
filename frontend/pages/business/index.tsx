@@ -106,7 +106,7 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 				<meta property="og:title" content="Business | Aachen App" key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
-				<meta property="og:type" content="website" />
+				<meta property="og:type" content="business" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta
 					property="og:description"
@@ -117,9 +117,10 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
 			</Head>
+
 			<div className={styles.container}>
 				<div className={styles.banner}>
 					<Image

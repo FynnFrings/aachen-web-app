@@ -6,7 +6,27 @@ const Download = () => {
 		<>
 			<Head>
 				<title>Download | Aachen App</title>
+				<meta
+					name="description"
+					content="Download | Aachen App. Aachen App herunterladen."
+				/>
+				<meta name="robots" content="index, follow" />
+				<meta charSet="UTF-8" />
+				<meta property="og:type" content="website" />
+				<meta property="og:site_name" content="Aachen App" />
+				<meta
+					property="og:description"
+					content="Download | Aachen App. Aachen App herunterladen."
+				/>
+				<meta property="og:url" content="https://aachen-web-app.vercel.app/download" />
+				<meta property="og:locale" content="de_DE" />
+				<meta property="og:image" content="/logo_yellow.jpg" />
+				<meta property="og:image:type" content="image/jpg" />
+				<meta property="og:image:alt" content="Aachen App" />
+				<meta property="og:image:width" content="500" />
+				<meta property="og:image:height" content="500" />
 			</Head>
+
 			<div className="text-white w-screen flex justify-center  h-full bg-[url('../public/gradient.png')] bg-cover bg-top -mx-10 md:-mx-20 lg:-mx-24 py-48">
 				<div className="px-[5%] flex flex-col items-center justify-center gap-y-6 ">
 					<h1 className="font-bold text-5xl">Aachen App</h1>

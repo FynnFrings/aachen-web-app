@@ -14,6 +14,7 @@ import { CgCloseR } from "react-icons/cg";
 import Head from "next/head";
 import PopUpOpener from "@/components/popUpContact";
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { useRouter } from "next/router";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -137,11 +138,37 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		isOpen(false);
 	}
 
+	// Get an id of the page
+	const router = useRouter();
+	const { id } = router.query;
+
 	return (
 		<>
+			{/* Meta tags */}
 			<Head>
 				<title>{business.name} | Aachen App</title>
+				<meta name="description" content={business.description} />
+				<meta property="og:title" content={`${business.name} | Aachen App`} key="title" />
+				<meta name="robots" content="index, follow" />
+				<meta charSet="UTF-8" />
+				<meta property="og:type" content="website" />
+				<meta property="og:site_name" content="Aachen App" />
+				<meta property="og:description" content={business.description} />
+				<meta
+					property="og:url"
+					content={`https://aachen-web-app.vercel.app/business/${id}`}
+				/>
+				<meta property="og:locale" content="de_DE" />
+				<meta
+					property="og:image"
+					content={business.bannerImageUrl ?? business.bigPhotoURL}
+				/>
+				<meta property="og:image:type" content="image/jpg" />
+				<meta property="og:image:alt" content={business.name} />
+				<meta property="og:image:width" content="500" />
+				<meta property="og:image:height" content="500" />
 			</Head>
+			{/* Meta tags */}
 
 			<div className={styles.business_header}>
 				<div className={styles.image_container}>

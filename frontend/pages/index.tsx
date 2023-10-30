@@ -12,6 +12,10 @@ export default function Home({ articles }: { articles: IBlogCard[] }) {
 		<>
 			<Head>
 				<title>Aachen App</title>
+				<meta
+					name="description"
+					content="Aachen App. Events. Angebote. Nachrichten. Dein Aachen"
+				/>
 				<meta name="robots" content="index, follow" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
@@ -24,6 +28,8 @@ export default function Home({ articles }: { articles: IBlogCard[] }) {
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
+				<meta property="og:image:width" content="500" />
+				<meta property="og:image:height" content="500" />
 			</Head>
 			<AdDownload />
 			<Reviews />

@@ -39,16 +39,22 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 		<>
 			<Head>
 				<title>Blog | Aachen App</title>
+				<meta
+					name="description"
+					content="Blog | Aachen App. Blog über Aachen und die App."
+				/>
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta property="og:description" content="Blog | Aachen App" />
+				<meta property="og:description" content="Aachen App" />
 				<meta property="og:url" content="https://aachen-web-app.vercel.app/blog" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
+				<meta property="og:image:width" content="500" />
+				<meta property="og:image:height" content="500" />
 			</Head>
 			<div className="flex flex-col gap-14 py-20">
 				<div className="bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">

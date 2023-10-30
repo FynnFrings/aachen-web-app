@@ -47,7 +47,10 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta property="og:description" content="Aachen App" />
+				<meta
+					property="og:description"
+					content="Blog | Aachen App. Blog über Aachen und die App."
+				/>
 				<meta property="og:url" content="https://www.aachen-app.de/blog" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />

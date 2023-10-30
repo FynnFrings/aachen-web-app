@@ -28,8 +28,8 @@ export default function Home({ articles }: { articles: IBlogCard[] }) {
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="1200" />
-				<meta property="og:image:height" content="630" />
+				<meta property="og:image:width" content="900" />
+				<meta property="og:image:height" content="900" />
 			</Head>
 			<AdDownload />
 			<Reviews />

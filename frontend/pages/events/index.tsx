@@ -95,13 +95,13 @@ const Events = ({ events }: any) => {
 					property="og:description"
 					content="Events | Aachen App. Entdecken Sie mehr über Events in Aachen."
 				/>
-				<meta property="og:url" content="https://aachen-web-app.vercel.app/events" />
+				<meta property="og:url" content="https://www.aachen-app.de//events" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="500" />
-				<meta property="og:image:height" content="500" />
+				<meta property="og:image:width" content="630" />
+				<meta property="og:image:height" content="1200" />
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>

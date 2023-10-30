@@ -27,13 +27,13 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 				<meta property="og:title" content={`${article.title} | Aachen App`} key="title" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={sanitizedShortDescription} />
-				<meta property="og:url" content={`https://aachen-web-app.vercel.app/blog/${id}`} />
+				<meta property="og:url" content={`https://www.aachen-app.de/blog/blog/${id}`} />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content={article.imageUrl} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={article.title} />
-				<meta property="og:image:width" content="500" />
-				<meta property="og:image:height" content="500" />
+				<meta property="og:image:width" content="630" />
+				<meta property="og:image:height" content="1200" />
 			</Head>
 			<div className="flex flex-col gap-5 items-start my-16">
 				<div className="relative w-full flex justify-center">

@@ -112,13 +112,13 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 					property="og:description"
 					content="Business | Aachen App. Entdecken Sie mehr über Business in Aachen."
 				/>
-				<meta property="og:url" content="https://aachen-web-app.vercel.app/business" />
+				<meta property="og:url" content="https://www.aachen-app.de/business" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="500" />
-				<meta property="og:image:height" content="500" />
+				<meta property="og:image:width" content="630" />
+				<meta property="og:image:height" content="1200" />
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>

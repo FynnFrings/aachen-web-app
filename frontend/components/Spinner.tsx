@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Logo from "@/public/logo_hd.png";
+import { useEffect } from "react";
 
 const Spinner = () => {
+	useEffect(() => {
+		window.scrollTo({
+			top: 20,
+			behavior: "smooth",
+		});
+	});
 	return (
 		<>
 			<div className="h-screen w-full">

@@ -8,6 +8,7 @@ import { AiFillClockCircle } from "react-icons/ai";
 import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import banner from "@/public/aachen_pic_2.png";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const EventDetailsPage = ({ event }: any) => {
 	const [alert, isAlert] = useState<boolean>(false);
@@ -92,10 +93,31 @@ const EventDetailsPage = ({ event }: any) => {
 		}
 	};
 
+	// Get an id of the page
+	const router = useRouter();
+	const { id } = router.query;
+
 	return (
 		<>
 			<Head>
 				<title>{event.title} | Aachen App</title>
+				<meta name="description" content={event.description} />
+				<meta property="og:title" content={`${event.title} | Aachen App`} key="title" />
+				<meta name="robots" content="index, follow" />
+				<meta charSet="UTF-8" />
+				<meta property="og:type" content="website" />
+				<meta property="og:site_name" content="Aachen App" />
+				<meta property="og:description" content={event.description} />
+				<meta
+					property="og:url"
+					content={`https://aachen-web-app.vercel.app/events/${id}`}
+				/>
+				<meta property="og:locale" content="de_DE" />
+				<meta property="og:image" content={event.imageUrl ?? banner} />
+				<meta property="og:image:type" content="image/jpg" />
+				<meta property="og:image:alt" content={event.title} />
+				<meta property="og:image:width" content="500" />
+				<meta property="og:image:height" content="500" />
 			</Head>
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>

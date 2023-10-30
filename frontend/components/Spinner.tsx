@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const Spinner = () => {
 	useEffect(() => {
 		window.scrollTo({
-			top: 20,
+			top: 0,
 			behavior: "smooth",
 		});
 	});

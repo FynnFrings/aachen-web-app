@@ -17,7 +17,9 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 import { useRouter } from "next/router";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
+	// States to control visibility of components.
 	const [alert, isAlert] = useState<boolean>(false);
+
 	const [open, isOpen] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
@@ -28,24 +30,34 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		}, 3000);
 	};
 
+	// Function to open "Kontaktieren" notification
 	const popUpOpener = () => {
 		isOpen(!open);
 	};
-	//getting the number of months from the date of creation
+	// This function calculates the number of months between two dates.
 	const getMonthDifference = (startDate: any, endDate: any) => {
+		// Create Date objects from the provided start and end date strings.
 		const start = new Date(startDate);
 		const end = new Date(endDate);
 
+		// Extract the year component from the start and end dates.
 		const startYear = start.getFullYear();
 		const endYear = end.getFullYear();
+
+		// Extract the month component from the start and end dates.
 		const startMonth = start.getMonth();
 		const endMonth = end.getMonth();
 
+		// Calculate the difference in years between the start and end dates.
 		const yearDiff = endYear - startYear;
+
+		// Calculate the difference in months within the same year between the start and end dates.
 		const monthDiff = endMonth - startMonth;
 
+		// Calculate the total number of months by adding months within the same year to the years' contribution of months.
 		const totalMonths = yearDiff * 12 + monthDiff;
 
+		// Return the total number of months.
 		return totalMonths;
 	};
 
@@ -151,19 +163,16 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				<meta property="og:title" content={`${business.name} | Aachen App`} key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
-				<meta property="og:type" content="website" />
+				<meta property="og:type" content="businesses" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={business.description} />
 				<meta property="og:url" content={`https://www.aachen-app.de/business/${id}`} />
 				<meta property="og:locale" content="de_DE" />
-				<meta
-					property="og:image"
-					content={business.bannerImageUrl ?? business.bigPhotoURL}
-				/>
+				<meta property="og:image" content={business.logoImageUrl ?? business.photoURL} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={business.name} />
-				<meta property="og:image:width" content="700" />
-				<meta property="og:image:height" content="700" />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
 			</Head>
 			{/* Meta tags */}
 

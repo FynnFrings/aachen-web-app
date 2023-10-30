@@ -23,7 +23,7 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 				<meta name="description" content={sanitizedShortDescription} />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
-				<meta property="og:type" content="website" />
+				<meta property="og:type" content="article" />
 				<meta property="og:title" content={`${article.title} | Aachen App`} key="title" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={sanitizedShortDescription} />
@@ -32,8 +32,8 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 				<meta property="og:image" content={article.imageUrl} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={article.title} />
-				<meta property="og:image:width" content="700" />
-				<meta property="og:image:height" content="700" />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
 			</Head>
 			<div className="flex flex-col gap-5 items-start my-16">
 				<div className="relative w-full flex justify-center">

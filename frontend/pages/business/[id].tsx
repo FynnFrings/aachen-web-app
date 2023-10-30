@@ -154,10 +154,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={business.description} />
-				<meta
-					property="og:url"
-					content={`https://aachen-web-app.vercel.app/business/${id}`}
-				/>
+				<meta property="og:url" content={`https://www.aachen-app.de/business/${id}`} />
 				<meta property="og:locale" content="de_DE" />
 				<meta
 					property="og:image"
@@ -165,8 +162,8 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				/>
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={business.name} />
-				<meta property="og:image:width" content="500" />
-				<meta property="og:image:height" content="500" />
+				<meta property="og:image:width" content="630" />
+				<meta property="og:image:height" content="1200" />
 			</Head>
 			{/* Meta tags */}
 

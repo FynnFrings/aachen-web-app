@@ -108,16 +108,13 @@ const EventDetailsPage = ({ event }: any) => {
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={event.description} />
-				<meta
-					property="og:url"
-					content={`https://aachen-web-app.vercel.app/events/${id}`}
-				/>
+				<meta property="og:url" content={`https://www.aachen-app.de/events/${id}`} />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content={event.imageUrl ?? banner} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={event.title} />
-				<meta property="og:image:width" content="500" />
-				<meta property="og:image:height" content="500" />
+				<meta property="og:image:width" content="630" />
+				<meta property="og:image:height" content="1200" />
 			</Head>
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>

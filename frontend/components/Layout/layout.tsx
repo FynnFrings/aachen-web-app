@@ -14,7 +14,7 @@ const Layout = ({ children, ...props }: Props) => {
 			<Head>
 				<title>Aachen App</title>
 				<meta charSet="UTF-8" />
-				<meta name="robots" content="none" />
+				<meta name="robots" content="index, follow" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta
@@ -23,7 +23,7 @@ const Layout = ({ children, ...props }: Props) => {
 				/>
 				<meta property="og:url" content="https://aachen-web-app.vercel.app/" />
 				<meta property="og:locale" content="de_DE" />
-				<meta property="og:image" content="../public/logo_yellow.jpg" />
+				<meta property="og:image" content="/public/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
 			</Head>

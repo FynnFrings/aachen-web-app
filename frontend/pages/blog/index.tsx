@@ -39,7 +39,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 		<>
 			<Head>
 				<title>Blog | Aachen App</title>
-				<meta name="robots" content="none" />
+				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Aachen App" />

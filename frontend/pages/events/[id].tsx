@@ -11,6 +11,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 const EventDetailsPage = ({ event }: any) => {
+	//TODO: Please optimie this page if it is possible;
+
 	const [alert, isAlert] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
@@ -72,14 +74,6 @@ const EventDetailsPage = ({ event }: any) => {
 		}
 		return obj;
 	};
-
-	// const hrefValidator = (href: any) => {
-	// 	return href == "" || href == null
-	// 		? "/404"
-	// 		: href.slice(0, 3) == "www"
-	// 		? "http://" + `${href}`
-	// 		: `${href}`;
-	// };
 
 	const hasPayment = () => {
 		if (

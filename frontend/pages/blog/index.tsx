@@ -46,7 +46,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 				<meta property="og:description" content="Blog | Aachen App" />
 				<meta property="og:url" content="https://aachen-web-app.vercel.app/blog" />
 				<meta property="og:locale" content="de_DE" />
-				<meta property="og:image" content="../../public/logo_yellow.jpg" />
+				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
 			</Head>

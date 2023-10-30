@@ -23,7 +23,7 @@ const Layout = ({ children, ...props }: Props) => {
 				/>
 				<meta property="og:url" content="https://aachen-web-app.vercel.app/" />
 				<meta property="og:locale" content="de_DE" />
-				<meta property="og:image" content="/public/logo_yellow.jpg" />
+				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
 			</Head>

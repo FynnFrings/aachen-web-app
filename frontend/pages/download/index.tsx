@@ -23,8 +23,8 @@ const Download = () => {
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="700" />
+				<meta property="og:image:height" content="700" />
 			</Head>
 
 			<div className="text-white w-screen flex justify-center  h-full bg-[url('../public/gradient.png')] bg-cover bg-top -mx-10 md:-mx-20 lg:-mx-24 py-48">

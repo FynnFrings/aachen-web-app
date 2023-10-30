@@ -53,8 +53,8 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content="Aachen App" />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="700" />
+				<meta property="og:image:height" content="700" />
 			</Head>
 			<div className="flex flex-col gap-14 py-20">
 				<div className="bg-gradient-to-b from-neutral-700 to-neutral-500 bg-cover bg-opacity-75 w-full flex flex-col justify-center items-center gap-y-5 py-28 rounded-lg">

@@ -113,8 +113,8 @@ const EventDetailsPage = ({ event }: any) => {
 				<meta property="og:image" content={event.imageUrl ?? banner} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={event.title} />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="700" />
+				<meta property="og:image:height" content="700" />
 			</Head>
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>

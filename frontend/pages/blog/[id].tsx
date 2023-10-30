@@ -32,8 +32,8 @@ const BlogDetails = ({ article }: { article: IBlogCard }) => {
 				<meta property="og:image" content={article.imageUrl} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={article.title} />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="700" />
+				<meta property="og:image:height" content="700" />
 			</Head>
 			<div className="flex flex-col gap-5 items-start my-16">
 				<div className="relative w-full flex justify-center">

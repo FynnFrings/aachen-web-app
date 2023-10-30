@@ -162,8 +162,8 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				/>
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={business.name} />
-				<meta property="og:image:width" content="630" />
-				<meta property="og:image:height" content="1200" />
+				<meta property="og:image:width" content="700" />
+				<meta property="og:image:height" content="700" />
 			</Head>
 			{/* Meta tags */}
 

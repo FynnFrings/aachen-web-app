@@ -2,7 +2,7 @@ import styles from "@/styles/events.module.scss";
 import BusinessBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
-import { ChangeEvent, MouseEventHandler, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import EventCard from "@/components/Events/EventCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
@@ -12,6 +12,8 @@ import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
 import Head from "next/head";
 import Nothing from "@/components/Nothing";
+import { useDispatch, useSelector } from "react-redux";
+import { getEvents, setEvents } from "@/redux/eventsSlice";
 
 const Events = ({ events }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -77,7 +79,18 @@ const Events = ({ events }: any) => {
 			// Filter the array based on the searchInput using a custom function searchByTitle
 			(event) => searchByTitle([event], searchInput).length > 0
 		);
+	// Pagination
 	const paginatedPosts = paginate(filteredEvents, currentPage, pageSize);
+
+	//!! Redux
+
+	const itemsInCart: any = useSelector(getEvents);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(setEvents(events));
+		console.log("🚀 ~ file: index.tsx:95 ~ useEffect ~ itemsInCart:", itemsInCart);
+	});
 
 	return (
 		<>

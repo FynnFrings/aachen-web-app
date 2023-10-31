@@ -20,5 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
   }
 }

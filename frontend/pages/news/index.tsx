@@ -11,6 +11,7 @@ import Nothing from "@/components/Nothing";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
 import NewsCard from "@/components/News/NewsCard";
+import NewsCarousel from "@/components/News/NewsCarousel";
 
 const News: NextComponentType = ({ news }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -34,6 +35,7 @@ const News: NextComponentType = ({ news }: any) => {
 		searchByDate(selectItem, a, b)
 	);
 	const paginatedPosts = paginate(filteredNews, currentPage, pageSize);
+	console.log("🚀 ~ file: index.tsx:38 ~ paginatedPosts:", paginatedPosts);
 
 	return (
 		<>
@@ -78,7 +80,7 @@ const News: NextComponentType = ({ news }: any) => {
 					/>
 					<h1 className={styles.banner_text}>News</h1>
 				</div>
-				<div className={styles.news_slider}></div>
+				<NewsCarousel news={paginatedPosts} />
 				<div className={styles.select_filters}>
 					<ListOfCategoryItems
 						selectItem={selectItem}

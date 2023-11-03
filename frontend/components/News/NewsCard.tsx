@@ -6,6 +6,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 const NewsCard = ({ newsItem }: any) => {
 	const { item, feedItem } = newsItem;
 	const logoSrc = feedItem.publisher.profilePictureUrl;
+	console.log("🚀 ~ file: NewsCard.tsx:9 ~ NewsCard ~ logoSrc:", logoSrc);
 
 	const diffDateFunc = (pubDate: any) => {
 		const publicationDate: any = new Date(pubDate);
@@ -30,11 +31,16 @@ const NewsCard = ({ newsItem }: any) => {
 		}
 		return text;
 	};
-
 	return (
 		<>
 			<Link href={item.link} target="_blank" rel="noreferrer">
-				<div className={styles.container}>
+				<div
+					className={`${styles.container} ${
+						item.enclosure == undefined
+							? styles.short_container
+							: ""
+					}`}
+				>
 					<div className={styles.item_header}>
 						<Image
 							alt={feedItem.publisher.name}
@@ -57,10 +63,16 @@ const NewsCard = ({ newsItem }: any) => {
 								src={item.enclosure.url}
 								width="424"
 								height="295"
-								key={item.isoDate}
+								key={Math.random()}
 							/>
 						) : (
 							""
+							// <Image
+							// 	src="/aachen_pic_2.png"
+							// 	alt={`${Math.random()}`}
+							// 	width="424"
+							// 	height="295"
+							// />
 						)}
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>

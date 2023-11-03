@@ -11,7 +11,7 @@
     transition-duration: 150ms;
     transition-duration: 200ms;
     color: #fff;
-    min-height: 39rem;
+    max-height: 39rem;
 
     @media screen and (max-width: 768px) {
         min-height: 18.313rem;
@@ -114,4 +114,7 @@
             }
         }
     }
+}
+.short_container {
+    min-height: 18rem !important;
 }

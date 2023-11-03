@@ -5,7 +5,8 @@ import { GoDotFill } from "react-icons/go";
 import NewsCarouselCard from "./NewsCarouselCard";
 const NewsCarousel = ({ news }: any) => {
 	const [activeSlide, setActiveSlide] = useState(0);
-	let totalSlides = news.slice(5).length;
+
+	let totalSlides = news.length;
 	const slide = (action: string) => {
 		if (action === "next") {
 			if (activeSlide < totalSlides - 1) {
@@ -29,12 +30,10 @@ const NewsCarousel = ({ news }: any) => {
 					onClick={() => slide("prev")}
 				></div>
 				<div className={style.slides}>
-					{news.slice(5).map((item: any, index: number) => {
-						console.log(item, index);
-
+					{news.map((item: any, index: number) => {
 						return (
 							<div
-								key={`asdasd45eq#$${index}`}
+								key={`slide_${index}`}
 								className={`${style.slide} ${
 									index === activeSlide && style.active
 								}
@@ -54,7 +53,7 @@ const NewsCarousel = ({ news }: any) => {
 				></div>
 			</div>
 			<div className={style.dot_markers_container}>
-				{news.slice(5).map((item: any, index: number) => {
+				{news.map((item: any, index: number) => {
 					return (
 						<GoDotFill
 							key={index}

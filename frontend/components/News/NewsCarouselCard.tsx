@@ -42,7 +42,7 @@ const NewsCarouselCard = ({ newsItem }: any) => {
 							src={item.enclosure.url}
 							width="100"
 							height="0"
-							key={item.isoDate}
+							key={Math.random()}
 							className={styles.news_img}
 						/>
 					) : (

@@ -35,8 +35,6 @@ const News: NextComponentType = ({ news }: any) => {
 		searchByDate(selectItem, a, b)
 	);
 	const paginatedPosts = paginate(filteredNews, currentPage, pageSize);
-	console.log("🚀 ~ file: index.tsx:38 ~ paginatedPosts:", paginatedPosts);
-
 	return (
 		<>
 			<Head>
@@ -80,7 +78,7 @@ const News: NextComponentType = ({ news }: any) => {
 					/>
 					<h1 className={styles.banner_text}>News</h1>
 				</div>
-				<NewsCarousel news={paginatedPosts} />
+				<NewsCarousel news={news.slice(3, paginatedPosts.length - 2)} />
 				<div className={styles.select_filters}>
 					<ListOfCategoryItems
 						selectItem={selectItem}
@@ -98,7 +96,7 @@ const News: NextComponentType = ({ news }: any) => {
 				>
 					{paginatedPosts.length ? (
 						paginatedPosts.map((news: any, index: any) => (
-							<NewsCard key={news.item.pubDay} newsItem={news} />
+							<NewsCard key={Math.random()} newsItem={news} />
 						))
 					) : (
 						<Nothing list_name="News" />

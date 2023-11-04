@@ -12,7 +12,9 @@
         position: relative;
         width: 100%;
         margin-bottom: 3.5rem;
-        .business_banner {
+        border-radius: 1rem /* 8px */;
+
+        .news_banner {
             width: 100%;
             object-fit: cover;
             background-size: cover;
@@ -40,13 +42,13 @@
     .list_of_news {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 2rem;
+        gap: 1rem;
         margin-bottom: 3rem;
         @media screen and (max-width: 768px) {
             align-self: auto;
             display: flex;
             flex-direction: column;
-            row-gap: 2rem;
+            row-gap: 1.5rem;
         }
     }
 }

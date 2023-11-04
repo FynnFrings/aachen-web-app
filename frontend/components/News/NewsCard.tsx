@@ -61,18 +61,12 @@ const NewsCard = ({ newsItem }: any) => {
 								alt={item.title}
 								loader={() => item.enclosure.url}
 								src={item.enclosure.url}
-								width="424"
-								height="295"
+								width={0}
+								height={0}
 								key={Math.random()}
 							/>
 						) : (
 							""
-							// <Image
-							// 	src="/aachen_pic_2.png"
-							// 	alt={`${Math.random()}`}
-							// 	width="424"
-							// 	height="295"
-							// />
 						)}
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>

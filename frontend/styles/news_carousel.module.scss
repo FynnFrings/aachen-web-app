@@ -1,12 +1,11 @@
 .container {
     position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding-bottom: 3rem;
     row-gap: 1.75rem;
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
+
     .slider {
         display: flex;
         overflow: hidden;
@@ -24,10 +23,16 @@
                 border-radius: 1rem;
                 transition: all 0.7s ease-in-out;
                 background-color: #232321;
+                @media screen and (max-width: 1200px) {
+                    -webkit-animation: flip-in-hor-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                    animation: flip-in-hor-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                }
+
                 &.active {
                     opacity: 1;
                     transform: translateX(0);
                     z-index: 1;
+
                     &:hover {
                         &:hover {
                             border-radius: 1rem;
@@ -39,14 +44,19 @@
                         }
                     }
                 }
+
                 &.next {
                     position: absolute;
-                    transform: translateX(+9.6%);
                     -moz-transform: scale(0.8) translate(+41%, 0px);
                     -webkit-transform: scale(0.8) translate(+41%, 0px);
                     -o-transform: scale(0.8) translate(+41%, 0px);
                     -ms-transform: scale(0.8) translate(+41%, 0px);
                     transform: scale(0.8) translate(+41%, 0px);
+                    @media screen and (max-width: 1200px) {
+                        display: none;
+                        -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+                        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+                    }
                 }
                 &.prev {
                     position: absolute;
@@ -55,16 +65,30 @@
                     -o-transform: scale(0.8) translate(-41%, 0px);
                     -ms-transform: scale(0.8) translate(-41%, 0px);
                     transform: scale(0.8) translate(-41%, 0px);
+                    @media screen and (max-width: 1200px) {
+                        display: none;
+                        -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+                        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+                    }
                 }
             }
         }
         .arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
             // border: 1px solid red;
             width: 100%;
             z-index: 2;
             background-repeat: no-repeat;
-            background-size: 25px;
-            cursor: pointer;
+            cursor: ew-resize;
+            touch-action: cross-slide-x;
+            @media screen and (max-width: 1200px) {
+                position: absolute;
+                width: 30%;
+                height: 80%;
+            }
             &.prev {
                 left: 0;
                 z-index: 2;
@@ -94,5 +118,30 @@
         .active_dot {
             color: #ffff00;
         }
+    }
+}
+
+@-webkit-keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+@keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
     }
 }

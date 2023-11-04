@@ -72,7 +72,7 @@ const News: NextComponentType = ({ news }: any) => {
 					<Image
 						className={styles.news_banner}
 						src={NewsBanner}
-						alt="business-banner"
+						alt="news-banner"
 						width={0}
 						height={0}
 					/>

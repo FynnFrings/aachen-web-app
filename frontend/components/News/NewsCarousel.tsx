@@ -22,6 +22,7 @@ const NewsCarousel = ({ news }: any) => {
 			}
 		}
 	};
+
 	return (
 		<div className={style.container}>
 			<div className={style.slider}>

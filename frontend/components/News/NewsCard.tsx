@@ -6,7 +6,6 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 const NewsCard = ({ newsItem }: any) => {
 	const { item, feedItem } = newsItem;
 	const logoSrc = feedItem.publisher.profilePictureUrl;
-	console.log("🚀 ~ file: NewsCard.tsx:9 ~ NewsCard ~ logoSrc:", logoSrc);
 
 	const diffDateFunc = (pubDate: any) => {
 		const publicationDate: any = new Date(pubDate);
@@ -22,14 +21,6 @@ const NewsCard = ({ newsItem }: any) => {
 		} else {
 			return `Vor ${differenceInDays} Tagen`;
 		}
-	};
-
-	const truncateText = (text: string, limit: number) => {
-		const words = text.split(" ");
-		if (words.length > limit) {
-			return words.slice(0, limit).join(" ") + "...";
-		}
-		return text;
 	};
 	return (
 		<>
@@ -49,6 +40,7 @@ const NewsCard = ({ newsItem }: any) => {
 							src={logoSrc}
 							width={65}
 							height={65}
+							loading="lazy"
 						/>
 						<span>
 							<h2>{feedItem.publisher.name}</h2>
@@ -64,14 +56,17 @@ const NewsCard = ({ newsItem }: any) => {
 								width={0}
 								height={0}
 								key={Math.random()}
+								loading="lazy"
 							/>
 						) : (
 							""
 						)}
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>
-							<p className={styles.description}>
-								{truncateText(item.contentSnippet, 15)}
+							<p
+								className={`${styles.description} ${styles.cutoff_text}`}
+							>
+								{item.contentSnippet}
 							</p>
 						</div>
 						<div className={styles.news_footer}>

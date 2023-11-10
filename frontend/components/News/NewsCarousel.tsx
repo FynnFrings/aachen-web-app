@@ -3,6 +3,7 @@ import style from "@/styles/news_carousel.module.scss";
 import Image from "next/image";
 import { GoDotFill } from "react-icons/go";
 import NewsCarouselCard from "./NewsCarouselCard";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 const NewsCarousel = ({ news }: any) => {
 	const [activeSlide, setActiveSlide] = useState(0);
 
@@ -29,7 +30,9 @@ const NewsCarousel = ({ news }: any) => {
 				<div
 					className={`${style.arrow} ${style.prev}`}
 					onClick={() => slide("prev")}
-				></div>
+				>
+					<AiOutlineLeft size={30} />
+				</div>
 				<div className={style.slides}>
 					{news.map((item: any, index: number) => {
 						return (
@@ -51,7 +54,9 @@ const NewsCarousel = ({ news }: any) => {
 				<div
 					className={`${style.arrow} ${style.next}`}
 					onClick={() => slide("next")}
-				></div>
+				>
+					<AiOutlineRight size={30} />
+				</div>
 			</div>
 			<div className={style.dot_markers_container}>
 				{news.map((item: any, index: number) => {

@@ -74,9 +74,12 @@
                 text-align: left;
                 opacity: 0.8;
                 width: 100%;
-                white-space: nowrap;
+                --max-lines: 2;
+
+                display: -webkit-box;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: var(--max-lines);
             }
         }
 

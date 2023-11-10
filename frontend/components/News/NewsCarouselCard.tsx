@@ -44,6 +44,7 @@ const NewsCarouselCard = ({ newsItem }: any) => {
 							height="0"
 							key={Math.random()}
 							className={styles.news_img}
+							loading="lazy"
 						/>
 					) : (
 						""
@@ -58,6 +59,7 @@ const NewsCarouselCard = ({ newsItem }: any) => {
 								src={logoSrc}
 								width={48}
 								height={48}
+								loading="lazy"
 							/>
 							<span>
 								<h2>{feedItem.publisher.name}</h2>
@@ -67,7 +69,7 @@ const NewsCarouselCard = ({ newsItem }: any) => {
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>
 							<p className={styles.description}>
-								{truncateText(item.contentSnippet, 10)}
+								{item.contentSnippet}
 							</p>
 						</div>
 						<div className={styles.news_footer}>

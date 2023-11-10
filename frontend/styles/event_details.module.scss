@@ -65,7 +65,7 @@
         row-gap: 1rem;
         color: rgb(255, 255, 255);
         min-width: 30vw;
-
+        z-index: 3;
         h1 {
             font-size: 1.4rem;
         }
@@ -108,16 +108,11 @@
 }
 
 .event_details {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     margin: 3rem 0 3rem 0;
     padding: 0 10%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-        "information information"
-        "location location"
-        "link link";
     row-gap: 2rem;
-    column-gap: 2rem;
 
     @media (max-width: 768px) {
         display: flex;
@@ -166,10 +161,54 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+
         h2 {
             color: #ffffff;
             font-size: 1.5rem;
             padding-bottom: 1.5rem;
+        }
+        p {
+            --max-lines: 3;
+            --line-height: 1.5em;
+            max-height: calc(var(--max-lines) * var(--line-height));
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: var(--max-lines);
+            transition: max-height 1s ease-in-out;
+
+            &:has(+ .expand_btn:checked) {
+                display: flex;
+                max-height: none; // Розгортання
+                transition: max-height 1s ease-in-out;
+            }
+        }
+        .expand_btn {
+            // margin-top: 1rem;
+            height: auto;
+            width: auto;
+            align-self: flex-start;
+            appearance: none;
+            padding: 0.5rem 1rem;
+            color: #000;
+            background-color: #fac520;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease-in-out;
+            margin-top: 1rem;
+            cursor: pointer;
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: rgba(255, 255, 255, 1);
+                transition: all 0.3s ease-in-out;
+            }
+            &::before {
+                content: "Mehr anzeigen";
+            }
+
+            &:checked::before {
+                margin-top: 0;
+                content: "Weniger anzeigen";
+            }
         }
     }
 
@@ -204,7 +243,7 @@
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.7);
-        padding: 1.4rem;
+        padding: 0 1.4rem;
 
         .item {
             display: flex;

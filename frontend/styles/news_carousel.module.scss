@@ -24,8 +24,8 @@
                 transition: all 0.7s ease-in-out;
                 background-color: #232321;
                 @media screen and (max-width: 1200px) {
-                    -webkit-animation: flip-in-hor-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-                    animation: flip-in-hor-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                    -webkit-animation: flip-in-hor-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                    animation: flip-in-hor-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
                 }
 
                 &.active {
@@ -47,28 +47,25 @@
 
                 &.next {
                     position: absolute;
-                    -moz-transform: scale(0.8) translate(+41%, 0px);
-                    -webkit-transform: scale(0.8) translate(+41%, 0px);
-                    -o-transform: scale(0.8) translate(+41%, 0px);
-                    -ms-transform: scale(0.8) translate(+41%, 0px);
-                    transform: scale(0.8) translate(+41%, 0px);
+                    width: auto;
+                    -moz-transform: scale(0.8) translate(+30%, 0px);
+                    -webkit-transform: scale(0.8) translate(+30%, 0px);
+                    -o-transform: scale(0.8) translate(+30%, 0px);
+                    -ms-transform: scale(0.8) translate(+30%, 0px);
+                    transform: scale(0.8) translate(+30%, 0px);
                     @media screen and (max-width: 1200px) {
                         display: none;
-                        -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-                        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
                     }
                 }
                 &.prev {
                     position: absolute;
-                    -moz-transform: scale(0.8) translate(-41%, 0px);
-                    -webkit-transform: scale(0.8) translate(-41%, 0px);
-                    -o-transform: scale(0.8) translate(-41%, 0px);
-                    -ms-transform: scale(0.8) translate(-41%, 0px);
-                    transform: scale(0.8) translate(-41%, 0px);
+                    -moz-transform: scale(0.8) translate(-30%, 0px);
+                    -webkit-transform: scale(0.8) translate(-30%, 0px);
+                    -o-transform: scale(0.8) translate(-30%, 0px);
+                    -ms-transform: scale(0.8) translate(-30%, 0px);
+                    transform: scale(0.8) translate(-30%, 0px);
                     @media screen and (max-width: 1200px) {
                         display: none;
-                        -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-                        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
                     }
                 }
             }
@@ -91,12 +88,31 @@
             &.prev {
                 left: 0;
                 z-index: 2;
-                background-position: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                @media screen and (max-width: 1200px) {
+                    width: auto;
+                    background-position: left;
+                    background-size: 3rem;
+                    // background-image: url("/arrows_dots/arrow_left.png");
+                    &:active {
+                        background-image: none;
+                        transform: background-image 2s ease-out;
+                    }
+                }
             }
             &.next {
                 right: 0;
                 z-index: 2;
-                background-position: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+                @media screen and (max-width: 1200px) {
+                    width: auto;
+                    background-position: right;
+                    background-size: 3rem;
+                }
             }
         }
     }

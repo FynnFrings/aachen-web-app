@@ -75,6 +75,7 @@ const News: NextComponentType = ({ news }: any) => {
 						alt="news-banner"
 						width={0}
 						height={0}
+						loading="lazy"
 					/>
 					<h1 className={styles.banner_text}>News</h1>
 				</div>

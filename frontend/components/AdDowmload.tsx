@@ -15,16 +15,13 @@ const AdDownload = () => {
 						height={120}
 					/>
 					<div className="text-center font-bold text-2xl">
-						<h1>
-							Alles was Aachen zu bieten hat in nur einer App!
-						</h1>
+						<h1>Alles was Aachen zu bieten hat in nur einer App!</h1>
 						<h1> Die App für Aachen.</h1>
 					</div>
 					<div className="text-center font-light px-2">
 						<p>
-							Die Aachen App informiert über wichtige lokale
-							Ereignisse, so dass du dir keine Sorgen mehr machen
-							musst, etwas zu verpassen.
+							Die Aachen App informiert über wichtige lokale Ereignisse, so dass du
+							dir keine Sorgen mehr machen musst, etwas zu verpassen.
 						</p>
 					</div>
 					<div>
@@ -55,12 +52,7 @@ const AdDownload = () => {
 							</div>
 						</div>
 						<div>
-							<Image
-								src={iphoneLarge}
-								alt="big_iphone"
-								width={338}
-								height={840}
-							/>
+							<Image src={iphoneLarge} alt="big_iphone" width={338} height={840} />
 						</div>
 					</div>
 				</div>

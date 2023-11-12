@@ -16,7 +16,8 @@ const EventCard = ({
 	// Function to format event date and time
 	const eventData = () => {
 		const fullStartDate = new Date(
-			event.startDate._seconds * 1000 + event.startDate._nanoseconds / 1000000
+			event.startDate._seconds * 1000 +
+				event.startDate._nanoseconds / 1000000
 		);
 		const fullEndDate = new Date(
 			event.endDate._seconds * 1000 + event.endDate._nanoseconds / 1000000
@@ -31,10 +32,22 @@ const EventCard = ({
 			minute: "numeric",
 			hour12: false,
 		};
-		const validStartDate = fullStartDate.toLocaleDateString("de-DE", dataOption);
-		const validStartTime = fullStartDate.toLocaleTimeString("de-DE", timeOption);
-		const validEndDate = fullEndDate.toLocaleDateString("de-DE", dataOption);
-		const validEndTime = fullEndDate.toLocaleTimeString("de-DE", timeOption);
+		const validStartDate = fullStartDate.toLocaleDateString(
+			"de-DE",
+			dataOption
+		);
+		const validStartTime = fullStartDate.toLocaleTimeString(
+			"de-DE",
+			timeOption
+		);
+		const validEndDate = fullEndDate.toLocaleDateString(
+			"de-DE",
+			dataOption
+		);
+		const validEndTime = fullEndDate.toLocaleTimeString(
+			"de-DE",
+			timeOption
+		);
 		return {
 			openTime: validStartTime,
 			openDate: validStartDate,
@@ -65,17 +78,7 @@ const EventCard = ({
 		setIsOpen(!isOpen);
 	};
 
-	return isOpen ? (
-		// Display full event description when "Mehr anzeigen" button is clicked
-		<div className={`${styles.container} ${styles.scale_in_center}`}>
-			<div className={styles.full_description}>
-				<p>{event.description}</p>
-				<button onClick={toggleButton} className={styles.more}>
-					Weniger anzeigen
-				</button>
-			</div>
-		</div>
-	) : (
+	return (
 		// Wrap the entire card in a link, which will redirect to event details page
 		<Link href={`/events/${event.itemId}`}>
 			<div className={`${styles.container} ${styles.scale_in_center}`}>
@@ -95,33 +98,39 @@ const EventCard = ({
 					<div className={styles.event_name}>
 						{event.title}
 						<div className={styles.text}>{event.description}</div>
-						<button onClick={toggleButton} className={styles.more}>
-							Mehr anzeigen
-						</button>
+						<div className={styles.more}>Mehr anzeigen</div>
 					</div>
 					{event.startDate || event.endDate !== null ? (
 						<div className={styles.event_time}>
 							<div>
 								<h2>Beginn</h2>
 								<p>
-									{eventData().openTime} Uhr, {eventData().openDate}
+									{eventData().openTime} Uhr,{" "}
+									{eventData().openDate}
 								</p>
 							</div>
 							<div>
 								<h2>Ende</h2>
 								<p>
-									{eventData().closeTime} Uhr, {eventData().closeDate}
+									{eventData().closeTime} Uhr,{" "}
+									{eventData().closeDate}
 								</p>
 							</div>
 						</div>
 					) : (
-						<div className={styles.event_time_unknown}>Datum unbekannt</div>
+						<div className={styles.event_time_unknown}>
+							Datum unbekannt
+						</div>
 					)}
 				</div>
 				{/* Render the "Bestellen" button if the event has a payment option */}
 				<button
 					className={styles.event_button}
-					style={!hasPayment() ? { display: "none" } : { display: "flex" }}
+					style={
+						!hasPayment()
+							? { display: "none" }
+							: { display: "flex" }
+					}
 					onClick={handleSubmit}
 				>
 					<FaBagShopping size={20} />

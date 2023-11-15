@@ -4,10 +4,13 @@ import Image from "next/image";
 import { GoDotFill } from "react-icons/go";
 import NewsCarouselCard from "./NewsCarouselCard";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+
 const NewsCarousel = ({ news }: any) => {
 	const [activeSlide, setActiveSlide] = useState(0);
-
+	const [touchStartX, setTouchStartX] = useState(0);
+	const [deltaX, setDeltaX] = useState(0);
 	let totalSlides = news.length;
+
 	const slide = (action: string) => {
 		if (action === "next") {
 			if (activeSlide < totalSlides - 1) {
@@ -24,6 +27,25 @@ const NewsCarousel = ({ news }: any) => {
 		}
 	};
 
+	const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+		setTouchStartX(e.touches[0].clientX);
+	};
+
+	const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+		const touchEndX = e.touches[0].pageX;
+		const deltaX = touchEndX - touchStartX;
+
+		setDeltaX(deltaX);
+	};
+
+	const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+		if (deltaX > 100) {
+			slide("prev");
+		} else if (deltaX < -100) {
+			slide("next");
+		}
+	};
+
 	return (
 		<div className={style.container}>
 			<div className={style.slider}>
@@ -33,7 +55,12 @@ const NewsCarousel = ({ news }: any) => {
 				>
 					<AiOutlineLeft size={30} />
 				</div>
-				<div className={style.slides}>
+				<div
+					onTouchStart={handleTouchStart}
+					onTouchMove={handleTouchMove}
+					onTouchEnd={handleTouchEnd}
+					className={style.slides}
+				>
 					{news.map((item: any, index: number) => {
 						return (
 							<div
@@ -41,10 +68,18 @@ const NewsCarousel = ({ news }: any) => {
 								className={`${style.slide} ${
 									index === activeSlide && style.active
 								}
-							${index === activeSlide + 1 && style.next}
-							${index === activeSlide - 1 && style.prev}
-							${activeSlide === 0 && index === totalSlides - 1 ? style.prev : ""}
-							${activeSlide === totalSlides - 1 && index === 0 ? style.next : ""}`}
+                ${index === activeSlide + 1 && style.next}
+                ${index === activeSlide - 1 && style.prev}
+                ${
+					activeSlide === 0 && index === totalSlides - 1
+						? style.prev
+						: ""
+				}
+                ${
+					activeSlide === totalSlides - 1 && index === 0
+						? style.next
+						: ""
+				}`}
 							>
 								<NewsCarouselCard newsItem={item} />
 							</div>
@@ -65,8 +100,7 @@ const NewsCarousel = ({ news }: any) => {
 							key={index}
 							className={`${style.dot} ${
 								index === activeSlide && style.active_dot
-							}
-						`}
+							}`}
 							size="12"
 						/>
 					);

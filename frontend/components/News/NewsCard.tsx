@@ -41,6 +41,7 @@ const NewsCard = ({ newsItem }: any) => {
 							width={65}
 							height={65}
 							loading="lazy"
+							unoptimized
 						/>
 						<span>
 							<h2>{feedItem.publisher.name}</h2>
@@ -57,6 +58,7 @@ const NewsCard = ({ newsItem }: any) => {
 								height={0}
 								key={Math.random()}
 								loading="lazy"
+								unoptimized
 							/>
 						) : (
 							""

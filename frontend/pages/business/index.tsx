@@ -171,15 +171,13 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 					)}
 				</div>
 				{alert ? <BusinessMerkenResponseMessage /> : ""}
-				{paginatedPosts.length ? (
+				{paginatedPosts.length && (
 					<Pagination
 						items={filteredBusinesses.length}
 						currentPage={currentPage}
 						pageSize={pageSize}
 						onPageChange={onPageChange}
 					/>
-				) : (
-					""
 				)}
 			</div>
 		</>

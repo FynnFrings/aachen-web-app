@@ -27,8 +27,8 @@ const NewsCard = ({ newsItem }: any) => {
 			<Link href={item.link} target="_blank" rel="noreferrer">
 				<div
 					className={`${styles.container} ${
-						item.enclosure == undefined
-							? styles.short_container
+						item.enclosure !== undefined
+							? styles.double_container
 							: ""
 					}`}
 				>

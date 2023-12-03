@@ -6,7 +6,6 @@ import styles from "@/styles/news.module.scss";
 import { FEEDS, getFeed } from "@/lib/rss";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import { useState } from "react";
-import searchByDate from "@/helpers/filterByDate";
 import Nothing from "@/components/Nothing";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/helpers/paginate";
@@ -31,9 +30,24 @@ const News: NextComponentType = ({ news }: any) => {
 	// declaring list of items, which will be displayed in DropdownList component (category filter)
 	const listOfItems = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
-	const filteredNews = [...(news || [])].sort((a, b) =>
-		searchByDate(selectItem, a, b)
+	const searchNewsByDate = (state: string, a: any, b: any) => {
+		const getDate = (news: any) => {
+			// Перетворення рядка дати в об'єкт Date
+			const date = new Date(news.item.pubDate);
+			return date.getTime(); // Повертаємо час у мілісекундах для порівняння
+		};
+
+		if (state === "vom neusten zu ältesten") {
+			return getDate(b) - getDate(a);
+		} else {
+			return getDate(a) - getDate(b);
+		}
+	};
+
+	const filteredNews = [...(news || [])].sort((a: any, b: any) =>
+		searchNewsByDate(selectItem, a, b)
 	);
+
 	const paginatedPosts = paginate(filteredNews, currentPage, pageSize);
 	return (
 		<>
@@ -79,7 +93,7 @@ const News: NextComponentType = ({ news }: any) => {
 					/>
 					<h1 className={styles.banner_text}>News</h1>
 				</div>
-				<NewsCarousel news={news.slice(3, paginatedPosts.length - 2)} />
+				<NewsCarousel news={news.slice(0, 3)} />
 				<div className={styles.select_filters}>
 					<ListOfCategoryItems
 						selectItem={selectItem}

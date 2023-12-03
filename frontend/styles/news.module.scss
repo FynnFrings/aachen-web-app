@@ -44,6 +44,7 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1rem;
         margin-bottom: 3rem;
+
         @media screen and (max-width: 768px) {
             align-self: auto;
             display: flex;

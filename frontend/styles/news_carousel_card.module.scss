@@ -15,7 +15,6 @@
         position: relative;
         display: flex;
         height: 50vh;
-
         flex-direction: column;
         width: 100%;
         justify-content: space-around;
@@ -24,10 +23,12 @@
     }
     @media screen and (max-width: 790px) {
         position: relative;
-        height: auto;
-        min-height: 20rem;
+        height: 50vh;
         justify-content: space-evenly;
         border-radius: 100rem;
+    }
+    @media screen and (max-width: 350px) {
+        height: auto;
     }
     .news_img {
         object-fit: cover;
@@ -59,6 +60,10 @@
             width: 100%;
         }
 
+        @media screen and (max-width: 400px) {
+            row-gap: 0.3rem;
+        }
+
         .news_header {
             display: flex;
             flex-direction: row;
@@ -68,8 +73,8 @@
             h2 {
                 font-size: 1.125rem;
                 font-weight: 500;
-                @media screen and (max-width: 400px) {
-                    font-size: 1rem;
+                @media screen and (max-width: 401px) {
+                    font-size: 0.8rem;
                 }
             }
             p {
@@ -81,7 +86,7 @@
                 border-radius: 50%;
                 width: 3rem;
                 object-fit: cover;
-                @media screen and (max-width: 250px) {
+                @media screen and (max-width: 350px) {
                     display: none;
                 }
             }
@@ -100,8 +105,8 @@
                 font-weight: 700;
                 line-height: 1.6875rem;
                 text-align: left;
-                @media screen and (max-width: 400px) {
-                    font-size: 1rem;
+                @media screen and (max-width: 401px) {
+                    font-size: 0.8rem;
                 }
             }
 
@@ -119,7 +124,7 @@
                 @media screen and (max-width: 1200px) {
                     width: 95%;
                 }
-                @media screen and (max-width: 400px) {
+                @media screen and (max-width: 401px) {
                     font-size: 0.8rem;
                 }
             }
@@ -134,7 +139,6 @@
             transition: color ease-out 0.2s;
             @media screen and (max-width: 340px) {
                 display: flex;
-                row-gap: 1rem;
                 flex-direction: column;
                 justify-content: center;
                 align-items: start;

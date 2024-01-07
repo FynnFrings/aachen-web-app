@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "./store";
-
 export interface IEventsSliceState {
 	allEvents: [];
 }

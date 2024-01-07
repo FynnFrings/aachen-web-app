@@ -1,55 +1,58 @@
 .container {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    // gap: 3.5rem /* 56px */;
-    padding-bottom: 5rem /* 80px */;
-    @media (max-width: 1024px) {
-        padding-top: 1rem;
-    }
+	display: flex;
+	width: 100%;
+	position: relative;
+	flex-direction: column;
+	gap: 3.5rem /* 56px */;
+	padding-bottom: 5rem /* 80px */;
+	@media (max-width: 1024px) {
+		padding-top: 1rem;
+	}
 
-    .banner {
-        position: relative;
-        width: 100%;
-        margin-bottom: 3.5rem;
-        border-radius: 1rem /* 8px */;
+	.banner {
+		position: relative;
+		width: 100%;
+		margin-bottom: 3.5rem;
+		border-radius: 1rem /* 8px */;
 
-        .news_banner {
-            width: 100%;
-            object-fit: cover;
-            background-size: cover;
-            opacity: 0.6;
-            border-radius: 0.5rem /* 8px */;
-            height: 16rem /* 256px */;
-        }
+		.news_banner {
+			width: 100%;
+			object-fit: cover;
+			background-size: cover;
+			opacity: 0.6;
+			border-radius: 0.5rem /* 8px */;
+			height: 16rem /* 256px */;
+		}
 
-        .banner_text {
-            position: absolute;
-            color: rgba(255, 255, 255, 1);
-            font-weight: 700;
-            font-size: 3.25rem;
-            line-height: 4.55rem;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 50%;
-        }
-    }
-    .select_filters {
-        align-self: flex-end;
-        margin-bottom: 2rem;
-    }
+		.banner_text {
+			position: absolute;
+			color: rgba(255, 255, 255, 1);
+			font-weight: 700;
+			font-size: 3.25rem;
+			line-height: 4.55rem;
+			transform: translate(-50%, -50%);
+			top: 50%;
+			left: 50%;
+		}
+	}
+	.filters {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+	}
+	.select_filters {
+		width: 100%;
+		@media screen and (min-width: 1024px) {
+			width: 20rem;
+		}
+	}
 
-    .list_of_news {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-        margin-bottom: 3rem;
-
-        @media screen and (max-width: 768px) {
-            align-self: auto;
-            display: flex;
-            flex-direction: column;
-            row-gap: 1.5rem;
-        }
-    }
+	.list_of_news {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		gap: 1.25rem /* 20px */;
+		@media screen and (min-width: 768px) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
 }

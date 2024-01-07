@@ -1,4 +1,4 @@
-import type { NextComponentType, NextPageContext } from "next";
+import type { NextComponentType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import NewsBanner from "@/public/news/news_banner.png";
@@ -20,9 +20,7 @@ const News: NextComponentType = ({ news }: any) => {
 		setCurrentPage(page);
 	};
 
-	const [selectItem, setSelectItem] = useState<string>(
-		"vom neusten zu ältesten"
-	);
+	const [selectItem, setSelectItem] = useState<string>("vom neusten zu ältesten");
 	//* functions to update selectItem state based on user selection
 	const itemSelection = (item: string): void => {
 		setSelectItem(item);
@@ -30,23 +28,14 @@ const News: NextComponentType = ({ news }: any) => {
 	// declaring list of items, which will be displayed in DropdownList component (category filter)
 	const listOfItems = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
-	const searchNewsByDate = (state: string, a: any, b: any) => {
-		const getDate = (news: any) => {
-			// Перетворення рядка дати в об'єкт Date
-			const date = new Date(news.item.pubDate);
-			return date.getTime(); // Повертаємо час у мілісекундах для порівняння
-		};
-
-		if (state === "vom neusten zu ältesten") {
-			return getDate(b) - getDate(a);
-		} else {
-			return getDate(a) - getDate(b);
-		}
+	const returnJSDate = (normalString: string): number => {
+		return Math.floor(new Date(normalString).getTime() / 1000);
 	};
-
-	const filteredNews = [...(news || [])].sort((a: any, b: any) =>
-		searchNewsByDate(selectItem, a, b)
-	);
+	const filteredNews = [...(news || [])].sort((a, b) => {
+		return selectItem === "vom neusten zu ältesten" // Sort from newest to oldest or vice versa based on selected sorting criteria
+			? returnJSDate(b.item?.pubDate) - returnJSDate(a.item?.pubDate)
+			: returnJSDate(a.item?.pubDate) - returnJSDate(b.item?.pubDate);
+	});
 
 	const paginatedPosts = paginate(filteredNews, currentPage, pageSize);
 	return (
@@ -57,11 +46,7 @@ const News: NextComponentType = ({ news }: any) => {
 					name="description"
 					content="News | Aachen App. Entdecken Sie mehr über News in Aachen."
 				/>
-				<meta
-					property="og:title"
-					content="News | Aachen App"
-					key="title"
-				/>
+				<meta property="og:title" content="News | Aachen App" key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="News" />
@@ -70,10 +55,7 @@ const News: NextComponentType = ({ news }: any) => {
 					property="og:description"
 					content="News | Aachen App. Entdecken Sie mehr über News in Aachen."
 				/>
-				<meta
-					property="og:url"
-					content="https://www.aachen-app.de/news"
-				/>
+				<meta property="og:url" content="https://www.aachen-app.de/news" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
 				<meta property="og:image:type" content="image/jpg" />
@@ -93,25 +75,21 @@ const News: NextComponentType = ({ news }: any) => {
 					/>
 					<h1 className={styles.banner_text}>News</h1>
 				</div>
-				<NewsCarousel news={news.slice(0, 3)} />
-				<div className={styles.select_filters}>
-					<ListOfCategoryItems
-						selectItem={selectItem}
-						itemSelection={itemSelection}
-						listOfItems={listOfItems}
-					/>
+				<NewsCarousel news={news.slice(3, paginatedPosts.length - 2)} />
+				<div className={styles.filters}>
+					<div className={styles.select_filters}>
+						<ListOfCategoryItems
+							selectItem={selectItem}
+							itemSelection={itemSelection}
+							listOfItems={listOfItems}
+						/>
+					</div>
 				</div>
 
-				<div
-					className={
-						paginatedPosts.length
-							? styles.list_of_news
-							: "w-full flex flex-row justify-center"
-					}
-				>
+				<div className={styles.list_of_news}>
 					{paginatedPosts.length ? (
-						paginatedPosts.map((news: any, index: any) => (
-							<NewsCard key={Math.random()} newsItem={news} />
+						paginatedPosts.map((news: any, index: number) => (
+							<NewsCard key={index} newsItem={news} />
 						))
 					) : (
 						<Nothing list_name="News" />
@@ -138,7 +116,7 @@ export const getStaticProps = async () => {
 	await Promise.all(
 		FEEDS.map(async (feedItem: any) => {
 			const { items } = await getFeed(feedItem.link);
-			items.forEach((item) => news.push({ item, feedItem }));
+			items.forEach((item: any) => news.push({ item, feedItem }));
 		})
 	);
 

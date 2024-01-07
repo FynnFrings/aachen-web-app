@@ -25,13 +25,7 @@ const NewsCard = ({ newsItem }: any) => {
 	return (
 		<>
 			<Link href={item.link} target="_blank" rel="noreferrer">
-				<div
-					className={`${styles.container} ${
-						item.enclosure !== undefined
-							? styles.double_container
-							: ""
-					}`}
-				>
+				<div className={`${styles.container}`}>
 					<div className={styles.item_header}>
 						<Image
 							alt={feedItem.publisher.name}
@@ -49,34 +43,29 @@ const NewsCard = ({ newsItem }: any) => {
 						</span>
 					</div>
 					<div className={styles.item_content}>
-						{item.enclosure != undefined ? (
-							<Image
-								alt={item.title}
-								loader={() => item.enclosure.url}
-								src={item.enclosure.url}
-								width={0}
-								height={0}
-								key={Math.random()}
-								loading="lazy"
-								unoptimized
-							/>
-						) : (
-							""
-						)}
+						<Image
+							className={styles.content_image}
+							alt={item.title}
+							loader={() => item?.enclosure?.url || logoSrc}
+							src={item?.enclosure?.url || logoSrc}
+							width={240}
+							height={240}
+							key={Math.random()}
+							loading="lazy"
+							unoptimized
+						/>
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>
-							<p
-								className={`${styles.description} ${styles.cutoff_text}`}
-							>
+							<p className={`${styles.description} ${styles.cutoff_text}`}>
 								{item.contentSnippet}
 							</p>
 						</div>
-						<div className={styles.news_footer}>
-							<button>Mehr lesen...</button>
-							<div className={styles.publication_date}>
-								<AiOutlineClockCircle size="19" />
-								<span>{diffDateFunc(item.pubDate)}</span>
-							</div>
+					</div>
+					<div className={styles.news_footer}>
+						<button>Mehr lesen...</button>
+						<div className={styles.publication_date}>
+							<AiOutlineClockCircle size="19" />
+							<span>{diffDateFunc(item.pubDate)}</span>
 						</div>
 					</div>
 				</div>

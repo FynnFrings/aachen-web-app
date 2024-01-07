@@ -84,12 +84,12 @@ const Events = ({ events }: any) => {
 
 	//!! Redux
 
-	const itemsInCart: any = useSelector(getEvents);
+	const storeEvents: any = useSelector(getEvents);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(setEvents(events));
-		console.log("🚀 ~ file: index.tsx:95 ~ useEffect ~ itemsInCart:", itemsInCart);
+		// dispatch(setEvents(events));
+		// console.log("🚀 ~ file: index.tsx:95 ~ useEffect ~ storeEvents:", storeEvents);
 	});
 
 	return (

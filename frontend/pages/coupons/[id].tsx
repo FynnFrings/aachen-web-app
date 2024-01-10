@@ -109,6 +109,7 @@ const CouponDetailsPage = ({ coupon }: any) => {
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>
 					<Image className={styles._image} src={coupon.imageUrl ?? banner} alt="event_image" width={976} height={350} loading="lazy" />
+					{coupon.bannerText && <div className={styles.bannerText}>{coupon.bannerText}</div>}
 					{/* Render a placeholder logo */}
 				</div>
 				<div className={styles.title}>

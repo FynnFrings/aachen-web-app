@@ -42,19 +42,13 @@ const News: NextComponentType = ({ news }: any) => {
 		<>
 			<Head>
 				<title>News | Aachen App</title>
-				<meta
-					name="description"
-					content="News | Aachen App. Entdecken Sie mehr über News in Aachen."
-				/>
+				<meta name="description" content="News | Aachen App. Entdecken Sie mehr über News in Aachen." />
 				<meta property="og:title" content="News | Aachen App" key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="News" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta
-					property="og:description"
-					content="News | Aachen App. Entdecken Sie mehr über News in Aachen."
-				/>
+				<meta property="og:description" content="News | Aachen App. Entdecken Sie mehr über News in Aachen." />
 				<meta property="og:url" content="https://www.aachen-app.de/news" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
@@ -65,53 +59,27 @@ const News: NextComponentType = ({ news }: any) => {
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>
-					<Image
-						className={styles.news_banner}
-						src={NewsBanner}
-						alt="news-banner"
-						width={0}
-						height={0}
-						loading="lazy"
-					/>
+					<Image className={styles.news_banner} src={NewsBanner} alt="news-banner" width={0} height={0} loading="lazy" />
 					<h1 className={styles.banner_text}>News</h1>
 				</div>
 				<NewsCarousel news={news.slice(3, paginatedPosts.length - 2)} />
 				<div className={styles.filters}>
 					<div className={styles.select_filters}>
-						<ListOfCategoryItems
-							selectItem={selectItem}
-							itemSelection={itemSelection}
-							listOfItems={listOfItems}
-						/>
+						<ListOfCategoryItems selectItem={selectItem} itemSelection={itemSelection} listOfItems={listOfItems} />
 					</div>
 				</div>
 
 				<div className={styles.list_of_news}>
-					{paginatedPosts.length ? (
-						paginatedPosts.map((news: any, index: number) => (
-							<NewsCard key={index} newsItem={news} />
-						))
-					) : (
-						<Nothing list_name="News" />
-					)}
+					{paginatedPosts.length ? paginatedPosts.map((news: any, index: number) => <NewsCard key={index} newsItem={news} />) : <Nothing list_name="News" />}
 				</div>
 
-				{paginatedPosts.length ? (
-					<Pagination
-						items={filteredNews.length}
-						currentPage={currentPage}
-						pageSize={pageSize}
-						onPageChange={onPageChange}
-					/>
-				) : (
-					""
-				)}
+				{paginatedPosts.length ? <Pagination items={filteredNews.length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} /> : ""}
 			</div>
 		</>
 	);
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
 	const news: any = [];
 	await Promise.all(
 		FEEDS.map(async (feedItem: any) => {

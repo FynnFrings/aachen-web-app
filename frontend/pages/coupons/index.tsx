@@ -50,31 +50,33 @@ const Coupons = ({ coupons }: any) => {
 	return (
 		<>
 			<Head>
-				<title>Coupons | Aachen App</title>
+				<Head>
+					<title>Coupons | Aachen App</title>
+					<meta name="description" content="Coupons | Aachen App. Entdecken Sie mehr über Coupons." />
+					<meta property="og:title" content="Coupons | Aachen App" key="title" />
+					<meta name="robots" content="index, follow" />
+					<meta charSet="UTF-8" />
+					<meta property="og:type" content="coupons" />
+					<meta property="og:site_name" content="Aachen App" />
+					<meta property="og:description" content="Coupons | Aachen App. Entdecken Sie mehr über Coupons." />
+					<meta property="og:url" content="https://www.aachen-app.de/coupons" />
+					<meta property="og:locale" content="de_DE" />
+					<meta property="og:image" content="/logo_yellow.jpg" />
+					<meta property="og:image:type" content="image/jpg" />
+					<meta property="og:image:alt" content="Aachen App" />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+				</Head>
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>
-					<Image
-						className={styles.business_banner}
-						src={BusinessBanner}
-						alt="business-banner"
-						width={0}
-						height={0}
-					/>
+					<Image className={styles.business_banner} src={BusinessBanner} alt="business-banner" width={0} height={0} />
 					<h1 className={styles.banner_text}>Coupons</h1>
 				</div>
 				<div className={styles.filters}>
-					<SearchField
-						handleChange={handleChange}
-						searchInput={searchInput}
-						placeholder={"Search"}
-					/>
+					<SearchField handleChange={handleChange} searchInput={searchInput} placeholder={"Search"} />
 					<div className={styles.select_filters}>
-						<ListOfCategoryItems
-							selectItem={selectDate}
-							itemSelection={itemSelectionDate}
-							listOfItems={dateSelectItem}
-						/>
+						<ListOfCategoryItems selectItem={selectDate} itemSelection={itemSelectionDate} listOfItems={dateSelectItem} />
 					</div>
 				</div>
 				<div className={styles.list_of_coupons}>
@@ -86,16 +88,7 @@ const Coupons = ({ coupons }: any) => {
 						<Nothing list_name="Coupons" />
 					)}
 				</div>
-				{paginatedPosts.length !== 0 ? (
-					<Pagination
-						items={filteredCoupons.length}
-						currentPage={currentPage}
-						pageSize={pageSize}
-						onPageChange={onPageChange}
-					/>
-				) : (
-					""
-				)}
+				{paginatedPosts.length !== 0 ? <Pagination items={filteredCoupons.length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} /> : ""}
 			</div>
 		</>
 	);

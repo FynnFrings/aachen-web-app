@@ -39,18 +39,12 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 		<>
 			<Head>
 				<title>Blog | Aachen App</title>
-				<meta
-					name="description"
-					content="Blog | Aachen App. Blog über Aachen und die App."
-				/>
+				<meta name="description" content="Blog | Aachen App. Blog über Aachen und die App." />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="blog" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta
-					property="og:description"
-					content="Blog | Aachen App. Blog über Aachen und die App."
-				/>
+				<meta property="og:description" content="Blog | Aachen App. Blog über Aachen und die App." />
 				<meta property="og:url" content="https://www.aachen-app.de/blog" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
@@ -64,16 +58,8 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 					<h1 className="text-5xl font-bold text-white">Unser Blog</h1>
 				</div>
 				<div className="w-full flex flex-col gap-10 lg:flex-row lg:justify-between">
-					<SearchField
-						handleChange={handleChange}
-						searchInput={searchInput}
-						placeholder={"Search"}
-					/>
-					<ListOfCategoryItems
-						selectItem={selectItem}
-						itemSelection={itemSelection}
-						listOfItems={listOfItems}
-					/>
+					<SearchField handleChange={handleChange} searchInput={searchInput} placeholder={"Search"} />
+					<ListOfCategoryItems selectItem={selectItem} itemSelection={itemSelection} listOfItems={listOfItems} />
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 					{/* render BlogCard component for each filtered article */}
@@ -87,7 +73,7 @@ const BlogPage = ({ articles }: { articles: IBlogCard[] }) => {
 };
 
 //Using Server Side Rendering function
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	// Fetch data from  API
 	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBlogs`);
 	const data = await res.json();

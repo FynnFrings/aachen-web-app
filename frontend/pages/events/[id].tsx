@@ -24,13 +24,8 @@ const EventDetailsPage = ({ event }: any) => {
 	};
 
 	const eventDate = () => {
-		const fullStartDate = new Date(
-			event.startDate._seconds * 1000 +
-				event.startDate._nanoseconds / 1000000
-		);
-		const fullEndDate = new Date(
-			event.endDate._seconds * 1000 + event.endDate._nanoseconds / 1000000
-		);
+		const fullStartDate = new Date(event.startDate._seconds * 1000 + event.startDate._nanoseconds / 1000000);
+		const fullEndDate = new Date(event.endDate._seconds * 1000 + event.endDate._nanoseconds / 1000000);
 		const dataOption: {} = {
 			year: "numeric",
 			month: "2-digit",
@@ -41,26 +36,13 @@ const EventDetailsPage = ({ event }: any) => {
 			minute: "numeric",
 			hour12: false,
 		};
-		const validStartDate = fullStartDate.toLocaleDateString(
-			"de-DE",
-			dataOption
-		);
-		const validStartTime = fullStartDate.toLocaleTimeString(
-			"de-DE",
-			timeOption
-		);
-		const validEndDate = fullEndDate.toLocaleDateString(
-			"de-DE",
-			dataOption
-		);
-		const validEndTime = fullEndDate.toLocaleTimeString(
-			"de-DE",
-			timeOption
-		);
+		const validStartDate = fullStartDate.toLocaleDateString("de-DE", dataOption);
+		const validStartTime = fullStartDate.toLocaleTimeString("de-DE", timeOption);
+		const validEndDate = fullEndDate.toLocaleDateString("de-DE", dataOption);
+		const validEndTime = fullEndDate.toLocaleTimeString("de-DE", timeOption);
 		return (
 			<span>
-				{validStartDate}, {validStartTime}uhr - {validEndDate},{" "}
-				{validEndTime}uhr
+				{validStartDate} {validStartTime} Uhr - {validEndDate} {validEndTime} Uhr
 			</span>
 		);
 	};
@@ -70,30 +52,18 @@ const EventDetailsPage = ({ event }: any) => {
 			latitude: 50.775555,
 			longitude: 6.083611,
 		};
-		if (
-			event.location == "" ||
-			event.location == undefined ||
-			event.location == null
-		) {
+		if (event.location == "" || event.location == undefined || event.location == null) {
 			obj.location = event.timeFrames[0].location;
 		} else {
 			obj.location = event.location;
 		}
 
-		if (
-			event.latitude == "" ||
-			event.latitude == undefined ||
-			event.latitude == null
-		) {
+		if (event.latitude == "" || event.latitude == undefined || event.latitude == null) {
 			obj.latitude = event.timeFrames[0].latitude;
 		} else {
 			obj.latitude = event.latitude;
 		}
-		if (
-			event.longitude == "" ||
-			event.longitude == undefined ||
-			event.longitude == null
-		) {
+		if (event.longitude == "" || event.longitude == undefined || event.longitude == null) {
 			obj.longitude = event.timeFrames[0].longitude;
 		} else {
 			obj.longitude = event.longitude;
@@ -102,11 +72,7 @@ const EventDetailsPage = ({ event }: any) => {
 	};
 
 	const hasPayment = () => {
-		if (
-			event.hasPayment == null ||
-			event.hasPayment == false ||
-			event.hasPayment == undefined
-		) {
+		if (event.hasPayment == null || event.hasPayment == false || event.hasPayment == undefined) {
 			return false;
 		} else {
 			return true;
@@ -120,22 +86,15 @@ const EventDetailsPage = ({ event }: any) => {
 	return (
 		<>
 			<Head>
-				<title>{event.title} | Aachen App</title>
+				<title>{`${event.title} | Aachen App`}</title>
 				<meta name="description" content={event.description} />
-				<meta
-					property="og:title"
-					content={`${event.title} | Aachen App`}
-					key="title"
-				/>
+				<meta property="og:title" content={`${event.title} | Aachen App`} key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="event" />
 				<meta property="og:site_name" content="Aachen App" />
 				<meta property="og:description" content={event.description} />
-				<meta
-					property="og:url"
-					content={`https://www.aachen-app.de/events/${id}`}
-				/>
+				<meta property="og:url" content={`https://www.aachen-app.de/events/${id}`} />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content={event.imageUrl ?? banner} />
 				<meta property="og:image:type" content="image/jpg" />
@@ -145,47 +104,23 @@ const EventDetailsPage = ({ event }: any) => {
 			</Head>
 			<div className={styles.event_header}>
 				<div className={styles.image_container}>
-					<Image
-						className={styles._image}
-						src={event.imageUrl ?? banner}
-						alt="event_image"
-						width={976}
-						height={350}
-						loading="lazy"
-					/>
+					<Image className={styles._image} src={event.imageUrl ?? banner} alt="event_image" width={976} height={350} loading="lazy" />
 					{/* Render a placeholder logo */}
 				</div>
 				<div className={styles.title}>
 					<h1>{event.title}</h1>
 					<div className={styles.event_location}>
-						<FaLocationDot
-							size={20}
-							className={styles.react_icons}
-						/>
+						<FaLocationDot size={20} className={styles.react_icons} />
 						<span>{validLocation().location}</span>
 					</div>
 					<div className={styles.event_time}>
-						<AiFillClockCircle
-							size={20}
-							className={styles.react_icons}
-						/>
+						<AiFillClockCircle size={20} className={styles.react_icons} />
 						{eventDate()}
 					</div>
 				</div>
 				<div className={styles.button}>
-					<button
-						onClick={handleSubmit}
-						className={styles.order}
-						style={
-							!hasPayment()
-								? { display: "none" }
-								: { display: "flex" }
-						}
-					>
-						<FaBagShopping
-							style={{ marginRight: "0.2rem" }}
-							size={"24"}
-						/>
+					<button onClick={handleSubmit} className={styles.order} style={!hasPayment() ? { display: "none" } : { display: "flex" }}>
+						<FaBagShopping style={{ marginRight: "0.2rem" }} size={"24"} />
 						Bestellen
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
@@ -199,19 +134,9 @@ const EventDetailsPage = ({ event }: any) => {
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<InteractiveMap
-						location={validLocation().location}
-						latitude={validLocation().latitude}
-						longitude={validLocation().longitude}
-					/>{" "}
+					<InteractiveMap location={validLocation().location} latitude={validLocation().latitude} longitude={validLocation().longitude} />{" "}
 					<div className={styles.route}>
-						<Link
-							target="_blank"
-							rel="noreferrer"
-							href={`https://maps.google.com/?q=${
-								validLocation().location
-							}`}
-						>
+						<Link target="_blank" rel="noreferrer" href={`https://maps.google.com/?q=${validLocation().location}`}>
 							Route planen
 						</Link>
 						<span>{validLocation().location}</span>
@@ -219,20 +144,10 @@ const EventDetailsPage = ({ event }: any) => {
 				</div>
 				<div className={styles.business_link}>
 					<div className={styles.item}>
-						<Image
-							src={event.imageUrl ?? banner}
-							width="56"
-							height="56"
-							alt="event logo"
-							className={styles.logo}
-						/>
+						<Image src={event.imageUrl ?? banner} width="56" height="56" alt="event logo" className={styles.logo} />
 						<span>
 							<h2>Inhaber</h2>
-							<Link
-								target="_blank"
-								rel="noreferrer"
-								href={`/business/${event.businessId}`}
-							>
+							<Link target="_blank" rel="noreferrer" href={`/business/${event.businessId}`}>
 								Link to business
 							</Link>
 						</span>
@@ -247,8 +162,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	// Fetch data from  API
 	const id = context.params.id;
 	// Declared url of events id
-	const EventUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getEventById";
+	const EventUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getEventById";
 
 	// Fetching data
 	const res = await fetch(`${EventUrlId}`, {

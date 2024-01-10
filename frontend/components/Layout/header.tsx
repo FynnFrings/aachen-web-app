@@ -17,7 +17,11 @@ const Header = () => {
 		<>
 			<header
 				className={`w-full bg-[#131311] fixed top-0 z-50 flex justify-between items-center px-5 py-5 lg:px-10 lg:py-5 transition-all ease-in-out
-                ${scrollPosition > 0 && menu === false ? "shadow-lg" : "shadow-none"}`}
+                ${
+					scrollPosition > 0 && menu === false
+						? "shadow-lg"
+						: "shadow-none"
+				}`}
 			>
 				<div>
 					<Link href={"/"}>
@@ -48,6 +52,9 @@ const Header = () => {
 						</li>
 						<li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
 							<Link href={"/events"}>Events</Link>
+						</li>
+						<li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
+							<Link href={"/news"}>News</Link>
 						</li>
 						{/* <li className="relative hover:after:w-full hover:after:transition-[width] hover:after:duration-300 after:absolute after:w-[0%] after:bg-[#FAC520] after:left-0 after:bottom-0 after:h-[2px] after:transition-[width] after:duration-300">
 							<Link href={"/coupons"}>Coupons</Link>

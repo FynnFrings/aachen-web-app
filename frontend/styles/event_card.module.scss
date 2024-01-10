@@ -58,18 +58,8 @@
 		}
 	}
 
-	.full_description {
-		display: flex;
-		flex-direction: column;
-		row-gap: 1rem;
-		font-size: 1rem;
-		font-weight: 400;
-		display: flex;
-		height: auto;
-		color: #ffffff;
-	}
-
 	.more {
+		width: fit-content;
 		align-self: start;
 		font-size: 1rem;
 		color: #ffffff;
@@ -126,9 +116,13 @@
 				color: white;
 				opacity: 0.7;
 				transition: ease-in 1s;
-				text-overflow: ellipsis;
-				white-space: nowrap;
+
+				--max-lines: 2;
+
+				display: -webkit-box;
 				overflow: hidden;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: var(--max-lines);
 			}
 		}
 	}
@@ -163,7 +157,6 @@
 
 .event_button {
 	width: 100%;
-	// min-width: 30%;
 	height: 2.5rem;
 	display: flex;
 	justify-content: center;

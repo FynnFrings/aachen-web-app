@@ -10,11 +10,13 @@ import { RiBuilding4Fill } from "react-icons/ri";
 import { AiFillPieChart } from "react-icons/ai";
 import { FaCalendarDays } from "react-icons/fa6";
 import { BiSolidCoupon } from "react-icons/bi";
-import { CgCloseR } from "react-icons/cg";
 import Head from "next/head";
 import PopUpOpener from "@/components/popUpContact";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import { useRouter } from "next/router";
+import getMonthDifference from "@/helpers/getMonthDifference";
+import hrefValidator from "@/helpers/hrefValidator";
+import weekSchedule from "@/helpers/weekSchedule";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	// States to control visibility of components.
@@ -34,38 +36,14 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const popUpOpener = () => {
 		isOpen(!open);
 	};
-	// This function calculates the number of months between two dates.
-	const getMonthDifference = (startDate: any, endDate: any) => {
-		// Create Date objects from the provided start and end date strings.
-		const start = new Date(startDate);
-		const end = new Date(endDate);
-
-		// Extract the year component from the start and end dates.
-		const startYear = start.getFullYear();
-		const endYear = end.getFullYear();
-
-		// Extract the month component from the start and end dates.
-		const startMonth = start.getMonth();
-		const endMonth = end.getMonth();
-
-		// Calculate the difference in years between the start and end dates.
-		const yearDiff = endYear - startYear;
-
-		// Calculate the difference in months within the same year between the start and end dates.
-		const monthDiff = endMonth - startMonth;
-
-		// Calculate the total number of months by adding months within the same year to the years' contribution of months.
-		const totalMonths = yearDiff * 12 + monthDiff;
-
-		// Return the total number of months.
-		return totalMonths;
-	};
 
 	const currentDate = new Date();
 
 	const creationData = new Date(
 		business.createdAt._seconds * 1000 + business.createdAt._nanoseconds / 1000000
 	);
+
+	//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
 	const monthsDifference = getMonthDifference(creationData, currentDate);
 
 	const weekDay = currentDate.getDay();
@@ -81,59 +59,6 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			const openTime = openTimeArray?.join("");
 			return openTime;
 		}
-	};
-
-	const weekSchedule = (scheduleData: any) => {
-		const daysOfWeekGerman = [
-			"Montag",
-			"Dienstag",
-			"Mittwoch",
-			"Donnerstag",
-			"Freitag",
-			"Samstag",
-			"Sonntag",
-		];
-
-		// A function that converts time to the "HH:MM" format
-		const formatTime = (time: string) => {
-			const hours = time.slice(0, 2);
-			const minutes = time.slice(2);
-			return `${hours}:${minutes}`;
-		};
-
-		// Render a list of days of the week and opening & closing times
-		const scheduleItems = daysOfWeekGerman.map((dayOfWeek, index) => {
-			const scheduleItem = scheduleData.find((item: any) => item.open.day === index);
-			if (scheduleItem) {
-				const openTime = formatTime(scheduleItem.open.time);
-				const closeTime = formatTime(scheduleItem.close.time);
-				return (
-					<p key={index}>
-						{dayOfWeek}:{" "}
-						<span>
-							{openTime.length && closeTime.length == 5
-								? `${openTime} - ${closeTime} Uhr`
-								: "Geschlossen"}
-						</span>
-					</p>
-				);
-			} else {
-				return (
-					<p key={index}>
-						{dayOfWeek}: <span>Geschlossen</span>
-					</p>
-				);
-			}
-		});
-		return scheduleItems;
-	};
-
-	const hrefValidator = (href: any) => {
-		return href == "" || href == null
-			? "/404"
-			: href.slice(0, 3) == "www"
-			? "http://" + `${href}`
-			: `${href}`;
 	};
 
 	const businessContacts = {
@@ -266,6 +191,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				</div>
 				<div className={styles.opening_time_table}>
 					<h2>Öffnungszeiten</h2>
+					{/* //TODO: This function is imported from /helpers folder. Please check this and optimize if its needed; */}
 					{weekSchedule(
 						business.openingHourPeriods != null
 							? business.openingHourPeriods
@@ -305,6 +231,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							<Link
 								target="_blank"
 								rel="noreferrer"
+								//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
 								href={hrefValidator(business.website) ?? `/*`}
 							>
 								{business.website == "" || business.website == null
@@ -372,7 +299,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	const id = context.params.id;
 	// Declared url of events id
 	const businessUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById"; //`http://localhost:5050/business/${id}`;
+		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById";
 
 	// Fetching data
 	const res = await fetch(`${businessUrlId}`, {

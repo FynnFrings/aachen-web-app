@@ -6,13 +6,7 @@ import { MouseEventHandler } from "react"; // Import MouseEventHandler from Reac
 import { IBusinessCard } from "@/types/types"; // Import the IBusinessCard type from the specified module
 
 // Define the BusinessCard component
-const BusinessCard = ({
-	handleSubmit,
-	business,
-}: {
-	handleSubmit: MouseEventHandler<HTMLButtonElement>;
-	business: IBusinessCard;
-}) => {
+const BusinessCard = ({ handleSubmit, business }: { handleSubmit: MouseEventHandler<HTMLButtonElement>; business: IBusinessCard }) => {
 	// Get the current date and time
 	const todaysDate = new Date();
 	const time = Date.now();
@@ -76,28 +70,14 @@ const BusinessCard = ({
 
 	return (
 		// Wrap the entire card in a link, which redirects to the business details page
-		<Link className="animate-fade" href="/business/[id]" as={`/business/${business.itemId}`}>
+		<Link className="animate-fade" target="_blank" href="/business/[id]" as={`/business/${business.itemId}`}>
 			<div className={styles.container}>
 				{/* Render a placeholder image */}
 				<div className={styles.business_image_container}>
-					<Image
-						className={styles.business_image}
-						src={business.bannerImageUrl ?? business.bigPhotoURL}
-						alt="business_image"
-						loading="lazy"
-						width={379}
-						height={176}
-					/>
+					<Image className={styles.business_image} src={business.bannerImageUrl ?? business.bigPhotoURL} alt="business_image" loading="lazy" width={379} height={176} />
 					{/* Render a placeholder logo */}
 					<div className={styles.business_logo_container}>
-						<Image
-							className={styles.business_logo}
-							src={business.logoImageUrl ?? business.photoURL}
-							alt="business_image"
-							loading="lazy"
-							width={80}
-							height={80}
-						/>
+						<Image className={styles.business_logo} src={business.logoImageUrl ?? business.photoURL} alt="business_image" loading="lazy" width={80} height={80} />
 					</div>
 				</div>
 				{/* Render the name, category, opening hours, and a button */}
@@ -106,16 +86,8 @@ const BusinessCard = ({
 					<div className={styles.business_category}>{business.category}</div>
 					<p className={styles.dot}>•</p>
 					{closeTime !== null ? (
-						<div
-							className={
-								checkTime() !== "Geschlossen"
-									? styles.business_time_open
-									: styles.business_time_close
-							}
-						>
-							{checkTime() !== "Geschlossen"
-								? `Geöffnet bis ${checkTime()}`
-								: checkTime()}
+						<div className={checkTime() !== "Geschlossen" ? styles.business_time_open : styles.business_time_close}>
+							{checkTime() !== "Geschlossen" ? `Geöffnet bis ${checkTime()}` : checkTime()}
 						</div>
 					) : (
 						<div className={styles.business_time_unknown}>Öffnungszeiten unbekannt</div>
@@ -124,9 +96,7 @@ const BusinessCard = ({
 				{/* Render additional information about distance and the number of posts */}
 				<div className={styles.add_info}>
 					<div className={styles.posts}>
-						<p className={styles.number}>
-							{(business.eventList.length ?? 0) + (business.couponList.length ?? 0)}
-						</p>
+						<p className={styles.number}>{(business.eventList.length ?? 0) + (business.couponList.length ?? 0)}</p>
 						<p className={styles.text}>Beiträge</p>
 					</div>
 					<button className={styles.business_button} onClick={handleSubmit}>

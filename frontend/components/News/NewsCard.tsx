@@ -10,9 +10,7 @@ const NewsCard = ({ newsItem }: any) => {
 	const diffDateFunc = (pubDate: any) => {
 		const publicationDate: any = new Date(pubDate);
 		const currentDate: any = new Date();
-		const differenceInDays = Math.floor(
-			(currentDate - publicationDate) / (1000 * 60 * 60 * 24)
-		);
+		const differenceInDays = Math.floor((currentDate - publicationDate) / (1000 * 60 * 60 * 24));
 		if (differenceInDays === 0) {
 			return `Heute`;
 		}
@@ -24,19 +22,10 @@ const NewsCard = ({ newsItem }: any) => {
 	};
 	return (
 		<>
-			<Link href={item.link} target="_blank" rel="noreferrer">
+			<Link className="animate-fade" href={item.link} target="_blank" rel="noreferrer">
 				<div className={`${styles.container}`}>
 					<div className={styles.item_header}>
-						<Image
-							alt={feedItem.publisher.name}
-							className={styles.logo}
-							loader={() => logoSrc}
-							src={logoSrc}
-							width={65}
-							height={65}
-							loading="lazy"
-							unoptimized
-						/>
+						<Image alt={feedItem.publisher.name} className={styles.logo} loader={() => logoSrc} src={logoSrc} width={65} height={65} loading="lazy" unoptimized />
 						<span>
 							<h2>{feedItem.publisher.name}</h2>
 							<p>{feedItem.publisher.subtitle}</p>
@@ -56,9 +45,7 @@ const NewsCard = ({ newsItem }: any) => {
 						/>
 						<div className={styles.news_body}>
 							<h2>{item.title}</h2>
-							<p className={`${styles.description} ${styles.cutoff_text}`}>
-								{item.contentSnippet}
-							</p>
+							<p className={`${styles.description} ${styles.cutoff_text}`}>{item.contentSnippet}</p>
 						</div>
 					</div>
 					<div className={styles.news_footer}>

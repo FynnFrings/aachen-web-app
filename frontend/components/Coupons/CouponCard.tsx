@@ -1,45 +1,22 @@
 import styles from "@/styles/coupon_card.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { BsBookmark } from "react-icons/bs";
-import { SlArrowRight } from "react-icons/sl";
 
 const CouponCard = ({ coupon }: any) => {
-	console.log("🚀 ~ CouponCard ~ coupon:", coupon);
-
 	const currentDate = new Date();
 
-	const endDate = new Date(
-		coupon.endDate._seconds * 1000 + coupon.endDate._nanoseconds / 1000000
-	);
-	console.log("🚀 ~ CouponCard ~ endDate:", endDate);
+	const endDate = new Date(coupon.endDate._seconds * 1000 + coupon.endDate._nanoseconds / 1000000);
+
 	const timeDiff = endDate.getTime() - currentDate.getTime();
 	const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-	console.log(daysDiff);
 
 	return (
-		<Link target="_blank" rel="noreferrer" href={`/coupons/${coupon.id}`}>
+		<Link className="animate-fade" target="_blank" rel="noreferrer" href={`/coupons/${coupon.id}`}>
 			<div className={styles.coupon_item}>
 				<div className={styles.image_container}>
-					<Image
-						className={styles._image}
-						src={coupon.imageUrl}
-						alt="event_image"
-						width={976}
-						height={350}
-						loading="lazy"
-					/>
-					{/* {coupon.bannerText == null ||
-					coupon.bannerText == undefined ||
-					coupon.bannerText == "" ? (
-						""
-					) : (
-						<div className={styles.bannerText}>
-							{coupon.bannerText}
-						</div>
-					)} */}
+					<Image className={styles._image} src={coupon.imageUrl} alt="event_image" width={976} height={350} loading="lazy" />
 					{coupon.bannerText && (
-						<div className={styles.bannerText}>
+						<div className={styles.bannerText} suppressHydrationWarning>
 							{coupon.bannerText}
 						</div>
 					)}
@@ -47,17 +24,17 @@ const CouponCard = ({ coupon }: any) => {
 				<div className={styles.header}>
 					<div>
 						<h2 suppressHydrationWarning>{coupon.title}</h2>
-						{daysDiff < 0 ? (
-							<p style={{ color: "#fac520" }}>
+						{daysDiff > 0 && <p suppressHydrationWarning>Läuft in {daysDiff} Tage ab</p>}
+						{daysDiff < 1 && daysDiff > 0 && <p suppressHydrationWarning>Läuft in {timeDiff} Stunden ab</p>}
+						{daysDiff < 0 && (
+							<p style={{ color: "#fac520" }} suppressHydrationWarning>
 								Der Coupon ist abgelaufen
 							</p>
-						) : (
-							<p>Läuft in {daysDiff} Stunden ab</p>
 						)}
 					</div>
 				</div>
 				<div className={styles.short_description}>
-					<p>{coupon.description}</p>
+					<p suppressHydrationWarning>{coupon.description}</p>
 				</div>
 			</div>
 		</Link>

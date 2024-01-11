@@ -18,13 +18,13 @@
 		overflow: hidden;
 		.bannerText {
 			position: absolute;
-			width: 300px;
-			top: 150px;
+			width: 150px;
+			top: 70px;
 			left: 0;
-			background-color: yellow; /* Yellow background */
+			background-color: #fac520; /* Yellow background */
 			color: black; /* Black text */
 			padding: 10px;
-			font-size: 18px;
+			font-size: 0.7rem;
 			font-weight: bold;
 			white-space: nowrap; /* Prevent text from wrapping */
 			transform: rotate(-45deg); /* Rotate the ribbon */

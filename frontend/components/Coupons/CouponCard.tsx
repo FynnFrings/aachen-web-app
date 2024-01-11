@@ -29,10 +29,16 @@ const CouponCard = ({ coupon }: any) => {
 						height={350}
 						loading="lazy"
 					/>
-					{coupon.bannerText == null ||
-					coupon.bannerText == undefined ? (
+					{/* {coupon.bannerText == null ||
+					coupon.bannerText == undefined ||
+					coupon.bannerText == "" ? (
 						""
 					) : (
+						<div className={styles.bannerText}>
+							{coupon.bannerText}
+						</div>
+					)} */}
+					{coupon.bannerText && (
 						<div className={styles.bannerText}>
 							{coupon.bannerText}
 						</div>

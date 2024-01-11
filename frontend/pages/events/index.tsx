@@ -13,7 +13,6 @@ import { paginate } from "@/helpers/paginate";
 import Head from "next/head";
 import Nothing from "@/components/Nothing";
 import { useDispatch, useSelector } from "react-redux";
-import { getEvents, setEvents } from "@/redux/eventsSlice";
 
 const Events = ({ events }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -83,14 +82,6 @@ const Events = ({ events }: any) => {
 	const paginatedPosts = paginate(filteredEvents, currentPage, pageSize);
 
 	//!! Redux
-
-	const storeEvents: any = useSelector(getEvents);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		// dispatch(setEvents(events));
-		// console.log("🚀 ~ file: index.tsx:95 ~ useEffect ~ storeEvents:", storeEvents);
-	});
 
 	return (
 		<>

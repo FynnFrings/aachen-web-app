@@ -2,7 +2,7 @@ import styles from "@/styles/bussiness.module.scss";
 import BusinessBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useEffect, useRef, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import BusinessCard from "@/components/Business/BusinessCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
@@ -22,17 +22,33 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		setCurrentPage(page);
 	};
 
-	// creating state for alert message
 	const [alert, isAlert] = useState<boolean>(false);
 
-	// onClick function with setTimeout fuction to manage "alert" state
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
 	const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
 		event.preventDefault();
 		isAlert(true);
-		setTimeout(() => {
+
+		// Clearing the previous timeout (if already set)
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current);
+		}
+
+		// Setting a new timeout
+		timeoutRef.current = setTimeout(() => {
 			isAlert(false);
 		}, 3000);
 	};
+
+	// Ensuring timeout clearance when placing a component
+	useEffect(() => {
+		return () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current);
+			}
+		};
+	}, []);
 
 	//*handling search field in search bar START
 
@@ -99,19 +115,13 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 		<>
 			<Head>
 				<title>Business | Aachen App</title>
-				<meta
-					name="description"
-					content="Business | Aachen App. Entdecken Sie mehr über Business in Aachen."
-				/>
+				<meta name="description" content="Business | Aachen App. Entdecken Sie mehr über Business in Aachen." />
 				<meta property="og:title" content="Business | Aachen App" key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="business" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta
-					property="og:description"
-					content="Business | Aachen App. Entdecken Sie mehr über Business in Aachen."
-				/>
+				<meta property="og:description" content="Business | Aachen App. Entdecken Sie mehr über Business in Aachen." />
 				<meta property="og:url" content="https://www.aachen-app.de/business" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
@@ -123,75 +133,36 @@ const Business = ({ businesses }: { businesses: IBusinessCard[] }) => {
 
 			<div className={styles.container}>
 				<div className={styles.banner}>
-					<Image
-						className={styles.business_banner}
-						src={BusinessBanner}
-						alt="business-banner"
-						width={0}
-						height={0}
-					/>
+					<Image className={styles.business_banner} src={BusinessBanner} alt="business-banner" width={0} height={0} />
 					<h1 className={styles.banner_text}>Business</h1>
 				</div>
 				<div className={styles.filters}>
-					<SearchField
-						handleChange={handleChange}
-						searchInput={searchInput}
-						placeholder={"Search"}
-					/>
+					<SearchField handleChange={handleChange} searchInput={searchInput} placeholder={"Search"} />
 					<div className={styles.select_filters}>
-						<ListOfCategoryItems
-							selectItem={selectItem}
-							itemSelection={itemSelection}
-							listOfItems={listOfItems}
-						/>
-						<ListOfCategoryItems
-							selectItem={selectDate}
-							itemSelection={itemSelectionDate}
-							listOfItems={dateSelectItem}
-						/>
+						<ListOfCategoryItems selectItem={selectItem} itemSelection={itemSelection} listOfItems={listOfItems} />
+						<ListOfCategoryItems selectItem={selectDate} itemSelection={itemSelectionDate} listOfItems={dateSelectItem} />
 					</div>
 				</div>
-				<div
-					className={
-						paginatedPosts.length
-							? styles.list_of_businesses
-							: "w-full flex flex-row justify-center"
-					}
-				>
+				<div className={paginatedPosts.length ? styles.list_of_businesses : "w-full flex flex-row justify-center"}>
 					{paginatedPosts.length ? (
-						paginatedPosts.map((business: IBusinessCard) => (
-							<BusinessCard
-								handleSubmit={handleSubmit}
-								business={business}
-								key={business.itemId}
-							/>
-						))
+						paginatedPosts.map((business: IBusinessCard) => <BusinessCard handleSubmit={handleSubmit} business={business} key={business.itemId} />)
 					) : (
 						<Nothing list_name="Businesses" />
 					)}
 				</div>
 				{alert ? <BusinessMerkenResponseMessage /> : ""}
-				{paginatedPosts.length && (
-					<Pagination
-						items={filteredBusinesses.length}
-						currentPage={currentPage}
-						pageSize={pageSize}
-						onPageChange={onPageChange}
-					/>
-				)}
+				{paginatedPosts.length && <Pagination items={filteredBusinesses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} />}
 			</div>
 		</>
 	);
 };
 
 //Using Server Side Rendering function
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	// Fetch data from  API
 	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllBusinesses`);
 	const allBusinesses = await res.json();
-	const response = allBusinesses.filter(
-		(a: IBusinessCard) => (a.bannerImageUrl ?? a.bigPhotoURL) && (a.logoImageUrl ?? a.photoURL)
-	);
+	const response = allBusinesses.filter((a: IBusinessCard) => (a.bannerImageUrl ?? a.bigPhotoURL) && (a.logoImageUrl ?? a.photoURL));
 	// Pass data to the page via props
 	return { props: { businesses: response } };
 }

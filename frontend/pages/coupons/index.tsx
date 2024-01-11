@@ -4,34 +4,19 @@ import styles from "@/styles/coupons.module.scss";
 import BusinessBanner from "@/public/business/business_banner.png";
 import SearchField from "@/components/SearchField";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import searchByDate from "@/helpers/filterByDate";
 import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
 import Pagination from "@/components/Pagination";
 import CouponCard from "@/components/Coupons/CouponCard";
+import Nothing from "@/components/Nothing";
 
-const Coupons = () => {
-	const [windowWidth, setWindowWidth] = useState(Number);
-
-	const handleResize = () => {
-		setWindowWidth(window.innerWidth);
-	};
-
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setWindowWidth(window.innerWidth);
-			window.addEventListener("resize", handleResize);
-
-			return () => {
-				window.removeEventListener("resize", handleResize);
-			};
-		}
-	}, []);
-
+const Coupons = ({ coupons }: any) => {
 	const [searchInput, setSearchInput] = useState<string>("");
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = windowWidth >= 1129 ? 5 : 6;
+
+	const pageSize = 8;
 
 	const onPageChange = (page: any) => {
 		setCurrentPage(page);
@@ -54,150 +39,69 @@ const Coupons = () => {
 
 	const dateSelectItem = ["vom neusten zu ältesten", "vom ältesten zu neusten"];
 
-	const couponTestArr = [
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-		{
-			title: "Gutschein(e) über Öcher-Deals",
-			endTime: "20:00",
-			imgUrl: "background: rgba(217, 217, 217, 1)",
-			businessName: "Afterglow - Gestaltung un...",
-			businessType: "Dienstleistung",
-		},
-	];
-	// console.log(
-	// 	"🚀 ~ file: index.tsx:45 ~ Coupons ~ couponTestArr:",
-	// 	couponTestArr
-	// );
-
-	const filteredEvents = [...(couponTestArr || [])]
+	const filteredCoupons = [...(coupons || [])]
 		.sort((a, b) => searchByDate(selectDate, a, b))
 		.filter(
 			// Filter the array based on the searchInput using a custom function searchByTitle
-			(event) => searchByTitle([event], searchInput).length > 0
+			(coupon) => searchByTitle([coupon], searchInput).length > 0
 		);
-	const paginatedPosts = paginate(filteredEvents, currentPage, pageSize);
+	const paginatedPosts = paginate(filteredCoupons, currentPage, pageSize);
 
 	return (
 		<>
 			<Head>
-				<title>Coupons | Aachen App</title>
+				<Head>
+					<title>Coupons | Aachen App</title>
+					<meta name="description" content="Coupons | Aachen App. Entdecken Sie mehr über Coupons." />
+					<meta property="og:title" content="Coupons | Aachen App" key="title" />
+					<meta name="robots" content="index, follow" />
+					<meta charSet="UTF-8" />
+					<meta property="og:type" content="coupons" />
+					<meta property="og:site_name" content="Aachen App" />
+					<meta property="og:description" content="Coupons | Aachen App. Entdecken Sie mehr über Coupons." />
+					<meta property="og:url" content="https://www.aachen-app.de/coupons" />
+					<meta property="og:locale" content="de_DE" />
+					<meta property="og:image" content="/logo_yellow.jpg" />
+					<meta property="og:image:type" content="image/jpg" />
+					<meta property="og:image:alt" content="Aachen App" />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+				</Head>
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>
-					<Image
-						className={styles.business_banner}
-						src={BusinessBanner}
-						alt="business-banner"
-						width={0}
-						height={0}
-					/>
+					<Image className={styles.business_banner} src={BusinessBanner} alt="business-banner" width={0} height={0} />
 					<h1 className={styles.banner_text}>Coupons</h1>
 				</div>
 				<div className={styles.filters}>
-					<SearchField
-						handleChange={handleChange}
-						searchInput={searchInput}
-						placeholder={"Search"}
-					/>
+					<SearchField handleChange={handleChange} searchInput={searchInput} placeholder={"Search"} />
 					<div className={styles.select_filters}>
-						<ListOfCategoryItems
-							selectItem={selectDate}
-							itemSelection={itemSelectionDate}
-							listOfItems={dateSelectItem}
-						/>
+						<ListOfCategoryItems selectItem={selectDate} itemSelection={itemSelectionDate} listOfItems={dateSelectItem} />
 					</div>
 				</div>
 				<div className={styles.list_of_coupons}>
 					{paginatedPosts.length !== 0 ? (
-						paginatedPosts.map((coupon: any, index: any) => {
-							return <CouponCard key={index} coupon={coupon} id={index} />;
+						paginatedPosts.map((coupon: any) => {
+							return <CouponCard key={coupon.id} coupon={coupon} />;
 						})
 					) : (
-						<div style={{ color: "white" }}>Nichts gefunden</div>
+						<Nothing list_name="Coupons" />
 					)}
 				</div>
-				{paginatedPosts.length !== 0 ? (
-					<Pagination
-						items={filteredEvents.length}
-						currentPage={currentPage}
-						pageSize={pageSize}
-						onPageChange={onPageChange}
-					/>
-				) : (
-					""
-				)}
+				{paginatedPosts.length !== 0 ? <Pagination items={filteredCoupons.length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} /> : ""}
 			</div>
 		</>
 	);
 };
+
+//Using Server Side Rendering function
+export async function getServerSideProps() {
+	// Fetch data from  API
+	const res = await fetch(`https://us-central1-aachen-app.cloudfunctions.net/getAllCoupons`);
+	const response = await res.json();
+
+	// Pass data to the page via props
+	return { props: { coupons: response } };
+}
 
 export default Coupons;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/business_details.module.scss";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useRef, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import { IBusinessCard } from "@/types/types";
 import InteractiveMap from "@/components/interactiveMap";
@@ -17,6 +17,8 @@ import { useRouter } from "next/router";
 import getMonthDifference from "@/helpers/getMonthDifference";
 import hrefValidator from "@/helpers/hrefValidator";
 import weekSchedule from "@/helpers/weekSchedule";
+import CouponCard from "@/components/Coupons/CouponCard";
+import Nothing from "@/components/Nothing";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	// States to control visibility of components.
@@ -25,9 +27,20 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const [open, isOpen] = useState<boolean>(false);
 
 	// onClick function with setTimeout fuction to manage "alert" state
-	const handleSubmit: MouseEventHandler = () => {
+
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+	const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
+		event.preventDefault();
 		isAlert(true);
-		setTimeout(() => {
+
+		// Clearing the previous timeout (if already set)
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current);
+		}
+
+		// Setting a new timeout
+		timeoutRef.current = setTimeout(() => {
 			isAlert(false);
 		}, 3000);
 	};
@@ -40,7 +53,8 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	const currentDate = new Date();
 
 	const creationData = new Date(
-		business.createdAt._seconds * 1000 + business.createdAt._nanoseconds / 1000000
+		business.createdAt._seconds * 1000 +
+			business.createdAt._nanoseconds / 1000000
 	);
 
 	//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
@@ -52,7 +66,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		if (!business.openingHourPeriods) {
 			return null;
 		}
-		const result = business.openingHourPeriods.find((day) => day.open.day == weekDay);
+		const result = business.openingHourPeriods.find(
+			(day) => day.open.day == weekDay
+		);
 		if (result && result.open.time !== "Geschlossen") {
 			const openTimeArray = result.open.time.split("");
 			openTimeArray?.splice(2, 0, ":");
@@ -83,17 +99,30 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		<>
 			{/* Meta tags */}
 			<Head>
-				<title>{business.name} | Aachen App</title>
+				<title>{`${business.name} | Aachen App`}</title>
 				<meta name="description" content={business.description} />
-				<meta property="og:title" content={`${business.name} | Aachen App`} key="title" />
+				<meta
+					property="og:title"
+					content={`${business.name} | Aachen App`}
+					key="title"
+				/>
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="businesses" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta property="og:description" content={business.description} />
-				<meta property="og:url" content={`https://www.aachen-app.de/business/${id}`} />
+				<meta
+					property="og:description"
+					content={business.description}
+				/>
+				<meta
+					property="og:url"
+					content={`https://www.aachen-app.de/business/${id}`}
+				/>
 				<meta property="og:locale" content="de_DE" />
-				<meta property="og:image" content={business.logoImageUrl ?? business.photoURL} />
+				<meta
+					property="og:image"
+					content={business.logoImageUrl ?? business.photoURL}
+				/>
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={business.name} />
 				<meta property="og:image:width" content="1200" />
@@ -131,15 +160,29 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								: ""}
 						</span>
 					</p>
-					<p className={styles.description}>{`${business.description}`}</p>
+					<p
+						className={styles.description}
+					>{`${business.description}`}</p>
 				</div>
 				<div className={styles.buttons}>
-					<button onClick={handleSubmit} className={styles.notification}>
-						<IoIosNotificationsOutline style={{ marginRight: "0.2rem" }} size={"24"} />
+					<button
+						onClick={handleSubmit}
+						className={styles.notification}
+					>
+						<IoIosNotificationsOutline
+							style={{
+								marginRight: "0.2rem",
+							}}
+							size={"24"}
+						/>
 						Merken
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
-					<button onClick={popUpOpener} className={styles.contact} ref={ref}>
+					<button
+						onClick={popUpOpener}
+						className={styles.contact}
+						ref={ref}
+					>
 						Kontaktieren
 					</button>
 					{open ? (
@@ -157,11 +200,17 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>
-						<RiBuilding4Fill size={28} className={styles.react_icons} />
+						<RiBuilding4Fill
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.name}
 					</p>
 					<p>
-						<AiFillPieChart size={28} className={styles.react_icons} />
+						<AiFillPieChart
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.category}
 					</p>
 					<p>
@@ -177,13 +226,19 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 							: `seit ${monthsDifference} Monat Mitglied der Aachen App`}
 					</p>
 					<p>
-						<BiSolidCoupon size={28} className={styles.react_icons} />
+						<BiSolidCoupon
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.totalCouponCount <= 0
 							? "Noch keine Coupons erstellt"
 							: `${business.totalCouponCount} Coupons erstellt`}
 					</p>
 					<p>
-						<FaCalendarDays size={28} className={styles.react_icons} />
+						<FaCalendarDays
+							size={28}
+							className={styles.react_icons}
+						/>
 						{business.totalEventCount <= 0
 							? "Noch keine Events erstellt"
 							: `${business.totalEventCount} Events erstellt`}
@@ -213,7 +268,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						>
 							Route planen
 						</Link>
-						<span>{business.formattedAddress ?? business.location}</span>
+						<span>
+							{business.formattedAddress ?? business.location}
+						</span>
 					</div>
 				</div>
 				<div className={styles.website_link}>
@@ -234,7 +291,8 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
 								href={hrefValidator(business.website) ?? `/*`}
 							>
-								{business.website == "" || business.website == null
+								{business.website == "" ||
+								business.website == null
 									? "Unbekannt"
 									: business.website}
 							</Link>
@@ -258,7 +316,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 										/\s/g,
 										""
 									)}/`}
-									style={{ textDecoration: "none" }}
+									style={{
+										textDecoration: "none",
+									}}
 								>
 									@{business.instagram}
 								</Link>
@@ -273,7 +333,9 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								height="56"
 								alt="instagram logo"
 								className={styles.logo}
-								style={{ borderRadius: "10%" }}
+								style={{
+									borderRadius: "10%",
+								}}
 							/>
 							<div>
 								<h2>WhatsApp</h2>
@@ -281,13 +343,33 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 									target="_blank"
 									rel="noreferrer"
 									href={`https://wa.me/${business.whatsapp}`}
-									style={{ textDecoration: "none" }}
+									style={{
+										textDecoration: "none",
+									}}
 								>
 									{business.whatsapp}
 								</Link>
 							</div>
 						</div>
 					) : null}
+				</div>
+				<div className={styles.coupons_container}>
+					<h2>Coupons</h2>
+					<div className={styles.list}>
+						{business.couponList.length !== 0 ? (
+							business.couponList.map((coupon: any) => {
+								return (
+									<CouponCard
+										key={coupon.id}
+										coupon={coupon}
+										business={business}
+									/>
+								);
+							})
+						) : (
+							<Nothing list_name="Coupons" />
+						)}
+					</div>
 				</div>
 			</div>
 		</>

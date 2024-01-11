@@ -1,82 +1,66 @@
 import styles from "@/styles/coupon_card.module.scss";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { BsBookmark } from "react-icons/bs";
 import { SlArrowRight } from "react-icons/sl";
-const CouponCard = ({ coupon, id }: any) => {
-	/***********************getting window width for "adaptive"**********************/
-	const [windowWidth, setWindowWidth] = useState(Number);
 
-	const handleResize = () => {
-		setWindowWidth(window.innerWidth);
-	};
+const CouponCard = ({ coupon }: any) => {
+	console.log("🚀 ~ CouponCard ~ coupon:", coupon);
 
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setWindowWidth(window.innerWidth);
-			window.addEventListener("resize", handleResize);
+	const currentDate = new Date();
 
-			return () => {
-				window.removeEventListener("resize", handleResize);
-			};
-		}
-	}, []);
-	//////////////////////////////////////////////////////////////////////////////////////
-	const toggleButton = (event: any) => {
-		event.preventDefault();
-	};
-	const layoutProperties = [
-		{ gridArea: "1 / 1 / 2 / 2", display: "none", height: "12.9375rem" },
-		{ gridArea: "1 / 2 / 3 / 3", display: "flex", height: "27.875rem" },
-		{ gridArea: "2 / 1 / 4 / 2", display: "flex", height: "27.875rem" },
-		{ gridArea: "3 / 2 / 5 / 3", display: "flex", height: "27.875rem" },
-		{ gridArea: "4 / 1 / 5 / 2", display: "none", height: "12.9375rem" },
-	];
+	const endDate = new Date(
+		coupon.endDate._seconds * 1000 + coupon.endDate._nanoseconds / 1000000
+	);
+	console.log("🚀 ~ CouponCard ~ endDate:", endDate);
+	const timeDiff = endDate.getTime() - currentDate.getTime();
+	const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+	console.log(daysDiff);
 
 	return (
-		<>
-			<div
-				className={styles.coupon_item}
-				style={{
-					gridArea:
-						windowWidth <= 1128
-							? ""
-							: layoutProperties[id].gridArea,
-					height:
-						windowWidth <= 1128
-							? "auto"
-							: layoutProperties[id].height,
-				}}
-			>
-				<div
-					className={styles.banner}
-					style={{
-						display:
-							windowWidth <= 1128
-								? "flex"
-								: layoutProperties[id].display,
-					}}
-				/>
-
-				<div className={styles.header}>
-					<span>
-						<h2>{coupon.title}</h2>
-						<p>Läuft in 3 Stunden ab</p>
-					</span>
-					<button onClick={toggleButton}>
-						<BsBookmark size={32}></BsBookmark>
-					</button>
+		<Link target="_blank" rel="noreferrer" href={`/coupons/${coupon.id}`}>
+			<div className={styles.coupon_item}>
+				<div className={styles.image_container}>
+					<Image
+						className={styles._image}
+						src={coupon.imageUrl}
+						alt="event_image"
+						width={976}
+						height={350}
+						loading="lazy"
+					/>
+					{/* {coupon.bannerText == null ||
+					coupon.bannerText == undefined ||
+					coupon.bannerText == "" ? (
+						""
+					) : (
+						<div className={styles.bannerText}>
+							{coupon.bannerText}
+						</div>
+					)} */}
+					{coupon.bannerText && (
+						<div className={styles.bannerText}>
+							{coupon.bannerText}
+						</div>
+					)}
 				</div>
-				<div className={styles.business_container}>
-					<div className={styles.logo}></div>
-					<div className={styles.info}>
-						<h2>{coupon.businessName}</h2>
-						<p>{coupon.businessType}</p>
+				<div className={styles.header}>
+					<div>
+						<h2 suppressHydrationWarning>{coupon.title}</h2>
+						{daysDiff < 0 ? (
+							<p style={{ color: "#fac520" }}>
+								Der Coupon ist abgelaufen
+							</p>
+						) : (
+							<p>Läuft in {daysDiff} Stunden ab</p>
+						)}
 					</div>
-					<SlArrowRight className={styles.arrow_icon} size={20} />
+				</div>
+				<div className={styles.short_description}>
+					<p>{coupon.description}</p>
 				</div>
 			</div>
-		</>
+		</Link>
 	);
 };
 

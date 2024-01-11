@@ -47,6 +47,7 @@
 		border-radius: 0.5rem;
 		justify-content: center;
 		width: 100%;
+		overflow: hidden;
 
 		@media (max-width: 768px) {
 			display: none;
@@ -57,6 +58,25 @@
 			border-radius: 0.5rem;
 			justify-content: center;
 		}
+	}
+
+	.bannerText {
+		position: absolute;
+		width: 300px;
+		top: 150px;
+		left: 0;
+		background-color: #fac520; /* Yellow background */
+		color: #010101; /* Black text */
+		padding: 10px;
+		font-size: 0.875rem; /* 14px */
+		line-height: 1.25rem; /* 20px */
+		font-weight: bold;
+		white-space: nowrap; /* Prevent text from wrapping */
+		transform: rotate(-45deg); /* Rotate the ribbon */
+		transform-origin: 0 100%; /* Rotate around the bottom-left corner */
+		max-width: calc(100% - 20px); /* Limit the ribbon width to the image width minus padding */
+		box-sizing: border-box; /* Include padding in the width calculation */
+		text-align: center;
 	}
 
 	.title {

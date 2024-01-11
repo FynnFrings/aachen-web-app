@@ -1,40 +1,60 @@
 import styles from "@/styles/coupon_card.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 import { BsBookmark } from "react-icons/bs";
 import { SlArrowRight } from "react-icons/sl";
 
 const CouponCard = ({ coupon }: any) => {
+	console.log("🚀 ~ CouponCard ~ coupon:", coupon);
+
+	const currentDate = new Date();
+
+	const endDate = new Date(
+		coupon.endDate._seconds * 1000 + coupon.endDate._nanoseconds / 1000000
+	);
+	console.log("🚀 ~ CouponCard ~ endDate:", endDate);
+	const timeDiff = endDate.getTime() - currentDate.getTime();
+	const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+	console.log(daysDiff);
+
 	return (
-		<>
+		<Link target="_blank" rel="noreferrer" href={`/coupons/${coupon.id}`}>
 			<div className={styles.coupon_item}>
-				<div className={styles.banner}>
-					{/* <Image
-						className={styles.banner_image}
+				<div className={styles.image_container}>
+					<Image
+						className={styles._image}
 						src={coupon.imageUrl}
-						alt={coupon.title}
-						width={50}
-						height={50}
-					/> */}
+						alt="event_image"
+						width={976}
+						height={350}
+						loading="lazy"
+					/>
+					{coupon.bannerText == null ||
+					coupon.bannerText == undefined ? (
+						""
+					) : (
+						<div className={styles.bannerText}>
+							{coupon.bannerText}
+						</div>
+					)}
 				</div>
 				<div className={styles.header}>
 					<div>
 						<h2 suppressHydrationWarning>{coupon.title}</h2>
-						<p>Läuft in 3 Stunden ab</p>
+						{daysDiff < 0 ? (
+							<p style={{ color: "#fac520" }}>
+								Der Coupon ist abgelaufen
+							</p>
+						) : (
+							<p>Läuft in {daysDiff} Stunden ab</p>
+						)}
 					</div>
-					<button>
-						<BsBookmark size={32}></BsBookmark>
-					</button>
 				</div>
-				<div className={styles.business_container}>
-					<div className={styles.logo}></div>
-					<div className={styles.info}>
-						{/* <h2>{coupon.businessName}</h2>
-						<p>{coupon.businessType}</p> */}
-					</div>
-					{/* <SlArrowRight className={styles.arrow_icon} size={20} /> */}
+				<div className={styles.short_description}>
+					<p>{coupon.description}</p>
 				</div>
 			</div>
-		</>
+		</Link>
 	);
 };
 

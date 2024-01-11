@@ -1,17 +1,40 @@
 .coupon_item {
 	display: flex;
 	flex-direction: column;
-	row-gap: 1.25rem;
+	row-gap: 1rem;
 	background-color: #22221f;
 	border-radius: 0.5rem /* 8px */;
 	padding: 1.5rem /* 20px */;
-	min-width: 220px;
+	min-width: 160px;
 	transition-property: transform;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 	transition-duration: 200ms;
 	color: #fff;
-	// width: 29.5rem;
+
+	.image_container,
+	._image {
+		position: relative;
+		overflow: hidden;
+		.bannerText {
+			position: absolute;
+			width: 300px;
+			top: 150px;
+			left: 0;
+			background-color: yellow; /* Yellow background */
+			color: black; /* Black text */
+			padding: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			white-space: nowrap; /* Prevent text from wrapping */
+			transform: rotate(-45deg); /* Rotate the ribbon */
+			transform-origin: 0 100%; /* Rotate around the bottom-left corner */
+			max-width: calc(100% - 20px); /* Limit the ribbon width to the image width minus padding */
+			box-sizing: border-box; /* Include padding in the width calculation */
+			text-align: center;
+		}
+	}
+
 	&:hover {
 		transform: scale(0.99);
 	}
@@ -22,28 +45,20 @@
 		height: auto;
 	}
 
-	.banner {
-		height: 13.6875rem;
-		border-radius: 0.5rem;
-		@media screen and (max-width: 1124px) {
-			height: 10rem;
-		}
-	}
-
-	.banner_image {
-		width: 100%;
+	.image {
 		object-fit: cover;
 		background-size: cover;
 		opacity: 0.6;
 		border-radius: 0.5rem /* 8px */;
-		height: 16rem /* 256px */;
+		height: fit-content /* 256px */;
+		border-radius: 0.5rem;
 	}
 
 	.header {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		column-gap: 1rem;
+		column-gap: 0.5rem;
 
 		@media screen and (max-width: 400px) {
 			column-gap: 0.5rem;
@@ -51,6 +66,7 @@
 		h2 {
 			font-size: 1.5rem;
 			font-weight: 700;
+			padding: 0;
 		}
 
 		p {
@@ -58,62 +74,75 @@
 			color: rgba(225, 255, 225, 0.8);
 			font-weight: 400;
 		}
-		button {
-			color: #fff;
-			transition: color ease-out 0.2s;
-			:hover {
-				color: #fac520;
-				transition: color ease-in 0.2s;
-			}
-		}
 	}
-	.business_container {
-		display: flex;
-		flex-direction: row;
-		column-gap: 1rem;
-		padding: 0.625rem;
-		border-radius: 0.5rem;
-		background-color: rgba(19, 19, 17, 0.87);
-		justify-content: space-between;
-		align-items: center;
-		transition: color ease-out 0.2s;
+	.short_description {
+		font-size: 1rem;
+		font-weight: 400;
+		text-align: left;
+		opacity: 0.8;
+		width: 100%;
+		--max-lines: 2;
 
-		// @media (min-width: 768px) and (max-width: 1128px) {
-		//     width: 80%;
-		//     align-self: center;
-		// }
-
-		&:hover {
-			color: #fac520;
-			transition: color ease-in 0.2s;
-		}
-
-		.logo {
-			width: 3.75rem;
-			height: 3.75rem;
-			border-radius: 0.5rem;
-			background-color: rgba(255, 255, 255, 0.5);
-			@media screen and (max-width: 524px) {
-				display: none;
-			}
-
-			@media (min-width: 768px) and (max-width: 1100px) {
-				display: none;
-			}
-		}
-		.info {
-			h2 {
-				font-size: 1.25rem;
-				font-weight: 700;
-			}
-			p {
-				font-size: 1rem;
-				font-weight: 400;
-				text-overflow: ellipsis;
-
-				color: rgba(255, 255, 255, 0.8);
-				word-break: break-all;
-			}
-		}
+		display: -webkit-box;
+		overflow: hidden;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: var(--max-lines);
 	}
+
+	// .business_container {
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	// column-gap: 1rem;
+	// 	padding: 0.625rem;
+	// 	border-radius: 0.5rem;
+	// 	background-color: rgba(19, 19, 17, 0.87);
+	// 	justify-content: space-between;
+	// 	align-items: center;
+	// 	transition: color ease-out 0.2s;
+
+	// 	// @media (min-width: 768px) and (max-width: 1128px) {
+	// 	//     width: 80%;
+	// 	//     align-self: center;
+	// 	// }
+
+	// 	&:hover {
+	// 		h2 {
+	// 			color: #fac520;
+	// 		}
+	// 		color: #fac520;
+	// 		transition: color ease-in 0.2s;
+	// 	}
+
+	// 	.logo {
+	// 		display: flex;
+	// 		flex-direction: row;
+	// 		justify-content: space-between;
+	// 		width: 3.75rem;
+	// 		height: 3.75rem;
+	// 		border-radius: 0.5rem;
+	// 		background-color: rgba(255, 255, 255, 0.5);
+	// 		@media screen and (max-width: 524px) {
+	// 			display: none;
+	// 		}
+
+	// 		@media (min-width: 768px) and (max-width: 1100px) {
+	// 			display: none;
+	// 		}
+	// 	}
+	// 	.info {
+	// 		h2 {
+	// 			font-size: 1.25rem;
+	// 			font-weight: 700;
+	// 			padding: 0;
+	// 		}
+	// 		p {
+	// 			font-size: 1rem;
+	// 			font-weight: 400;
+	// 			text-overflow: ellipsis;
+
+	// 			color: rgba(255, 255, 255, 0.7);
+	// 			word-break: break-all;
+	// 		}
+	// 	}
+	// }
 }

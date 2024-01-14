@@ -1,9 +1,9 @@
-import styles from "@/styles/event_card.module.scss"; // Import the SCSS styles
-import Image from "next/image"; // Import the Next.js Image component
-import Link from "next/link"; // Import the Next.js Link component
-import banner from "@/public/AachenPics/aachen6.png"; // Import the event banner image
-import { FaBagShopping } from "react-icons/fa6"; // Import the shopping bag icon
-import { MouseEventHandler, useState } from "react"; // Import MouseEventHandler, useEffect, and useState from React
+import styles from "@/styles/event_card.module.scss";
+import Image from "next/image";
+import Link from "next/link";
+import banner from "@/public/AachenPics/aachen6.png";
+import { FaBagShopping } from "react-icons/fa6";
+import { MouseEventHandler } from "react";
 
 // Define the EventCard component
 const EventCard = ({ handleSubmit, event }: { handleSubmit: MouseEventHandler<HTMLButtonElement>; event: any }) => {

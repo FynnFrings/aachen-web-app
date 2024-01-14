@@ -135,7 +135,7 @@ const CouponDetailsPage = ({ coupon }: any) => {
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>{coupon.description}</p>
-					<input type="checkbox" className={styles.expand_btn} />
+					{coupon.description.length > 350 && <input type="checkbox" className={styles.expand_btn} />}
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>

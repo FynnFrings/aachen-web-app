@@ -1,4 +1,4 @@
-import { dateFormat } from "@/components/dateFormat";
+import { dateFormat } from "@/helpers/dateFormat";
 import { useRouter } from "next/router";
 import { IBlogCard } from "@/types/types";
 import DOMPurify from "isomorphic-dompurify";

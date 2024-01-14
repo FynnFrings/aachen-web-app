@@ -2,7 +2,7 @@
 import { IBlogCard } from "../../types/types";
 import Link from "next/link";
 import Image from "next/image";
-import { dateFormat } from "../dateFormat";
+import { dateFormat } from "../../helpers/dateFormat";
 import DOMPurify from "isomorphic-dompurify";
 
 // Define the BlogCard component which accepts an article object as a prop with type IBlogCard

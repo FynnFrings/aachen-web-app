@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/event_details.module.scss";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
 import InteractiveMap from "@/components/interactiveMap";
 import { AiFillClockCircle } from "react-icons/ai";
@@ -9,6 +9,8 @@ import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import banner from "@/public/aachen_pic_2.png";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import TimeFrameCard from "@/components/Events/TimeFrameCard";
+import searchByDate from "@/helpers/filterByDate";
 
 const EventDetailsPage = ({ event }: any) => {
 	//TODO: Please optimie this page if it is possible;
@@ -79,6 +81,8 @@ const EventDetailsPage = ({ event }: any) => {
 		}
 	};
 
+	const sortedTimeFrames = [...(event.timeFrames || [])].sort((a: any, b: any) => a.startDate?._seconds - b.startDate?._seconds || a.startDate?._nanoseconds - b.startDate?._nanoseconds);
+
 	// Get an id of the page
 	const router = useRouter();
 	const { id } = router.query;
@@ -130,7 +134,7 @@ const EventDetailsPage = ({ event }: any) => {
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>{event.description}</p>
-					<input type="checkbox" className={styles.expand_btn} />
+					{event.description.length > 300 && <input type="checkbox" className={styles.expand_btn} />}
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
@@ -142,6 +146,16 @@ const EventDetailsPage = ({ event }: any) => {
 						<span>{validLocation().location}</span>
 					</div>
 				</div>
+				{event.timeFrames.length > 0 && (
+					<div className={styles.event_time_frames}>
+						<h2>Zeiträume</h2>
+						<div className={styles.time_frames_list}>
+							{sortedTimeFrames.map((frame: any) => {
+								return <TimeFrameCard key={frame.id} eventFrame={frame} />;
+							})}
+						</div>
+					</div>
+				)}
 				<div className={styles.business_link}>
 					<div className={styles.item}>
 						<Image src={event.imageUrl ?? banner} width="56" height="56" alt="event logo" className={styles.logo} />

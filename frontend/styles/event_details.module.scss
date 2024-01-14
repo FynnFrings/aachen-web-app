@@ -199,12 +199,11 @@
 
 			&:has(+ .expand_btn:checked) {
 				display: flex;
-				max-height: none; // Розгортання
+				max-height: none; // Expanding
 				transition: max-height 1s ease-in-out;
 			}
 		}
 		.expand_btn {
-			// margin-top: 1rem;
 			height: auto;
 			width: auto;
 			align-self: flex-start;
@@ -256,6 +255,37 @@
 			}
 		}
 	}
+
+	.event_time_frames {
+		display: flex;
+		flex-direction: column;
+		border-radius: 12px;
+
+		background: rgba(255, 255, 255, 0.1);
+		color: rgba(255, 255, 255, 0.7);
+		padding: 1.4rem;
+
+		h2 {
+			color: #ffffff;
+			font-size: 1.5rem;
+			padding-bottom: 1.5rem;
+		}
+		.time_frames_list {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			gap: 1rem;
+			@media (min-width: 768px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (min-width: 1280px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (min-width: 1536px) {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+	}
+
 	.business_link {
 		grid-area: link;
 		display: flex;

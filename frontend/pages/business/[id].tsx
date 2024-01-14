@@ -18,7 +18,7 @@ import getMonthDifference from "@/helpers/getMonthDifference";
 import hrefValidator from "@/helpers/hrefValidator";
 import weekSchedule from "@/helpers/weekSchedule";
 import CouponCard from "@/components/Coupons/CouponCard";
-import Nothing from "@/components/Nothing";
+import EventCard from "@/components/Events/EventCard";
 
 const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 	// States to control visibility of components.
@@ -45,6 +45,15 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		}, 3000);
 	};
 
+	// onClick function with setTimeout fuction to manage "alert" state
+	const handleSubmitEvent: MouseEventHandler<HTMLButtonElement> = (event) => {
+		event.preventDefault();
+		isAlert(true);
+		setTimeout(() => {
+			isAlert(false);
+		}, 3000);
+	};
+
 	// Function to open "Kontaktieren" notification
 	const popUpOpener = () => {
 		isOpen(!open);
@@ -52,10 +61,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 
 	const currentDate = new Date();
 
-	const creationData = new Date(
-		business.createdAt._seconds * 1000 +
-			business.createdAt._nanoseconds / 1000000
-	);
+	const creationData = new Date(business.createdAt._seconds * 1000 + business.createdAt._nanoseconds / 1000000);
 
 	//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
 	const monthsDifference = getMonthDifference(creationData, currentDate);
@@ -66,9 +72,7 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 		if (!business.openingHourPeriods) {
 			return null;
 		}
-		const result = business.openingHourPeriods.find(
-			(day) => day.open.day == weekDay
-		);
+		const result = business.openingHourPeriods.find((day) => day.open.day == weekDay);
 		if (result && result.open.time !== "Geschlossen") {
 			const openTimeArray = result.open.time.split("");
 			openTimeArray?.splice(2, 0, ":");
@@ -101,28 +105,15 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 			<Head>
 				<title>{`${business.name} | Aachen App`}</title>
 				<meta name="description" content={business.description} />
-				<meta
-					property="og:title"
-					content={`${business.name} | Aachen App`}
-					key="title"
-				/>
+				<meta property="og:title" content={`${business.name} | Aachen App`} key="title" />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="businesses" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta
-					property="og:description"
-					content={business.description}
-				/>
-				<meta
-					property="og:url"
-					content={`https://www.aachen-app.de/business/${id}`}
-				/>
+				<meta property="og:description" content={business.description} />
+				<meta property="og:url" content={`https://www.aachen-app.de/business/${id}`} />
 				<meta property="og:locale" content="de_DE" />
-				<meta
-					property="og:image"
-					content={business.logoImageUrl ?? business.photoURL}
-				/>
+				<meta property="og:image" content={business.logoImageUrl ?? business.photoURL} />
 				<meta property="og:image:type" content="image/jpg" />
 				<meta property="og:image:alt" content={business.name} />
 				<meta property="og:image:width" content="1200" />
@@ -132,43 +123,19 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 
 			<div className={styles.business_header}>
 				<div className={styles.image_container}>
-					<Image
-						className={styles._image}
-						src={business.bannerImageUrl ?? business.bigPhotoURL}
-						alt="business_image"
-						width={976}
-						height={350}
-						loading="lazy"
-					/>
+					<Image className={styles._image} src={business.bannerImageUrl ?? business.bigPhotoURL} alt="business_image" width={976} height={350} loading="lazy" />
 					{/* Render a placeholder logo */}
-					<Image
-						className={styles._logo}
-						src={business.logoImageUrl ?? business.photoURL}
-						alt="business_logo"
-						width={200}
-						height={200}
-						loading="lazy"
-					/>
+					<Image className={styles._logo} src={business.logoImageUrl ?? business.photoURL} alt="business_logo" width={200} height={200} loading="lazy" />
 				</div>
 				<div className={styles.title}>
 					<h1>{business.name}</h1>
 					<p>
-						{business.category}{" "}
-						<span className={styles.opening_time}>
-							{businessOpeningHoursPeriods()
-								? `Öffnet ${businessOpeningHoursPeriods()} Uhr`
-								: ""}
-						</span>
+						{business.category} <span className={styles.opening_time}>{businessOpeningHoursPeriods() ? `Öffnet ${businessOpeningHoursPeriods()} Uhr` : ""}</span>
 					</p>
-					<p
-						className={styles.description}
-					>{`${business.description}`}</p>
+					<p className={styles.description}>{`${business.description}`}</p>
 				</div>
 				<div className={styles.buttons}>
-					<button
-						onClick={handleSubmit}
-						className={styles.notification}
-					>
+					<button onClick={handleSubmit} className={styles.notification}>
 						<IoIosNotificationsOutline
 							style={{
 								marginRight: "0.2rem",
@@ -178,111 +145,54 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						Merken
 					</button>
 					{alert ? <BusinessMerkenResponseMessage /> : ""}
-					<button
-						onClick={popUpOpener}
-						className={styles.contact}
-						ref={ref}
-					>
+					<button onClick={popUpOpener} className={styles.contact} ref={ref}>
 						Kontaktieren
 					</button>
-					{open ? (
-						<PopUpOpener
-							popUpOpener={popUpOpener}
-							open={open}
-							businessContacts={businessContacts}
-						/>
-					) : (
-						""
-					)}
+					{open ? <PopUpOpener popUpOpener={popUpOpener} open={open} businessContacts={businessContacts} /> : ""}
 				</div>
 			</div>
 			<div className={styles.business_details}>
 				<div className={styles.information}>
 					<h2>Information</h2>
 					<p>
-						<RiBuilding4Fill
-							size={28}
-							className={styles.react_icons}
-						/>
+						<RiBuilding4Fill size={28} className={styles.react_icons} />
 						{business.name}
 					</p>
 					<p>
-						<AiFillPieChart
-							size={28}
-							className={styles.react_icons}
-						/>
+						<AiFillPieChart size={28} className={styles.react_icons} />
 						{business.category}
 					</p>
 					<p>
-						<Image
-							alt=""
-							height={"28"}
-							width={"28"}
-							className={styles.react_icons}
-							src={"/shop-remove.svg"}
-						/>{" "}
-						{monthsDifference > 1
-							? `seit ${monthsDifference} Monaten Mitglied der Aachen App`
-							: `seit ${monthsDifference} Monat Mitglied der Aachen App`}
+						<Image alt="" height={"28"} width={"28"} className={styles.react_icons} src={"/shop-remove.svg"} /> {monthsDifference > 1 ? `seit ${monthsDifference} Monaten Mitglied der Aachen App` : `seit ${monthsDifference} Monat Mitglied der Aachen App`}
 					</p>
 					<p>
-						<BiSolidCoupon
-							size={28}
-							className={styles.react_icons}
-						/>
-						{business.totalCouponCount <= 0
-							? "Noch keine Coupons erstellt"
-							: `${business.totalCouponCount} Coupons erstellt`}
+						<BiSolidCoupon size={28} className={styles.react_icons} />
+						{business.totalCouponCount <= 0 ? "Noch keine Coupons erstellt" : `${business.totalCouponCount} Coupons erstellt`}
 					</p>
 					<p>
-						<FaCalendarDays
-							size={28}
-							className={styles.react_icons}
-						/>
-						{business.totalEventCount <= 0
-							? "Noch keine Events erstellt"
-							: `${business.totalEventCount} Events erstellt`}
+						<FaCalendarDays size={28} className={styles.react_icons} />
+						{business.totalEventCount <= 0 ? "Noch keine Events erstellt" : `${business.totalEventCount} Events erstellt`}
 					</p>
 				</div>
 				<div className={styles.opening_time_table}>
 					<h2>Öffnungszeiten</h2>
 					{/* //TODO: This function is imported from /helpers folder. Please check this and optimize if its needed; */}
-					{weekSchedule(
-						business.openingHourPeriods != null
-							? business.openingHourPeriods
-							: business.dayList
-					)}
+					{weekSchedule(business.openingHourPeriods != null ? business.openingHourPeriods : business.dayList)}
 				</div>
 				<div className={styles.location}>
 					<h2>Standort</h2>
-					<InteractiveMap
-						location={business.location}
-						latitude={business.latitude}
-						longitude={business.longitude}
-					/>
+					<InteractiveMap location={business.location} latitude={business.latitude} longitude={business.longitude} />
 					<div className={styles.route}>
-						<Link
-							target="_blank"
-							rel="noreferrer"
-							href={`https://maps.google.com/?q=${business.location}`}
-						>
+						<Link target="_blank" rel="noreferrer" href={`https://maps.google.com/?q=${business.location}`}>
 							Route planen
 						</Link>
-						<span>
-							{business.formattedAddress ?? business.location}
-						</span>
+						<span>{business.formattedAddress ?? business.location}</span>
 					</div>
 				</div>
 				<div className={styles.website_link}>
 					<h2>Soziale Medien</h2>
 					<div className={styles.item}>
-						<Image
-							src={business.logoImageUrl ?? business.photoURL}
-							width="56"
-							height="56"
-							alt="Business logo"
-							className={styles.logo}
-						/>
+						<Image src={business.logoImageUrl ?? business.photoURL} width="56" height="56" alt="Business logo" className={styles.logo} />
 						<div>
 							<h2>Website</h2>
 							<Link
@@ -291,31 +201,19 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 								//TODO: This function is imported from /helpers folder. Please check this and optimize if its needed;
 								href={hrefValidator(business.website) ?? `/*`}
 							>
-								{business.website == "" ||
-								business.website == null
-									? "Unbekannt"
-									: business.website}
+								{business.website == "" || business.website == null ? "Unbekannt" : business.website}
 							</Link>
 						</div>
 					</div>
 					{business.instagram ? (
 						<div className={styles.item}>
-							<Image
-								src={"/instagram_logo.svg"}
-								width="56"
-								height="56"
-								alt="instagram logo"
-								className={styles.logo}
-							/>
+							<Image src={"/instagram_logo.svg"} width="56" height="56" alt="instagram logo" className={styles.logo} />
 							<div>
 								<h2>Instagram</h2>
 								<Link
 									target="_blank"
 									rel="noreferrer"
-									href={`https://www.instagram.com/${business.instagram.replace(
-										/\s/g,
-										""
-									)}/`}
+									href={`https://www.instagram.com/${business.instagram.replace(/\s/g, "")}/`}
 									style={{
 										textDecoration: "none",
 									}}
@@ -353,24 +251,26 @@ const BusinessDetailsPage = ({ business }: { business: IBusinessCard }) => {
 						</div>
 					) : null}
 				</div>
-				<div className={styles.coupons_container}>
-					<h2>Coupons</h2>
-					<div className={styles.list}>
-						{business.couponList.length !== 0 ? (
-							business.couponList.map((coupon: any) => {
-								return (
-									<CouponCard
-										key={coupon.id}
-										coupon={coupon}
-										business={business}
-									/>
-								);
-							})
-						) : (
-							<Nothing list_name="Coupons" />
-						)}
+				{business.couponList.length > 0 && (
+					<div className={styles.coupons_container}>
+						<h2>Coupons</h2>
+						<div className={styles.list}>
+							{business.couponList.map((coupon: any) => {
+								return <CouponCard key={coupon.id} coupon={coupon} business={business} />;
+							})}
+						</div>
 					</div>
-				</div>
+				)}
+				{business.eventList.length > 0 && (
+					<div className={styles.events_container}>
+						<h2>Events</h2>
+						<div className={styles.list}>
+							{business.eventList.map((event: any) => {
+								return <EventCard key={event.itemId} event={event} handleSubmit={handleSubmitEvent} />;
+							})}
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);
@@ -380,8 +280,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 	// Fetch data from  API
 	const id = context.params.id;
 	// Declared url of events id
-	const businessUrlId: string =
-		"https://us-central1-aachen-app.cloudfunctions.net/getBusinessById";
+	const businessUrlId: string = "https://us-central1-aachen-app.cloudfunctions.net/getBusinessById";
 
 	// Fetching data
 	const res = await fetch(`${businessUrlId}`, {

@@ -3,7 +3,7 @@ import Image from "next/image"; // Import the Next.js Image component
 import Link from "next/link"; // Import the Next.js Link component
 import banner from "@/public/AachenPics/aachen6.png"; // Import the event banner image
 import { FaBagShopping } from "react-icons/fa6"; // Import the shopping bag icon
-import { MouseEventHandler, useEffect, useState } from "react"; // Import MouseEventHandler, useEffect, and useState from React
+import { MouseEventHandler, useState } from "react"; // Import MouseEventHandler, useEffect, and useState from React
 
 // Define the EventCard component
 const EventCard = ({ handleSubmit, event }: { handleSubmit: MouseEventHandler<HTMLButtonElement>; event: any }) => {
@@ -40,15 +40,6 @@ const EventCard = ({ handleSubmit, event }: { handleSubmit: MouseEventHandler<HT
 		} else {
 			return true;
 		}
-	};
-
-	// State to manage the "Mehr anzeigen" button
-	const [isOpen, setIsOpen] = useState(false);
-
-	// Function to toggle the "Mehr anzeigen" button
-	const toggleButton = (event: any) => {
-		event.preventDefault();
-		setIsOpen(!isOpen);
 	};
 
 	return (

@@ -2,7 +2,7 @@ import styles from "@/styles/events.module.scss";
 import BusinessBanner from "@/public/business/business_banner.png";
 import Image from "next/image";
 import SearchField from "@/components/SearchField";
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useState } from "react";
 import ListOfCategoryItems from "@/components/DropdownFilter/ListOfCategoryItems";
 import EventCard from "@/components/Events/EventCard";
 import BusinessMerkenResponseMessage from "@/components/Business/BusinessMerkenResponseMessage";
@@ -12,7 +12,6 @@ import searchByTitle from "@/helpers/searchByTitle";
 import { paginate } from "@/helpers/paginate";
 import Head from "next/head";
 import Nothing from "@/components/Nothing";
-import { useDispatch, useSelector } from "react-redux";
 
 const Events = ({ events }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -87,18 +86,12 @@ const Events = ({ events }: any) => {
 		<>
 			<Head>
 				<title>Events | Aachen App</title>
-				<meta
-					name="description"
-					content="Events | Aachen App. Entdecken Sie mehr über Events in Aachen."
-				/>
+				<meta name="description" content="Events | Aachen App. Entdecken Sie mehr über Events in Aachen." />
 				<meta name="robots" content="index, follow" />
 				<meta charSet="UTF-8" />
 				<meta property="og:type" content="events" />
 				<meta property="og:site_name" content="Aachen App" />
-				<meta
-					property="og:description"
-					content="Events | Aachen App. Entdecken Sie mehr über Events in Aachen."
-				/>
+				<meta property="og:description" content="Events | Aachen App. Entdecken Sie mehr über Events in Aachen." />
 				<meta property="og:url" content="https://www.aachen-app.de//events" />
 				<meta property="og:locale" content="de_DE" />
 				<meta property="og:image" content="/logo_yellow.jpg" />
@@ -109,62 +102,27 @@ const Events = ({ events }: any) => {
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.banner}>
-					<Image
-						className={styles.business_banner}
-						src={BusinessBanner}
-						alt="business-banner"
-						width={0}
-						height={0}
-					/>
+					<Image className={styles.business_banner} src={BusinessBanner} alt="business-banner" width={0} height={0} />
 					<h1 className={styles.banner_text}>Event</h1>
 				</div>
 				<div className={styles.filters}>
-					<SearchField
-						handleChange={handleChange}
-						searchInput={searchInput}
-						placeholder={"Search"}
-					/>
+					<SearchField handleChange={handleChange} searchInput={searchInput} placeholder={"Search"} />
 					<div className={styles.select_filters}>
-						<ListOfCategoryItems
-							selectItem={selectDate}
-							itemSelection={itemSelectionDate}
-							listOfItems={dateSelectItem}
-						/>
+						<ListOfCategoryItems selectItem={selectDate} itemSelection={itemSelectionDate} listOfItems={dateSelectItem} />
 					</div>
 				</div>
-				<div
-					className={
-						paginatedPosts.length !== 0
-							? styles.list_of_businesses
-							: "w-full flex flex-row justify-center"
-					}
-				>
+				<div className={paginatedPosts.length !== 0 ? styles.list_of_businesses : "w-full flex flex-row justify-center"}>
 					{/* {paginatedPosts */}
 					{paginatedPosts.length !== 0 ? (
 						paginatedPosts.map((event: any) => {
-							return (
-								<EventCard
-									event={event}
-									key={event.itemId}
-									handleSubmit={handleSubmit}
-								/>
-							);
+							return <EventCard event={event} key={event.itemId} handleSubmit={handleSubmit} />;
 						})
 					) : (
 						<Nothing list_name="Events" />
 					)}
 				</div>
 				{alert ? <BusinessMerkenResponseMessage /> : ""}
-				{paginatedPosts.length !== 0 ? (
-					<Pagination
-						items={filteredEvents.length}
-						currentPage={currentPage}
-						pageSize={pageSize}
-						onPageChange={onPageChange}
-					/>
-				) : (
-					""
-				)}
+				{paginatedPosts.length !== 0 ? <Pagination items={filteredEvents.length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} /> : ""}
 			</div>
 		</>
 	);
